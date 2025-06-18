@@ -4,7 +4,6 @@
 
 package ren.main;
 
-import com.formdev.flatlaf.FlatLaf;
 import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
 import vista.Login;
 
@@ -19,7 +18,8 @@ public class main {
 
     public static void main(String[] args) {
         // Estilo visual (FlatLaf)
-        FlatLaf.setup(new FlatArcDarkIJTheme());
+          // siento que es mejor asi (confirmen)
+        FlatArcDarkIJTheme.setup();
 
         SwingUtilities.invokeLater(() -> {
             main = new main();
@@ -45,11 +45,11 @@ public class main {
             frame.dispose();
         }
 
-        frame = new JFrame("Sistema CRM - Menú Principal");
+        frame = new JFrame("Sistema CRM - Vista Principal");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLocationRelativeTo(null);
-        frame.setContentPane(new MenuPrincipal());
+        frame.setContentPane(new VistaPrincipal());
         frame.setVisible(true);
     }
 }
