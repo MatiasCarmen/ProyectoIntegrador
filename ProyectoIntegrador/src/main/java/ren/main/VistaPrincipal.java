@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 import vista.VistaClientes;
+import vista.VistasActividades;
 
 /**
  *
@@ -69,7 +70,7 @@ public class VistaPrincipal extends JPanel {
         modulos.put("Dashboard", new JPanel());
         modulos.put("Clientes", new VistaClientes());
         modulos.put("Usuarios", new JPanel());
-        modulos.put("Actividades", new JPanel());
+        modulos.put("Actividades", new VistasActividades());
         modulos.put("Agenda", new JPanel());
 
         // Agregar cada módulo al contenedor
