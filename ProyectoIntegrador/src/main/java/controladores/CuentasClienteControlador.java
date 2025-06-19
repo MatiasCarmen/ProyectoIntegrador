@@ -2,22 +2,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+
 package controladores;
 
 import dao.CuentasClienteDAO;
 import entidades.CuentaCliente;
+
 import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * Controller de CuentasCliente: envuelve al DAO si necesitas lógica extra.
+ * MVC – Controlador de CuentasCliente:
+ *  • SRP: única responsabilidad: orquestar operaciones de cuentas.
+ *  • Usa DAO para separar la lógica de acceso a datos.
  */
 public class CuentasClienteControlador {
     private static final Logger LOGGER = Logger.getLogger(CuentasClienteControlador.class.getName());
     private final CuentasClienteDAO dao = new CuentasClienteDAO();
 
+    /**
+     * Inserta una nueva cuenta cliente en la BD.
+     * @param idCuenta UUID de la cuenta
+     * @param rut      RUT del cliente
+     * @param clase    tipo de cuenta (Cliente/Servicio/Facturacion)
+     * @return true si la inserción fue exitosa
+     */
+    public boolean insertar(String idCuenta, String rut, String clase) {
+        LOGGER.info(String.format("CuentasClienteControlador: insertar(idCuenta=%s, rut=%s, clase=%s)",
+                idCuenta, rut, clase));
+        return dao.insertar(idCuenta, rut, clase);
+    }
+
+    /**
+     * @return todas las cuentas cliente (para listados)
+     */
     public List<CuentaCliente> listarTodas() {
-        LOGGER.info("Controlador: listarTodas CuentasCliente");
+        LOGGER.info("CuentasClienteControlador: listarTodas");
         return dao.listarTodas();
     }
 }

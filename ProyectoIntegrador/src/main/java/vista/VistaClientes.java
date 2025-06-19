@@ -9,12 +9,13 @@
  */
 package vista;
 
+import javax.swing.SwingUtilities;
 import controladores.ClienteControlador;
 import controladores.ComunasControlador;
 import com.formdev.flatlaf.FlatClientProperties;
-import entidades.Cliente;
 import entidades.Comuna;
 import net.miginfocom.swing.MigLayout;
+import ren.main.VistaPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +25,7 @@ import java.util.List;
 
 /**
  * Panel de búsqueda avanzada de clientes, con layout según mockup.
- * Captura doble-click para ver detalle en pestañas.
+ * Captura doble-click para ver detalle embebido en VistaPrincipal.
  */
 public class VistaClientes extends JPanel {
 
@@ -51,8 +52,7 @@ public class VistaClientes extends JPanel {
                 "[]10[]10[]10[][grow,fill]"));
 
         // Título
-        add(new JLabel("<html><h2>Búsqueda de clientes</h2></html>"),
-            "span 7, wrap");
+        add(new JLabel("<html><h2>Búsqueda de clientes</h2></html>"), "span 7, wrap");
 
         // Filtros...
         add(new JLabel("Buscar por nombre:"),   "cell 0 1");
@@ -83,38 +83,28 @@ public class VistaClientes extends JPanel {
         tblClientes = new JTable(model);
         tblClientes.setRowHeight(28);
 
-        // Doble‐click para detalle
+        // Doble-click para detalle embebido
         tblClientes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
                     int row = tblClientes.rowAtPoint(e.getPoint());
                     if (row < 0) return;
-                    String rut = (String) model.getValueAt(row, 1);
+
+                    // Obtenemos el ID Cuenta (columna 3)
                     String idCuenta = (String) model.getValueAt(row, 3);
-                    Cliente c = clienteCtrl.obtenerClientePorRut(rut);
-                    if (c != null) {
-                        JFrame frame = new JFrame("Detalle de " + c.getNombres());
-                        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                        // Ahora pasamos cliente + su idCuenta
-                        frame.setContentPane(new VistaClienteDetallePanel(c, idCuenta));
-                        frame.setSize(800, 600);
-                        frame.setLocationRelativeTo(VistaClientes.this);
-                        frame.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(
-                            VistaClientes.this,
-                            "No se pudo cargar los datos del cliente",
-                            "Error",
-                            JOptionPane.ERROR_MESSAGE
-                        );
+
+                    // Llamamos al método en VistaPrincipal
+                    VistaPrincipal vp = (VistaPrincipal)
+                        SwingUtilities.getAncestorOfClass(VistaPrincipal.class, VistaClientes.this);
+                    if (vp != null) {
+                        vp.abrirModuloCuenta(idCuenta);
                     }
                 }
             }
         });
 
-        add(new JScrollPane(tblClientes),
-            "span 7, grow, wrap");
+        add(new JScrollPane(tblClientes), "span 7, grow, wrap");
 
         // Estilos y lógica de filtros
         btnBuscar.putClientProperty(FlatClientProperties.STYLE, "font:bold");

@@ -2,100 +2,134 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package ren.main;
-import com.formdev.flatlaf.FlatClientProperties;
-import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
-import net.miginfocom.swing.MigLayout;
-
-import javax.swing.*;
-import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Logger;
-import vista.VistaClientes;
-import vista.VistasActividades;
 
 /**
  *
  * @author matias papu
  */
-/**
- * Vista principal del CRM: contiene la barra lateral y panel central dinámico.
- * 
- *  Vista post-login
- * Parte del patrón MVC (Vista)
- * SRP: esta clase solo representa el menú general
- */
- 
-public class VistaPrincipal extends JPanel {
+package ren.main;
 
-    private static final Logger LOGGER = Logger.getLogger(VistaPrincipal.class.getName());
+import vista.VistaClientes;
+import vista.VistaUsuarios;
+import vista.VistaAgenda;
+import vista.VistaMesaCentral;
+import vista.VistaActividadesPorCuenta;
+import vista.VistaProductosInstaladosPorCuenta;
 
-    private CardLayout cardLayout;
-    private JPanel panelContenido;
-    private Map<String, JPanel> modulos = new HashMap<>();
+import javax.swing.*;
+import java.awt.*;
+
+public class VistaPrincipal extends JFrame {
+
+    private final JPanel panelContenedor;
+    private final CardLayout cardLayout;
+
+    // Identificadores de tarjetas
+    private static final String TARJETA_CLIENTES    = "CLIENTES";
+    private static final String TARJETA_USUARIOS    = "USUARIOS";
+    private static final String TARJETA_AGENDA      = "AGENDA";
+    private static final String TARJETA_MESA        = "MESA_CENTRAL";
+    private static final String TARJETA_ACTIVIDADES = "ACTIVIDADES";
+    private static final String TARJETA_PRODUCTOS   = "PRODUCTOS";
+
+    // Panels embebidos
+    private final VistaClientes clientesPanel;
+    private final VistaUsuarios usuariosPanel;
+    private final VistaAgenda agendaPanel;
+    private final VistaMesaCentral mesaCentralPanel;
+    private final VistaActividadesPorCuenta actividadesPanel;
+    private final VistaProductosInstaladosPorCuenta productosPanel;
 
     public VistaPrincipal() {
-        LOGGER.info("Creando VistaPrincipal");
-        initUI();
-    }
-
-    private void initUI() {
-        LOGGER.info("Inicializando UI de VistaPrincipal");
+        super("CRM Integrador");
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setSize(1200, 800);
+        setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // Barra lateral
-        JPanel barraLateral = new JPanel(new MigLayout("wrap 1, insets 10", "[grow,center]"));
-        barraLateral.setPreferredSize(new Dimension(200, getHeight()));
-        barraLateral.putClientProperty(FlatClientProperties.STYLE,
-                "background: darken(@background, 10%);");
-
-        String[] nombres = {"Dashboard", "Clientes", "Usuarios", "Actividades", "Agenda", "Cerrar Sesión"};
-        for (String nombre : nombres) {
-            JButton btn = new JButton(nombre);
-            btn.setFocusPainted(false);
-            btn.setPreferredSize(new Dimension(160, 40));
+        // Menu lateral
+        JPanel menu = new JPanel();
+        menu.setLayout(new GridLayout(0, 1, 0, 5));
+        menu.setPreferredSize(new Dimension(200, 0));
+        String[] items = {
+            "Clientes", "Usuarios", "Agenda", "Mesa Central"
+        };
+        for (String name : items) {
+            JButton btn = new JButton(name);
             btn.addActionListener(e -> {
-                LOGGER.info("Botón seleccionado: " + nombre);
-                navegar(nombre);
+                switch (name) {
+                    case "Clientes"      -> showCard(TARJETA_CLIENTES);
+                    case "Usuarios"      -> showCard(TARJETA_USUARIOS);
+                    case "Agenda"        -> showCard(TARJETA_AGENDA);
+                    case "Mesa Central"  -> showCard(TARJETA_MESA);
+                }
             });
-            barraLateral.add(btn, "growx, wrap");
+            menu.add(btn);
         }
+        add(menu, BorderLayout.WEST);
 
-        // Panel central con CardLayout
+        // Contenedor central con CardLayout
         cardLayout = new CardLayout();
-        panelContenido = new JPanel(cardLayout);
+        panelContenedor = new JPanel(cardLayout);
 
-        // Módulos iniciales (vacíos o con placeholder)
-        modulos.put("Dashboard", new JPanel());
-        modulos.put("Clientes", new VistaClientes());
-        modulos.put("Usuarios", new JPanel());
-        modulos.put("Actividades", new VistasActividades());
-        modulos.put("Agenda", new JPanel());
+        // Instanciación de vistas
+        clientesPanel      = new VistaClientes();
+        usuariosPanel      = new VistaUsuarios();
+        agendaPanel        = new VistaAgenda();
+        mesaCentralPanel   = new VistaMesaCentral();
+        actividadesPanel   = new VistaActividadesPorCuenta();
+        productosPanel     = new VistaProductosInstaladosPorCuenta();
 
-        // Agregar cada módulo al contenedor
-        modulos.forEach((key, panel) -> {
-            LOGGER.info("Agregando módulo: " + key);
-            panelContenido.add(panel, key);
-        });
+        // Registro de tarjetas
+        panelContenedor.add(clientesPanel, TARJETA_CLIENTES);
+        panelContenedor.add(usuariosPanel, TARJETA_USUARIOS);
+        panelContenedor.add(agendaPanel,   TARJETA_AGENDA);
+        panelContenedor.add(mesaCentralPanel, TARJETA_MESA);
+        panelContenedor.add(actividadesPanel, TARJETA_ACTIVIDADES);
+        panelContenedor.add(productosPanel,   TARJETA_PRODUCTOS);
 
-        // Layout general
-        add(barraLateral, BorderLayout.WEST);
-        add(panelContenido, BorderLayout.CENTER);
+        add(panelContenedor, BorderLayout.CENTER);
 
-        // Mostrar módulo por defecto
-        cardLayout.show(panelContenido, "Dashboard");
-        LOGGER.info("Módulo por defecto: Dashboard mostrado");
+        // Mostrar inicialmente la vista de Clientes
+        showCard(TARJETA_CLIENTES);
     }
 
-    private void navegar(String nombre) {
-        LOGGER.info("Navegando a: " + nombre);
-        if ("Cerrar Sesión".equals(nombre)) {
-            LOGGER.info("Cerrando sesión");
-            ren.main.main.main.showLogin();
-        } else {
-            cardLayout.show(panelContenido, nombre);
-            LOGGER.info("Módulo mostrado: " + nombre);
-        }
+    /**
+     * Muestra la tarjeta con el nombre dado.
+     */
+    private void showCard(String tarjeta) {
+        cardLayout.show(panelContenedor, tarjeta);
+    }
+
+    /**
+     * Navega al módulo de Actividades + Productos para la cuenta dada.
+     */
+    public void abrirModuloCuenta(String idCuenta) {
+        actividadesPanel.setCuenta(idCuenta);
+        actividadesPanel.cargarActividades();
+        productosPanel.setCuenta(idCuenta);
+        productosPanel.cargarProductos();
+        showCard(TARJETA_ACTIVIDADES);
+    }
+
+    /**
+     * Método auxiliar para que desde los panels se muestre el panel de Productos.
+     */
+    public void mostrarProductos() {
+        showCard(TARJETA_PRODUCTOS);
+    }
+
+    /**
+     * Método auxiliar para que desde los panels se muestre el panel de Actividades.
+     */
+    public void mostrarActividades() {
+        showCard(TARJETA_ACTIVIDADES);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            VistaPrincipal vp = new VistaPrincipal();
+            vp.setVisible(true);
+        });
     }
 }

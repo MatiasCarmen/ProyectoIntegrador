@@ -9,16 +9,13 @@ package vista;
  * @author mathi
  */
 
-
 import com.formdev.flatlaf.FlatClientProperties;
 import controladores.ControladorUsuarios;
 import entidades.Usuario;
-
+import net.miginfocom.swing.MigLayout;
+import ren.main.VistaPrincipal;
 
 import javax.swing.*;
-import net.miginfocom.swing.MigLayout;
-import ren.main.main;
-
 import java.awt.*;
 
 public class Login extends JPanel {
@@ -29,13 +26,13 @@ public class Login extends JPanel {
     private JButton cmdLogin;
     private JLabel lblEstado;
 
-    private final ControladorUsuarios controlador = new ControladorUsuarios(); // ✅ DAO
+    private final ControladorUsuarios controlador = new ControladorUsuarios();
 
-    public Login() {
-        init();
+    public Login(JFrame loginFrame) {
+        init(loginFrame);
     }
 
-    private void init() {
+    private void init(JFrame loginFrame) {
         setLayout(new MigLayout("fill,insets 20", "[center]", "[center]"));
 
         txtUsername = new JTextField();
@@ -44,7 +41,6 @@ public class Login extends JPanel {
         cmdLogin = new JButton("Ingresar");
         lblEstado = new JLabel("", JLabel.CENTER);
 
-        // Estilos visuales
         JPanel panel = new JPanel(new MigLayout("wrap,fillx,insets 35 45 35 45", "fill,250:280"));
         panel.putClientProperty(FlatClientProperties.STYLE,
                 "arc:20;" +
@@ -71,10 +67,8 @@ public class Login extends JPanel {
                 "[light]foreground:lighten(@foreground,30%);" +
                         "[dark]foreground:darken(@foreground,30%)");
 
-        // Acción del botón de login
-        cmdLogin.addActionListener(e -> realizarLogin());
+        cmdLogin.addActionListener(e -> realizarLogin(loginFrame));
 
-        // Agregar componentes
         panel.add(lbTitle);
         panel.add(description);
         panel.add(new JLabel("Usuario"), "gapy 8");
@@ -87,14 +81,7 @@ public class Login extends JPanel {
         add(panel);
     }
 
-    /**
-     * ✅ LÓGICA DE LOGIN
-     * Este método hace:
-     * - Validación de campos
-     * - Llamado al DAO
-     * - Manejo del resultado
-     */
-    private void realizarLogin() {
+    private void realizarLogin(JFrame loginFrame) {
         String usuario = txtUsername.getText().trim();
         String clave = new String(txtPassword.getPassword()).trim();
 
@@ -110,7 +97,9 @@ public class Login extends JPanel {
             JOptionPane.showMessageDialog(this,
                     "Acceso concedido a " + u.getNombres() + " (" + u.getArea() + ")",
                     "Login exitoso", JOptionPane.INFORMATION_MESSAGE);
-            main.main.showMainForm(); // Cambia esto si tu app abre otra ventana
+
+            loginFrame.dispose(); // 🔒 cerrar login
+            SwingUtilities.invokeLater(() -> new MainFrame().setVisible(true)); // 🔓 abrir principal
         } else {
             mostrarEstado("❌ Usuario o contraseña incorrectos", Color.RED);
         }

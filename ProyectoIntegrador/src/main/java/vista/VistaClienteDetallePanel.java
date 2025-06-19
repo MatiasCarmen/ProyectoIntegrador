@@ -2,34 +2,44 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
+// VistaClienteDetallePanel.java
 package vista;
 
 import entidades.Cliente;
-
+import controladores.ComunasControlador;
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * Panel principal de detalle de cliente con pestañas.
- * Ahora recibe Cliente + idCuenta.
+ * Panel de detalle de cliente con pestañas para Actividades y Productos.
  */
 public class VistaClienteDetallePanel extends JPanel {
-    public VistaClienteDetallePanel(Cliente c, String idCuenta) {
+
+    private final Cliente cliente;
+    private final ComunasControlador comunaCtrl = new ComunasControlador();
+
+    public VistaClienteDetallePanel(Cliente cliente) {
+        this.cliente = cliente;
+        initUI();
+    }
+
+    private void initUI() {
         setLayout(new BorderLayout());
 
-        // Header rojo
-        JLabel header = new JLabel("Datos del Cliente: " + c.getNombres(), SwingConstants.CENTER);
-        header.setOpaque(true);
-        header.setBackground(Color.RED);
-        header.setForeground(Color.WHITE);
-        header.setFont(header.getFont().deriveFont(Font.BOLD, 18f));
-        add(header, BorderLayout.NORTH);
-
-        // Pestañas
         JTabbedPane tabs = new JTabbedPane();
-        tabs.addTab("Actividades", new VistaActividadesPorCuenta(idCuenta));
-        tabs.addTab("Productos Instalados", new VistaProductosInstaladosPorCuenta(idCuenta));
-        // … aquí podrías agregar más pestañas (Ofertas, Pedidos, etc.)
+
+        // Pestaña de Actividades
+        VistaActividadesPorCuenta vac = new VistaActividadesPorCuenta();
+        vac.setCuenta(cliente.getRut());         // o el idCuenta si lo tienes
+        vac.cargarActividades();
+        tabs.addTab("Actividades", vac);
+
+        // Pestaña de Productos
+        VistaProductosInstaladosPorCuenta vpc = new VistaProductosInstaladosPorCuenta();
+        vpc.setCuenta(cliente.getRut());         // o el idCuenta correspondiente
+        vpc.cargarProductos();
+        tabs.addTab("Productos", vpc);
+
         add(tabs, BorderLayout.CENTER);
     }
 }
