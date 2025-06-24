@@ -1,52 +1,60 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
  */
-package pruebas;
+package Pruebas;
 
 import controladores.ClienteControlador;
-import controladores.ComunasControlador;
 import entidades.Cliente;
 
 public class PruebaCliente {
     public static void main(String[] args) {
-        ClienteControlador cc = new ClienteControlador();
-        ComunasControlador ccc = new ComunasControlador();
+        ClienteControlador controlador = new ClienteControlador();
 
-        // 1) Asegurarnos de que la comuna existe (opcional)
-        // ccc.insertarComuna("C003", "ComunaPrueba"); 
+        // Crear un nuevo cliente usando setters
+        Cliente c = new Cliente();
+        c.setRut("12345678-9");
+        c.setCorreo("cliente@test.com");
+        c.setNombres("Juan Pedro");
+        c.setApellidoP("Pérez");
+        c.setApellidoM("González");
+        c.setTelefono(912345678L);
+        c.setEdad((byte)25);
+        c.setDireccion("Av. Principal 123");
+        c.setIdComuna("1");
 
-        // 2) Crear cliente con un IDCOMUNA que ya existe
-        Cliente nuevo = new Cliente(
-            "R9999999-1",
-            "test@correo.cl",
-            "Test",
-            "Prueba",
-            "Mock",
-            912345678L,
-            (byte)30,
-            "Calle Falsa 123",
-            "C001"        // <-- Aquí pones C001 o C002
-        );
-        System.out.println("Crear: " + cc.crearCliente(nuevo));
-
-        // 3) Listar
-        cc.listarClientes().forEach(c ->
-            System.out.println(c.getRut() + " - " + c.getNombres())
-        );
-
-        // 4) Buscar por RUT
-        Cliente buscado = cc.obtenerClientePorRut("R9999999-1");
-        System.out.println("Buscado: " +
-            (buscado != null ? buscado.getNombres() : "no existe"));
-
-        // 5) Actualizar
-        if (buscado != null) {
-            buscado.setNombres("TestModificado");
-            System.out.println("Actualizar: " + cc.actualizarCliente(buscado));
+        // Probar agregar
+        if (controlador.crearCliente(c)) {
+            System.out.println("Cliente agregado exitosamente");
+            System.out.println("RUT: " + c.getRut() + ", Nombre: " + c.getNombres());
+        } else {
+            System.out.println("Error al agregar cliente");
         }
 
-        // 6) Eliminar
-        System.out.println("Eliminar: " + cc.eliminarCliente("R9999999-1"));
+        // Probar búsqueda
+        Cliente buscado = controlador.obtenerClientePorRut("12345678-9");
+        if (buscado != null) {
+            System.out.println("Cliente encontrado: " + buscado.getNombres());
+        } else {
+            System.out.println("Cliente no encontrado");
+        }
+
+        // Probar modificación
+        if (buscado != null) {
+            buscado.setNombres("Juan Pablo");
+            if (controlador.actualizarCliente(buscado)) {
+                System.out.println("Cliente modificado exitosamente");
+            } else {
+                System.out.println("Error al modificar cliente");
+            }
+        }
+
+        // Probar eliminación
+        if (controlador.eliminarCliente("12345678-9")) {
+            System.out.println("Cliente eliminado exitosamente");
+        } else {
+            System.out.println("Error al eliminar cliente");
+        }
     }
 }

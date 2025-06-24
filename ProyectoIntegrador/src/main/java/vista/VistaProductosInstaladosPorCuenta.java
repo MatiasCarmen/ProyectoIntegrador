@@ -67,4 +67,29 @@ public class VistaProductosInstaladosPorCuenta extends JPanel {
             )
         );
     }
+
+    public void actualizarTabla() {
+        try {
+            // Usar el método existente que ya funciona en tu implementación
+            Map<String, List<String>> productosMap = ctrl.obtenerProductosPorTipo(idCuenta);
+
+            // Limpiar la tabla actual
+            model.setRowCount(0);
+
+            // Agregar los productos usando el formato de map que ya tienes implementado
+            productosMap.forEach((tipo, lista) -> {
+                lista.forEach(descripcion -> {
+                    model.addRow(new Object[]{
+                        tipo,          // PLAN / ADICIONAL / DESCUENTO
+                        descripcion    // Nombre o descripción del producto
+                    });
+                });
+            });
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Error al actualizar la tabla: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

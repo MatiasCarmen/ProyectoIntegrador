@@ -11,6 +11,8 @@ import java.util.function.Consumer;
 /**
  * Menú lateral muy simple: delega navegación al contenedor.
  */
+
+//clase posiblemente borrada ya no sirve creo
 public class DrawerPanel extends JPanel {
     public DrawerPanel(Consumer<String> onNavigate) {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

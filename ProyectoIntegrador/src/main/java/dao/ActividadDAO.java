@@ -147,5 +147,33 @@ public class ActividadDAO {
             return false;
         }
     }
-}
 
+    public List<Actividad> listarTodas() {
+        List<Actividad> lista = new ArrayList<>();
+        try (Connection conn = ConexionBD.conectar()) {
+            String sql = "SELECT * FROM ACTIVIDADES";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Actividad actividad = new Actividad();
+                actividad.setIdActividad(rs.getString("IDACTIVIDAD"));
+                actividad.setIdCuenta(rs.getString("IDCUENTA"));
+                actividad.setDescripcion(rs.getString("DESCRIPCION"));
+                actividad.setFechaCreacion(rs.getDate("FECHA_CREACION"));
+                actividad.setFechaCierre(rs.getDate("FECHA_CIERRE"));
+                actividad.setTipo(rs.getString("TIPO"));
+                actividad.setRazon(rs.getString("RAZON"));
+                actividad.setDetalle(rs.getString("DETALLE"));
+                actividad.setResolucion(rs.getString("RESOLUCION"));
+                actividad.setComentarios(rs.getString("COMENTARIOS"));
+                actividad.setTelefono(rs.getLong("TELEFONO"));
+                actividad.setCorreo(rs.getString("CORREO"));
+                lista.add(actividad);
+            }
+        } catch (SQLException e) {
+            System.err.println("Error al listar actividades: " + e.getMessage());
+        }
+        return lista;
+    }
+}

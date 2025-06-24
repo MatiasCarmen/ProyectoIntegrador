@@ -12,6 +12,7 @@ package controladores;
 import dao.MesaCentralDAO;
 import entidades.MesaCentral;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -39,5 +40,10 @@ public class ControladorMesa_central {
     public boolean eliminarMesaCentral(String idActividad) {
        	LOGGER.info("eliminarMesaCentral: " + idActividad);
         return dao.eliminar(idActividad);
+    }
+
+    public List<MesaCentral> listarTodos() {
+        LOGGER.info("[Ctrl] listarTodos");
+        return dao.listarTodos();
     }
 }

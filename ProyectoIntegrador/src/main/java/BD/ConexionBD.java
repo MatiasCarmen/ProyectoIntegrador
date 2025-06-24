@@ -12,10 +12,10 @@ import java.sql.SQLException;
  */
 public class ConexionBD {
     // 1. Atributos de conexión
-    private static final String BD = "SistemasCRM_V2"; // nombre de tu base
+    private static final String BD = "SistemasCRM_V2"; // nombre de la base de datos actual
     private static final String URL = "jdbc:mysql://localhost:3306/" + BD;
-    private static final String USER = "root"; // usuario de MySQL
-    private static final String PASSWORD = "Ms211596321*"; // contraseña de MySQL
+    private static final String USER = "root"; // modificar solo es para local
+    private static final String PASSWORD = "Ms211596321*"; // modificar solo es local
 
     // 2. Método público para obtener la conexión
     public static Connection conectar() {
@@ -29,9 +29,9 @@ public class ConexionBD {
 
             // 4. Establecer conexión
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println(" Conexión exitosa a la base de datos.");
+            System.out.println(" Conexion exitosa a la base de datos :D");
         } catch (ClassNotFoundException e) {
-            System.err.println(" Error: No se encontró el driver de MySQL.");
+            System.err.println(" Error: No se encontro el driver de MySQL.");
             e.printStackTrace();
         } catch (SQLException e) {
             System.err.println(" Error al conectar con la base de datos.");

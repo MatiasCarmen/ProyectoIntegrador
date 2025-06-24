@@ -25,7 +25,7 @@ public class UsuarioDAO {
     private static final Logger LOGGER = Logger.getLogger(UsuarioDAO.class.getName());
 
     public Usuario validarLogin(String idUsuario, String clave) {
-        String sql = "SELECT * FROM USUARIOS WHERE IDUSUARIO = ? AND CLAVE = ?";
+        String sql = "SELECT IDUSUARIO, RUT, IDROL, IDPAIS, CLAVE, NOMBRES, APELLIDOP, APELLIDOM, AREA FROM USUARIOS WHERE IDUSUARIO = ? AND CLAVE = ?";
         try (Connection conn = ConexionBD.conectar();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, idUsuario);
@@ -42,7 +42,7 @@ public class UsuarioDAO {
                       rs.getString("APELLIDOP"),
                       rs.getString("APELLIDOM"),
                       rs.getString("AREA"),
-                      rs.getDate("FECHACREACION")
+                      null  // Ya no usamos FECHACREACION
                     );
                 }
             }
@@ -54,7 +54,7 @@ public class UsuarioDAO {
 
     public List<Usuario> listarTodos() {
         List<Usuario> lista = new ArrayList<>();
-        String sql = "SELECT * FROM USUARIOS";
+        String sql = "SELECT IDUSUARIO, RUT, IDROL, IDPAIS, CLAVE, NOMBRES, APELLIDOP, APELLIDOM, AREA FROM USUARIOS";
         try (Connection conn = ConexionBD.conectar();
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -69,7 +69,7 @@ public class UsuarioDAO {
                   rs.getString("APELLIDOP"),
                   rs.getString("APELLIDOM"),
                   rs.getString("AREA"),
-                  rs.getDate("FECHACREACION")
+                  null  // Ya no usamos FECHACREACION
                 ));
             }
         } catch (SQLException e) {

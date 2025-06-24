@@ -9,24 +9,21 @@
  */
 package vista;
 
-import javax.swing.SwingUtilities;
 import controladores.ClienteControlador;
 import controladores.ComunasControlador;
 import com.formdev.flatlaf.FlatClientProperties;
+import entidades.Cliente;
 import entidades.Comuna;
 import net.miginfocom.swing.MigLayout;
 import ren.main.VistaPrincipal;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-/**
- * Panel de búsqueda avanzada de clientes, con layout según mockup.
- * Captura doble-click para ver detalle embebido en VistaPrincipal.
- */
 public class VistaClientes extends JPanel {
 
     private final JTextField txtNombre    = new JTextField();
@@ -47,92 +44,198 @@ public class VistaClientes extends JPanel {
     private final ComunasControlador comunaCtrl  = new ComunasControlador();
 
     public VistaClientes() {
-        setLayout(new MigLayout("fillx, insets 10",
+        setLayout(new MigLayout("fillx, insets 20",
                 "[pref][grow,fill][pref][100!][pref][100!][pref!]",
-                "[]10[]10[]10[][grow,fill]"));
+                "[]20[]10[]10[]20[][grow,fill]"));
 
-        // Título
-        add(new JLabel("<html><h2>Búsqueda de clientes</h2></html>"), "span 7, wrap");
+        // Panel principal con elevación
+        setBackground(Color.WHITE);
 
-        // Filtros...
-        add(new JLabel("Buscar por nombre:"),   "cell 0 1");
-        add(txtNombre,                          "cell 1 1");
-        add(new JLabel("RUT:"),                 "cell 2 1");
-        add(txtRut,                             "cell 3 1");
-        add(new JLabel("Dirección:"),           "cell 4 1");
-        add(txtDireccion,                       "cell 5 1");
-        add(btnBuscar,                          "cell 6 1, wrap");
+        // Título con estilo Claro y sombra
+        JPanel titlePanel = new vista.util.UIHelper.ElevatedPanel();
+        titlePanel.setBackground(Color.WHITE);
+        JLabel titulo = new JLabel("<html><h1 style='color:#ED1C24'>Búsqueda de clientes</h1></html>");
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
+        titlePanel.add(titulo);
+        add(titlePanel, "span 7, wrap");
 
-        add(new JLabel("Buscar por apellido paterno:"), "cell 0 2");
-        add(txtApellidoP,                                 "cell 1 2");
-        add(new JLabel("Buscar por apellido materno:"), "cell 2 2");
-        add(txtApellidoM,                                 "cell 3 2, span 3, wrap");
+        // Panel de filtros con borde y efecto de elevación
+        JPanel panelFiltros = new vista.util.UIHelper.ElevatedPanel();
+        panelFiltros.setLayout(new MigLayout("fillx, insets 15",
+            "[pref][grow,fill][pref][100!][pref][100!][pref!]", "[]10[]10[]"));
+        panelFiltros.setBackground(Color.WHITE);
 
-        add(new JLabel("Comuna:"),             "cell 0 3");
-        add(cmbComuna,                         "cell 1 3");
-        add(new JLabel("Tipo de cuenta:"),     "cell 3 3, alignx center");
-        add(cmbTipoCuenta,                     "cell 4 3, wrap");
+        // Estilizar campos con efectos modernos
+        configurarCampoModerno(txtNombre, "Ingrese nombre a buscar");
+        configurarCampoModerno(txtRut, "Ingrese RUT");
+        configurarCampoModerno(txtDireccion, "Ingrese dirección");
+        configurarCampoModerno(txtApellidoP, "Ingrese apellido paterno");
+        configurarCampoModerno(txtApellidoM, "Ingrese apellido materno");
 
-        add(new JLabel("Resultado de búsqueda"), "span 7, gaptop 10, wrap");
+        // Estilizar botón de búsqueda
+        vista.util.UIHelper.setupButtonHover(btnBuscar,
+            new Color(237, 28, 36),  // Color normal (Rojo Claro)
+            new Color(200, 16, 46)   // Color hover (Rojo oscuro)
+        );
 
-        // Tabla
-        String[] cols = {"Cliente","RUT","Tipo Cuenta","ID Cuenta"};
+        // Agregar componentes al panel de filtros
+        panelFiltros.add(crearLabel("Buscar por nombre:"), "cell 0 0");
+        panelFiltros.add(txtNombre, "cell 1 0");
+        panelFiltros.add(crearLabel("RUT:"), "cell 2 0");
+        panelFiltros.add(txtRut, "cell 3 0");
+        panelFiltros.add(crearLabel("Dirección:"), "cell 4 0");
+        panelFiltros.add(txtDireccion, "cell 5 0");
+        panelFiltros.add(btnBuscar, "cell 6 0, wrap");
+
+        panelFiltros.add(crearLabel("Apellido paterno:"), "cell 0 1");
+        panelFiltros.add(txtApellidoP, "cell 1 1");
+        panelFiltros.add(crearLabel("Apellido materno:"), "cell 2 1");
+        panelFiltros.add(txtApellidoM, "cell 3 1, span 3, wrap");
+
+        panelFiltros.add(crearLabel("Comuna:"), "cell 0 2");
+        panelFiltros.add(cmbComuna, "cell 1 2");
+        panelFiltros.add(crearLabel("Tipo de cuenta:"), "cell 3 2");
+        panelFiltros.add(cmbTipoCuenta, "cell 4 2, wrap");
+
+        add(panelFiltros, "span 7, grow, wrap");
+
+        // Tabla con estilo moderno
+        String[] cols = {"Nombre", "Apellido P", "Apellido M", "RUT", "Dirección", "Comuna", "Tipo Cuenta"};
         model = new DefaultTableModel(cols, 0) {
             @Override public boolean isCellEditable(int r, int c) { return false; }
         };
         tblClientes = new JTable(model);
-        tblClientes.setRowHeight(28);
+        tblClientes.setRowHeight(35);
+        tblClientes.setShowGrid(false);
+        tblClientes.setIntercellSpacing(new Dimension(0, 0));
+        tblClientes.setSelectionBackground(new Color(255, 236, 236));
+        tblClientes.setSelectionForeground(new Color(237, 28, 36));
 
-        // Doble-click para detalle embebido
+        // Panel de la tabla con elevación
+        JPanel tablePanel = new vista.util.UIHelper.ElevatedPanel();
+        tablePanel.setLayout(new BorderLayout());
+        tablePanel.add(new JScrollPane(tblClientes), BorderLayout.CENTER);
+        add(tablePanel, "span 7, grow");
+
+        // Protección contra nulos al cargar datos
+        btnBuscar.addActionListener(e -> {
+            model.setRowCount(0);
+            String nombreBusqueda = txtNombre.getText().trim();
+            System.out.println("Filtrando por nombre = '" + nombreBusqueda + "'");
+
+            List<Object[]> resultados = clienteCtrl.buscarClientesAvanzado(
+                txtRut.getText().trim(),
+                nombreBusqueda,
+                txtApellidoP.getText().trim(),
+                txtApellidoM.getText().trim(),
+                txtDireccion.getText().trim(),
+                cmbTipoCuenta.getSelectedItem().toString(),
+                cmbComuna.getSelectedItem().toString()
+            );
+
+            if (resultados != null) {
+                resultados.forEach(fila -> {
+                    if (fila != null && fila.length == 7) {  // Verificamos que tenga todas las columnas
+                        model.addRow(new Object[]{
+                            fila[0] != null ? fila[0] : "",  // Nombre
+                            fila[1] != null ? fila[1] : "",  // Apellido P
+                            fila[2] != null ? fila[2] : "",  // Apellido M
+                            fila[3] != null ? fila[3] : "",  // RUT
+                            fila[4] != null ? fila[4] : "",  // Dirección
+                            fila[5] != null ? fila[5] : "",  // Comuna
+                            fila[6] != null ? fila[6] : ""   // Tipo Cuenta
+                        });
+                    }
+                });
+                System.out.println("Filas cargadas: " + resultados.size());
+            } else {
+                System.out.println("La búsqueda no retornó resultados");
+            }
+        });
+
+        // Agregar evento de doble clic en la tabla
         tblClientes.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (e.getClickCount() == 2) {
-                    int row = tblClientes.rowAtPoint(e.getPoint());
-                    if (row < 0) return;
-
-                    // Obtenemos el ID Cuenta (columna 3)
-                    String idCuenta = (String) model.getValueAt(row, 3);
-
-                    // Llamamos al método en VistaPrincipal
-                    VistaPrincipal vp = (VistaPrincipal)
-                        SwingUtilities.getAncestorOfClass(VistaPrincipal.class, VistaClientes.this);
-                    if (vp != null) {
-                        vp.abrirModuloCuenta(idCuenta);
-                    }
+                    mostrarDetalleCliente();
                 }
             }
         });
 
-        add(new JScrollPane(tblClientes), "span 7, grow, wrap");
-
-        // Estilos y lógica de filtros
-        btnBuscar.putClientProperty(FlatClientProperties.STYLE, "font:bold");
+        // Cargar comunas en el combo
         cargarComunas();
-        btnBuscar.addActionListener(e -> aplicarFiltros());
-        aplicarFiltros();
+    }
+
+    private void configurarCampo(JTextField campo, String placeholder) {
+        campo.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, placeholder);
+        campo.putClientProperty(FlatClientProperties.TEXT_FIELD_SHOW_CLEAR_BUTTON, true);
+    }
+
+    private void configurarCampoModerno(JTextField campo, String placeholder) {
+        campo.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, placeholder);
+        campo.putClientProperty(FlatClientProperties.TEXT_FIELD_SHOW_CLEAR_BUTTON, true);
+        campo.putClientProperty(FlatClientProperties.STYLE, "" +
+            "arc: 8;" +
+            "focusWidth: 1;" +
+            "focusColor: #ED1C24;" +
+            "borderWidth: 1;" +
+            "innerFocusWidth: 0");
+    }
+
+    private JLabel crearLabel(String texto) {
+        JLabel label = new JLabel(texto);
+        label.setForeground(new Color(51, 51, 51));
+        return label;
     }
 
     private void cargarComunas() {
-        cmbComuna.removeAllItems();
-        cmbComuna.addItem("Todos");
-        List<Comuna> lista = comunaCtrl.listarComunas();
-        lista.forEach(c -> cmbComuna.addItem(c.getDescripcion()));
+        List<Comuna> comunas = comunaCtrl.listarComunas();
+        cmbComuna.addItem("Todas");
+        if (comunas != null) {
+            comunas.forEach(c -> {
+                if (c != null && c.getDescripcion() != null) {
+                    cmbComuna.addItem(c.getDescripcion());
+                }
+            });
+        }
     }
 
-    private void aplicarFiltros() {
-        String nombre    = txtNombre.getText().trim();
-        String rut       = txtRut.getText().trim();
-        String direccion = txtDireccion.getText().trim();
-        String apP       = txtApellidoP.getText().trim();
-        String apM       = txtApellidoM.getText().trim();
-        String comuna    = (String)cmbComuna.getSelectedItem();
-        String tipo      = (String)cmbTipoCuenta.getSelectedItem();
+    private void mostrarDetalleCliente() {
+        int row = tblClientes.getSelectedRow();
+        if (row >= 0) {
+            String rut = (String) model.getValueAt(row, 3); // RUT está en la columna 3
+            Cliente cliente = clienteCtrl.obtenerClientePorRut(rut);
+            if (cliente != null) {
+                VistaPrincipal vp = (VistaPrincipal) SwingUtilities.getWindowAncestor(this);
+                if (vp != null) {
+                    vp.showDetalleCliente(cliente);
+                }
+            }
+        }
+    }
 
-        List<Object[]> filas = clienteCtrl.buscarClientesAvanzado(
-            rut, nombre, apP, apM, direccion, tipo, comuna
-        );
+    public void actualizarTabla() {
         model.setRowCount(0);
-        filas.forEach(f -> model.addRow(f));
+        List<Object[]> resultados = clienteCtrl.buscarClientesAvanzado("", "", "", "", "", "Todos", "Todas");
+
+        if (resultados != null) {
+            for (Object[] fila : resultados) {
+                if (fila != null) {
+                    model.addRow(new Object[]{
+                        fila[0] != null ? fila[0] : "",  // Nombre
+                        fila[1] != null ? fila[1] : "",  // Apellido P
+                        fila[2] != null ? fila[2] : "",  // Apellido M
+                        fila[3] != null ? fila[3] : "",  // RUT
+                        fila[4] != null ? fila[4] : "",  // Dirección
+                        fila[5] != null ? fila[5] : "",  // Comuna
+                        fila[6] != null ? fila[6] : ""   // Tipo Cuenta
+                    });
+                }
+            }
+            System.out.println("Tabla actualizada: " + resultados.size() + " clientes cargados");
+        } else {
+            System.out.println("No se pudieron cargar los clientes");
+        }
     }
 }

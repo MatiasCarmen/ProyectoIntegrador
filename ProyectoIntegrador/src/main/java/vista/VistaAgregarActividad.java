@@ -4,7 +4,7 @@
  */
 package vista;
 
-import Controladores.ActividadesControlador;
+import controladores.ActividadesControlador; // Corregido a minúsculas
 import entidades.Actividad;
 
 

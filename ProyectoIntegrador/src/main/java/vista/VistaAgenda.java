@@ -5,14 +5,14 @@
 /* VistaAgenda.java */
 package vista;
 
-
-import Controladores.ActividadesControlador;
+import controladores.ActividadesControlador;  // Corregido el paquete a minúsculas
 import entidades.Actividad;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -57,5 +57,45 @@ public class VistaAgenda extends JPanel {
             a.getTipo()
         }));
     }
-}
 
+    public void actualizarAgenda() {
+        try {
+            // Actualizar la vista de la agenda con los datos más recientes
+            List<Actividad> actividades = ctrl.listarPorCuenta(null); // Usando el método existente
+            mostrarActividades(actividades);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Error al actualizar la agenda: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void mostrarActividades(List<Actividad> actividades) {
+        // Limpiar la vista actual
+        model.setRowCount(0);
+
+        // Agregar cada actividad a la tabla usando los atributos correctos de la entidad
+        for (Actividad actividad : actividades) {
+            model.addRow(new Object[]{
+                actividad.getFechaCreacion(),
+                actividad.getIdActividad(),
+                actividad.getDescripcion(),
+                actividad.getTipo(),
+                actividad.getRazon(),
+                actividad.getResolucion()
+            });
+        }
+    }
+
+    private void cargarActividades() {
+        List<Actividad> lista = ctrl.listarPorCuenta(null);
+        model.setRowCount(0);
+        lista.forEach(a -> model.addRow(new Object[]{
+            a.getFechaCreacion(),
+            a.getIdActividad(),
+            a.getDescripcion(),
+            a.getTipo()
+        }));
+    }
+}

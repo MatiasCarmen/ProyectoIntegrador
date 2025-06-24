@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package controladores;
-
+/**
+ *
+ * @author matias papu
+ */
 import dao.ComunaDAO;
 import entidades.Comuna;
 

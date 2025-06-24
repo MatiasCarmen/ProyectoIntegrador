@@ -9,28 +9,35 @@
  */
 package ren.main;
 
-import vista.VistaClientes;
-import vista.VistaUsuarios;
-import vista.VistaAgenda;
-import vista.VistaMesaCentral;
-import vista.VistaActividadesPorCuenta;
-import vista.VistaProductosInstaladosPorCuenta;
+import com.formdev.flatlaf.FlatLightLaf;
+import entidades.Cliente;
+import vista.*;
+import vista.drawer.MyDrawerBuilder;
+import vista.componentes.LoadingSpinner;
+import vista.util.UIHelper;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class VistaPrincipal extends JFrame {
-
-    private final JPanel panelContenedor;
-    private final CardLayout cardLayout;
-
     // Identificadores de tarjetas
-    private static final String TARJETA_CLIENTES    = "CLIENTES";
-    private static final String TARJETA_USUARIOS    = "USUARIOS";
-    private static final String TARJETA_AGENDA      = "AGENDA";
-    private static final String TARJETA_MESA        = "MESA_CENTRAL";
-    private static final String TARJETA_ACTIVIDADES = "ACTIVIDADES";
-    private static final String TARJETA_PRODUCTOS   = "PRODUCTOS";
+    public static final String TARJETA_INICIO = "INICIO";
+    public static final String TARJETA_CLIENTES = "CLIENTES";
+    public static final String TARJETA_BUSCAR_CLIENTE = "BUSCAR_CLIENTE";
+    public static final String TARJETA_AGREGAR_CLIENTE = "AGREGAR_CLIENTE";
+    public static final String TARJETA_USUARIOS = "USUARIOS";
+    public static final String TARJETA_CREAR_USUARIO = "CREAR_USUARIO";
+    public static final String TARJETA_NUEVA_ACTIVIDAD = "NUEVA_ACTIVIDAD";
+    public static final String TARJETA_ACTIVIDADES = "ACTIVIDADES";
+    public static final String TARJETA_AGENDA = "AGENDA";
+    public static final String TARJETA_MESA = "MESA_CENTRAL";
+    public static final String TARJETA_PRODUCTOS = "PRODUCTOS";
+
+    private final CardLayout cardLayout;
+    private final JPanel panelContenedor;
+    private final JComponent menuLateral;
+    private final LoadingSpinner loadingSpinner;
+    private final JPanel overlayPanel;
 
     // Panels embebidos
     private final VistaClientes clientesPanel;
@@ -40,96 +47,227 @@ public class VistaPrincipal extends JFrame {
     private final VistaActividadesPorCuenta actividadesPanel;
     private final VistaProductosInstaladosPorCuenta productosPanel;
 
+    private JPanel currentPanel;
+    private static final int ANIMATION_DURATION = 300; // milisegundos
+    private static final Color SUCCESS_COLOR = new Color(46, 125, 50);
+    private static final Color ERROR_COLOR = new Color(198, 40, 40);
+
     public VistaPrincipal() {
-        super("CRM Integrador");
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(1200, 800);
-        setLocationRelativeTo(null);
-        setLayout(new BorderLayout());
+        // Establecer look and feel moderno
+        FlatLightLaf.setup();
 
-        // Menu lateral
-        JPanel menu = new JPanel();
-        menu.setLayout(new GridLayout(0, 1, 0, 5));
-        menu.setPreferredSize(new Dimension(200, 0));
-        String[] items = {
-            "Clientes", "Usuarios", "Agenda", "Mesa Central"
-        };
-        for (String name : items) {
-            JButton btn = new JButton(name);
-            btn.addActionListener(e -> {
-                switch (name) {
-                    case "Clientes"      -> showCard(TARJETA_CLIENTES);
-                    case "Usuarios"      -> showCard(TARJETA_USUARIOS);
-                    case "Agenda"        -> showCard(TARJETA_AGENDA);
-                    case "Mesa Central"  -> showCard(TARJETA_MESA);
-                }
-            });
-            menu.add(btn);
-        }
-        add(menu, BorderLayout.WEST);
-
-        // Contenedor central con CardLayout
+        // Inicializar componentes
         cardLayout = new CardLayout();
         panelContenedor = new JPanel(cardLayout);
+        panelContenedor.setBackground(Color.WHITE);
 
-        // Instanciación de vistas
-        clientesPanel      = new VistaClientes();
-        usuariosPanel      = new VistaUsuarios();
-        agendaPanel        = new VistaAgenda();
-        mesaCentralPanel   = new VistaMesaCentral();
-        actividadesPanel   = new VistaActividadesPorCuenta();
-        productosPanel     = new VistaProductosInstaladosPorCuenta();
+        // Crear overlay para loading
+        overlayPanel = new JPanel(new GridBagLayout());
+        overlayPanel.setBackground(new Color(255, 255, 255, 200));
+        overlayPanel.setVisible(false);
 
-        // Registro de tarjetas
+        // Configurar loading spinner
+        loadingSpinner = new LoadingSpinner();
+        overlayPanel.add(loadingSpinner);
+
+        // Inicializar los paneles con efecto de elevación
+        clientesPanel = new VistaClientes();
+        usuariosPanel = new VistaUsuarios();
+        agendaPanel = new VistaAgenda();
+        mesaCentralPanel = new VistaMesaCentral();
+        actividadesPanel = new VistaActividadesPorCuenta();
+        productosPanel = new VistaProductosInstaladosPorCuenta();
+
+        // Crear el drawer con efecto de sombra
+        MyDrawerBuilder builder = new MyDrawerBuilder(this);
+        menuLateral = builder.build();
+
+        // Configurar la ventana principal
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Claro CRM");
+        setMinimumSize(new Dimension(1024, 768));
+        setExtendedState(JFrame.MAXIMIZED_BOTH);
+
+        // Panel principal con efecto de elevación
+        JPanel mainPanel = new UIHelper.ElevatedPanel();
+        mainPanel.setLayout(new BorderLayout(0, 0));
+        mainPanel.setBackground(Color.WHITE);
+
+        // Agregar overlay al panel principal
+        mainPanel.add(overlayPanel, BorderLayout.CENTER);
+
+        // Panel de contenido con margen y sombra
+        JPanel contentPanel = new UIHelper.ElevatedPanel();
+        contentPanel.setLayout(new BorderLayout());
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        contentPanel.setBackground(Color.WHITE);
+        contentPanel.add(panelContenedor, BorderLayout.CENTER);
+
+        // Agregar todos los paneles al CardLayout
+        panelContenedor.add(new VistaInicio(), TARJETA_INICIO);
         panelContenedor.add(clientesPanel, TARJETA_CLIENTES);
+
+        // Agregar paneles adicionales si existen
+        try {
+            Class<?> vistaBuscarClienteClass = Class.forName("vista.VistaBuscarCliente");
+            panelContenedor.add((JPanel) vistaBuscarClienteClass.getDeclaredConstructor().newInstance(),
+                              TARJETA_BUSCAR_CLIENTE);
+        } catch (Exception e) {
+            System.out.println("VistaBuscarCliente no encontrada");
+        }
+
+        try {
+            Class<?> vistaAgregarClienteClass = Class.forName("vista.VistaAgregarCliente");
+            panelContenedor.add((JPanel) vistaAgregarClienteClass.getDeclaredConstructor().newInstance(),
+                              TARJETA_AGREGAR_CLIENTE);
+        } catch (Exception e) {
+            System.out.println("VistaAgregarCliente no encontrada");
+        }
+
+        // Agregar el resto de los paneles
         panelContenedor.add(usuariosPanel, TARJETA_USUARIOS);
-        panelContenedor.add(agendaPanel,   TARJETA_AGENDA);
-        panelContenedor.add(mesaCentralPanel, TARJETA_MESA);
+        panelContenedor.add(new VistaCrearUsuario(), TARJETA_CREAR_USUARIO);
+        panelContenedor.add(new VistasActividades(), TARJETA_NUEVA_ACTIVIDAD);  // Cambiado a tu clase existente
         panelContenedor.add(actividadesPanel, TARJETA_ACTIVIDADES);
-        panelContenedor.add(productosPanel,   TARJETA_PRODUCTOS);
+        panelContenedor.add(agendaPanel, TARJETA_AGENDA);
+        panelContenedor.add(mesaCentralPanel, TARJETA_MESA);
+        panelContenedor.add(productosPanel, TARJETA_PRODUCTOS);
 
-        add(panelContenedor, BorderLayout.CENTER);
+        // Agregar los paneles al frame principal
+        mainPanel.add(menuLateral, BorderLayout.WEST);
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
 
-        // Mostrar inicialmente la vista de Clientes
-        showCard(TARJETA_CLIENTES);
+        setContentPane(mainPanel);
+        mostrarPanel(TARJETA_INICIO);
     }
 
-    /**
-     * Muestra la tarjeta con el nombre dado.
-     */
-    private void showCard(String tarjeta) {
-        cardLayout.show(panelContenedor, tarjeta);
-    }
-
-    /**
-     * Navega al módulo de Actividades + Productos para la cuenta dada.
-     */
-    public void abrirModuloCuenta(String idCuenta) {
-        actividadesPanel.setCuenta(idCuenta);
-        actividadesPanel.cargarActividades();
-        productosPanel.setCuenta(idCuenta);
-        productosPanel.cargarProductos();
-        showCard(TARJETA_ACTIVIDADES);
-    }
-
-    /**
-     * Método auxiliar para que desde los panels se muestre el panel de Productos.
-     */
-    public void mostrarProductos() {
-        showCard(TARJETA_PRODUCTOS);
-    }
-
-    /**
-     * Método auxiliar para que desde los panels se muestre el panel de Actividades.
-     */
-    public void mostrarActividades() {
-        showCard(TARJETA_ACTIVIDADES);
-    }
-
-    public static void main(String[] args) {
+    // Mejorar el cambio entre paneles con animación
+    public void mostrarPanel(String nombrePanel) {
         SwingUtilities.invokeLater(() -> {
-            VistaPrincipal vp = new VistaPrincipal();
-            vp.setVisible(true);
+            showLoading();
+
+            // Simular carga de datos
+            Timer timer = new Timer(500, e -> {
+                cardLayout.show(panelContenedor, nombrePanel);
+                panelContenedor.revalidate();
+                panelContenedor.repaint();
+                hideLoading();
+                System.out.println("Panel " + nombrePanel + " cargado ✅");
+                ((Timer)e.getSource()).stop();
+            });
+            timer.setRepeats(false);
+            timer.start();
         });
+    }
+
+    private void showLoading() {
+        overlayPanel.setVisible(true);
+        loadingSpinner.startAnimation();
+    }
+
+    private void hideLoading() {
+        loadingSpinner.stopAnimation();
+        overlayPanel.setVisible(false);
+    }
+
+    @Override
+    public void setContentPane(Container contentPane) {
+        SwingUtilities.invokeLater(() -> {
+            super.setContentPane(contentPane);
+            contentPane.revalidate();
+            contentPane.repaint();
+            System.out.println("ContentPane actualizado y revalidado ✅");
+        });
+    }
+
+    public void initUI() {
+        SwingUtilities.invokeLater(() -> {
+            // Panel principal con BorderLayout
+            JPanel mainPanel = new JPanel(new BorderLayout(0, 0));
+            mainPanel.setBackground(Color.WHITE);
+
+            // Panel lateral (drawer)
+            System.out.println("Antes de build(): " + menuLateral);
+            JPanel drawerPanel = new JPanel(new BorderLayout());
+            drawerPanel.setPreferredSize(new Dimension(280, 0));
+            drawerPanel.add(menuLateral, BorderLayout.CENTER);
+            drawerPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(200, 200, 200)));
+            System.out.println("Drawer creado: " + menuLateral.getClass() + ", prefSize=" + menuLateral.getPreferredSize());
+
+            // Panel para el contenido con margen
+            JPanel contentPanel = new JPanel(new BorderLayout());
+            contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+            contentPanel.setBackground(Color.WHITE);
+            contentPanel.add(panelContenedor, BorderLayout.CENTER);
+
+            mainPanel.add(drawerPanel, BorderLayout.WEST);
+            mainPanel.add(contentPanel, BorderLayout.CENTER);
+
+            setContentPane(mainPanel);
+            mainPanel.revalidate();
+            mainPanel.repaint();
+            System.out.println("Drawer revalidated & painted ✅");
+        });
+    }
+
+    // Métodos para actualizar paneles específicos
+    public void actualizarTablaClientes() {
+        if (clientesPanel != null) {
+            clientesPanel.actualizarTabla();
+        }
+    }
+
+    public void actualizarTablaUsuarios() {
+        if (usuariosPanel != null) {
+            usuariosPanel.actualizarTabla();
+        }
+    }
+
+    public void actualizarAgenda() {
+        if (agendaPanel != null) {
+            agendaPanel.actualizarAgenda();
+        }
+    }
+
+    public void actualizarMesaCentral() {
+        if (mesaCentralPanel != null) {
+            mesaCentralPanel.actualizarTabla();
+        }
+    }
+
+    public void actualizarActividades() {
+        if (actividadesPanel != null) {
+            actividadesPanel.actualizarTabla();
+        }
+    }
+
+    public void actualizarProductos() {
+        if (productosPanel != null) {
+            productosPanel.actualizarTabla();
+        }
+    }
+
+    public void showDetalleCliente(Cliente cliente) {
+        if (cliente != null) {
+            SwingUtilities.invokeLater(() -> {
+                ClienteDetalleDialog dialog = new ClienteDetalleDialog(this, true, cliente);
+                dialog.setLocationRelativeTo(this);
+                dialog.setVisible(true);
+            });
+        }
+    }
+
+    public void mostrarProductos() {
+        mostrarPanel(TARJETA_PRODUCTOS);
+        if (productosPanel != null) {
+            productosPanel.actualizarTabla();
+        }
+    }
+
+    public void mostrarActividades() {
+        mostrarPanel(TARJETA_ACTIVIDADES);
+        if (actividadesPanel != null) {
+            actividadesPanel.actualizarTabla();
+        }
     }
 }

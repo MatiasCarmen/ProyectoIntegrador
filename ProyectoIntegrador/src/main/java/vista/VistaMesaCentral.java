@@ -53,4 +53,29 @@ public class VistaMesaCentral extends JPanel {
             m.getLugar()
         }));
     }
+
+    public void actualizarTabla() {
+        try {
+            // Limpiar la tabla actual
+            DefaultTableModel model = (DefaultTableModel) tblMesa.getModel();
+            model.setRowCount(0);
+
+            // Obtener datos actualizados
+            List<MesaCentral> registros = ctrl.listarTodos();
+
+            // Agregar los nuevos datos
+            for (MesaCentral registro : registros) {
+                model.addRow(new Object[]{
+                    registro.getIdActividad(),
+                    registro.getTelefono(),
+                    registro.getLugar()
+                });
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Error al actualizar la tabla: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

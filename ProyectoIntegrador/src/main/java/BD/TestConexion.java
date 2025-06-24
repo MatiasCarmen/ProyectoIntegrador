@@ -13,7 +13,7 @@ public class TestConexion {
         Connection conn = ConexionBD.conectar();
 
         if (conn != null) {
-            System.out.println(" Prueba superada: estas conectado hurra");
+            System.out.println(" Prueba superada: estas conectado hurra!!!!!");
         } else {
             System.out.println(" Fallo en la conexión.");
         }

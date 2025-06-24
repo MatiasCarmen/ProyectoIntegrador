@@ -1,36 +1,75 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package entidades;
 
-/**
- * Entidad que representa un producto instalado en una cuenta.
- */
+import java.util.Date;
+
 public class ProductoInstalado {
+    private String id;
     private String idCuenta;
-    private String idAdicionales;
-    private String idPlan;
-    private String idDescuentos;
+    private String nombre;
+    private String descripcion;
+    private Date fechaInstalacion;
+    private String estado;
 
-    public ProductoInstalado() { }
+    // contructor principal 
+    public ProductoInstalado() {}
 
-    public ProductoInstalado(String idCuenta, String idAdicionales, String idPlan, String idDescuentos) {
-        this.idCuenta        = idCuenta;
-        this.idAdicionales   = idAdicionales;
-        this.idPlan          = idPlan;
-        this.idDescuentos    = idDescuentos;
+    // Constructor con parámetros
+    public ProductoInstalado(String id, String idCuenta, String nombre, String descripcion,
+                           Date fechaInstalacion, String estado) {
+        this.id = id;
+        this.idCuenta = idCuenta;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.fechaInstalacion = fechaInstalacion;
+        this.estado = estado;
     }
 
-    public String getIdCuenta() { return idCuenta; }
-    public void setIdCuenta(String idCuenta) { this.idCuenta = idCuenta; }
+    // Getters y Setters
+    public String getId() {
+        return id;
+    }
 
-    public String getIdAdicionales() { return idAdicionales; }
-    public void setIdAdicionales(String idAdicionales) { this.idAdicionales = idAdicionales; }
+    public void setId(String id) {
+        this.id = id;
+    }
 
-    public String getIdPlan() { return idPlan; }
-    public void setIdPlan(String idPlan) { this.idPlan = idPlan; }
+    public String getIdCuenta() {
+        return idCuenta;
+    }
 
-    public String getIdDescuentos() { return idDescuentos; }
-    public void setIdDescuentos(String idDescuentos) { this.idDescuentos = idDescuentos; }
+    public void setIdCuenta(String idCuenta) {
+        this.idCuenta = idCuenta;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Date getFechaInstalacion() {
+        return fechaInstalacion;
+    }
+
+    public void setFechaInstalacion(Date fechaInstalacion) {
+        this.fechaInstalacion = fechaInstalacion;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 }

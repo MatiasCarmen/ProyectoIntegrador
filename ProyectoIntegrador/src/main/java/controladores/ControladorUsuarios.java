@@ -56,4 +56,41 @@ public class ControladorUsuarios {
 
         return user;
     }
+
+    /**
+     * Valida las credenciales del usuario.
+     * @param usuario Nombre de usuario
+     * @param password Contraseña del usuario
+     * @return objeto Usuario si es válido, null si no existe
+     */
+    public Usuario validarCredenciales(String usuario, String password) {
+        try {
+            String sql = "SELECT * FROM USUARIOS WHERE IDUSUARIO = ? AND CLAVE = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ps.setString(2, password);
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                return new Usuario(
+                    rs.getString("IDUSUARIO"),
+                    rs.getString("RUT"),
+                    rs.getString("IDROL"),
+                    rs.getString("IDPAIS"),
+                    rs.getString("CLAVE"),
+                    rs.getString("NOMBRES"),
+                    rs.getString("APELLIDOP"),
+                    rs.getString("APELLIDOM"),
+                    rs.getString("AREA"),
+                    rs.getDate("FECHA_CREACION")
+                );
+            }
+
+        } catch (SQLException e) {
+            System.err.println("Error al validar credenciales: " + e.getMessage());
+        }
+
+        return null;
+    }
 }

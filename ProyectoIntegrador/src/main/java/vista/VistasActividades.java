@@ -10,7 +10,7 @@
  */
 package vista;
 
-import Controladores.ActividadesControlador;
+import controladores.ActividadesControlador;  // Corregido a minúsculas
 import entidades.Actividad;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
@@ -137,14 +137,24 @@ public class VistasActividades extends JPanel {
     private void recargarTabla() {
         model.setRowCount(0);
         List<Actividad> lista = ctrl.listarPorCuenta(txtIdCuenta.getText().trim());
-        lista.forEach(a -> model.addRow(new Object[]{
-            a.getIdActividad(),
-            a.getIdCuenta(),
-            a.getDescripcion(),
-            a.getFechaCreacion(),
-            a.getTipo(),
-            a.getRazon()
-        }));
+
+        if (lista != null) {
+            lista.forEach(a -> {
+                if (a != null) {
+                    model.addRow(new Object[]{
+                        a.getIdActividad(),
+                        a.getIdCuenta(),
+                        a.getDescripcion(),
+                        a.getFechaCreacion(),
+                        a.getTipo(),
+                        a.getRazon()
+                    });
+                }
+            });
+            System.out.println("Actividades cargadas: " + lista.size());
+        } else {
+            System.out.println("No se encontraron actividades para la cuenta");
+        }
     }
 
     private void mostrarDetalle() {
@@ -155,6 +165,13 @@ public class VistasActividades extends JPanel {
         }
         String id = (String)model.getValueAt(row,0);
         Actividad a = ctrl.obtenerPorId(id);
-        new DetalleActividadDialog(SwingUtilities.getWindowAncestor(this), a).setVisible(true);
+        if (a != null) {
+            new DetalleActividadDialog(SwingUtilities.getWindowAncestor(this), a).setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                "No se pudo cargar el detalle de la actividad",
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

@@ -3,12 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-
 /**
  *
  * @author mathi
  */
-package Controladores;
+package controladores; 
 
 import entidades.Actividad;
 import dao.ActividadDAO;
@@ -46,5 +45,10 @@ public class ActividadesControlador {
     public boolean eliminarActividad(String idActividad) {
         LOGGER.info("[Ctrl] eliminarActividad → " + idActividad);
         return dao.eliminarActividad(idActividad);
+    }
+
+    public List<Actividad> obtenerActividadesAgendadas() {
+        LOGGER.info("[Ctrl] obtenerActividadesAgendadas");
+        return dao.listarTodas();  // Usando tu método existente del DAO
     }
 }

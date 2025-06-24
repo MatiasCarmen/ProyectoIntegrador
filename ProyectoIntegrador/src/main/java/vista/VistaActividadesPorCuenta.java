@@ -5,16 +5,16 @@
 // VistaActividadesPorCuenta.java
 package vista;
 
-import Controladores.ActividadesControlador;
+import controladores.ActividadesControlador;  // Corregido el paquete
+import entidades.Actividad;
+import net.miginfocom.swing.MigLayout;
+import com.formdev.flatlaf.FlatClientProperties;
+import ren.main.VistaPrincipal;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.SwingUtilities;
-import com.formdev.flatlaf.FlatClientProperties;
-import net.miginfocom.swing.MigLayout;
-
-import entidades.Actividad;
-import ren.main.VistaPrincipal;
 
 /**
  * Panel que muestra las actividades de una cuenta dada.
@@ -59,16 +59,68 @@ public class VistaActividadesPorCuenta extends JPanel {
 
     /** Carga las actividades para la cuenta actual. */
     public void cargarActividades() {
-        if (idCuenta == null) return;
+        if (idCuenta == null) {
+            System.out.println("No hay cuenta seleccionada para cargar actividades");
+            return;
+        }
         List<Actividad> lista = ctrl.listarPorCuenta(idCuenta);
         model.setRowCount(0);
-        lista.forEach(a -> model.addRow(new Object[]{
-            a.getIdActividad(),
-            a.getDescripcion(),
-            a.getFechaCreacion(),
-            a.getFechaCierre(),
-            a.getTipo(),
-            a.getRazon()
-        }));
+
+        if (lista != null) {
+            lista.forEach(a -> {
+                if (a != null) {
+                    model.addRow(new Object[]{
+                        a.getIdActividad(),
+                        a.getDescripcion(),
+                        a.getFechaCreacion(),
+                        a.getFechaCierre(),
+                        a.getTipo(),
+                        a.getRazon()
+                    });
+                }
+            });
+            System.out.println("Actividades cargadas para cuenta " + idCuenta + ": " + lista.size());
+        } else {
+            System.out.println("No se encontraron actividades para la cuenta " + idCuenta);
+        }
+    }
+
+    public void actualizarTabla() {
+        try {
+            if (idCuenta == null) {
+                System.out.println("No hay cuenta seleccionada para actualizar");
+                return;
+            }
+
+            // Limpiar la tabla actual
+            model.setRowCount(0);
+
+            // Obtener datos actualizados
+            List<Actividad> actividades = ctrl.listarPorCuenta(idCuenta);
+
+            if (actividades != null) {
+                for (Actividad actividad : actividades) {
+                    if (actividad != null) {
+                        model.addRow(new Object[]{
+                            actividad.getIdActividad(),
+                            actividad.getDescripcion(),
+                            actividad.getFechaCreacion(),
+                            actividad.getFechaCierre(),
+                            actividad.getTipo(),
+                            actividad.getRazon()
+                        });
+                    }
+                }
+                System.out.println("Tabla actualizada: " + actividades.size() + " actividades");
+            } else {
+                System.out.println("No se obtuvieron actividades al actualizar");
+            }
+        } catch (Exception e) {
+            System.err.println("Error actualizando tabla: " + e.getMessage());
+            JOptionPane.showMessageDialog(this,
+                "Error al actualizar la tabla de actividades: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

@@ -13,6 +13,8 @@ import BD.ConexionBD;
 import entidades.MesaCentral;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 /**
@@ -82,5 +84,25 @@ public class MesaCentralDAO {
            	LOGGER.severe("Error eliminar MesaCentral: " + e.getMessage());
            	return false;
         }
+    }
+
+    public List<MesaCentral> listarTodos() {
+        List<MesaCentral> lista = new ArrayList<>();
+        try (Connection conn = ConexionBD.conectar()) {
+            String sql = "SELECT * FROM MESA_CENTRAL";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                MesaCentral mc = new MesaCentral();
+                mc.setIdActividad(rs.getString("ID_ACTIVIDAD"));
+                mc.setTelefono(rs.getLong("TELEFONO")); // Convertir a Long
+                mc.setLugar(rs.getString("LUGAR"));
+                lista.add(mc);
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error al listar mesa central: " + e.getMessage());
+        }
+        return lista;
     }
 }

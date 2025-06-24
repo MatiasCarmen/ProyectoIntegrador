@@ -6,7 +6,7 @@ package controladores;
 
 /**
  *
- * @author mathi
+ * @author matias papu
  */
 import dao.DetalleOfertaDAO;
 import entidades.DetalleOferta;

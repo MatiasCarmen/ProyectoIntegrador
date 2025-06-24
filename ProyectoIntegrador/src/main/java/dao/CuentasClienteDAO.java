@@ -4,6 +4,10 @@
  */
 
 package dao;
+/**
+ *
+ * @author matias papu
+ */
 
 import BD.ConexionBD;
 import entidades.CuentaCliente;

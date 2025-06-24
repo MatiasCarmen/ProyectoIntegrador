@@ -49,16 +49,24 @@ public class VistaUsuarios extends JPanel {
     private void cargarUsuarios() {
         List<Usuario> lista = ctrl.listarUsuarios();
         model.setRowCount(0);
-        lista.forEach(u -> model.addRow(new Object[]{
-            u.getIdUsuario(),
-            u.getRut(),
-            u.getIdRol(),
-            u.getIdPais(),
-            u.getNombres(),
-            u.getApellidoP(),
-            u.getApellidoM(),
-            u.getArea()
-        }));
+
+        if (lista != null) {
+            lista.forEach(u -> {
+                if (u != null) {
+                    model.addRow(new Object[]{
+                        u.getIdUsuario(),
+                        u.getRut(),
+                        u.getIdRol(),
+                        u.getIdPais(),
+                        u.getNombres(),
+                        u.getApellidoP(),
+                        u.getApellidoM(),
+                        u.getArea()
+                    });
+                }
+            });
+        }
+        System.out.println("Usuarios cargados: " + (lista != null ? lista.size() : 0));
     }
 
     private void mostrarDialogoAgregar() {
@@ -69,5 +77,35 @@ public class VistaUsuarios extends JPanel {
             "Agregar Usuario",
             JOptionPane.INFORMATION_MESSAGE
         );
+    }
+
+    public void actualizarTabla() {
+        model.setRowCount(0);
+
+        try {
+            List<Usuario> usuarios = ctrl.listarUsuarios();
+            if (usuarios != null) {
+                for (Usuario usuario : usuarios) {
+                    if (usuario != null) {
+                        model.addRow(new Object[]{
+                            usuario.getIdUsuario(),
+                            usuario.getRut(),
+                            usuario.getIdRol(),
+                            usuario.getIdPais(),
+                            usuario.getNombres(),
+                            usuario.getApellidoP(),
+                            usuario.getApellidoM(),
+                            usuario.getArea()
+                        });
+                    }
+                }
+                System.out.println("Tabla de usuarios actualizada: " + usuarios.size() + " registros");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                "Error al actualizar la tabla de usuarios: " + e.getMessage(),
+                "Error",
+                JOptionPane.ERROR_MESSAGE);
+        }
     }
 }

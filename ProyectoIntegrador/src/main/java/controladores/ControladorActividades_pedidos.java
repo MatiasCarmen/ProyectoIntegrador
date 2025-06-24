@@ -8,7 +8,6 @@ package controladores;
  *
  * @author mathi
  */
-// src/main/java/controladores/ControladorActividades_pedidos.java
 
 import dao.ActividadPedidoDAO;
 import entidades.ActividadPedido;

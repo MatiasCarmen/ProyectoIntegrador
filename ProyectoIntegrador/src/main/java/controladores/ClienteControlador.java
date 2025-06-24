@@ -8,8 +8,6 @@ import dao.ClienteDAO;
 import dao.ComunaDAO;
 import dao.CuentasClienteDAO;
 import entidades.Cliente;
-import entidades.Comuna;
-
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -25,7 +23,21 @@ public class ClienteControlador {
     private final ComunaDAO comunaDAO           = new ComunaDAO();
     private final CuentasClienteDAO cuentasDAO  = new CuentasClienteDAO();
 
-    // CRUD básicos delegando al DAO
+    // Métodos para compatibilidad con la vista
+    public List<Cliente> obtenerTodosLosClientes() {
+        return listarClientes();
+    }
+
+    public List<Cliente> buscarClientes(String criterio) {
+        LOGGER.info("[Controlador] buscarClientes con criterio: " + criterio);
+        if (criterio == null || criterio.trim().isEmpty()) {
+            return listarClientes();
+        }
+        // Implementar búsqueda por criterio
+        return clienteDAO.buscarPorCriterio(criterio);
+    }
+
+    // Métodos CRUD básicos
     public boolean crearCliente(Cliente c) {
         LOGGER.info("[Controlador] crearCliente → " + c.getRut());
         return clienteDAO.crearCliente(c);
@@ -51,21 +63,15 @@ public class ClienteControlador {
         return clienteDAO.listarClientes();
     }
 
-    /**
-     * Búsqueda avanzada de clientes:
-     * delega al DAO que hace el JOIN con CUENTAS_CLIENTES.
-     */
+    // Búsqueda avanzada
     public List<Object[]> buscarClientesAvanzado(
-            String rut,
-            String nombre,
-            String apellidoP,
-            String apellidoM,
-            String direccion,
-            String tipoCuenta,
-            String comuna) {
+            String rut, String nombre, String apellidoP,
+            String apellidoM, String direccion,
+            String tipoCuenta, String comuna) {
         LOGGER.info("[Controlador] buscarClientesAvanzado");
         return clienteDAO.buscarClientesAvanzado(
-            rut, nombre, apellidoP, apellidoM, direccion, tipoCuenta, comuna
+            rut, nombre, apellidoP, apellidoM,
+            direccion, tipoCuenta, comuna
         );
     }
 }
