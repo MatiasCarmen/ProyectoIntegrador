@@ -10,7 +10,7 @@
  */
 package vista;
 
-import controladores.ActividadesControlador;  // Corregido a minúsculas
+import controladores.ActividadesControlador;  
 import entidades.Actividad;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;

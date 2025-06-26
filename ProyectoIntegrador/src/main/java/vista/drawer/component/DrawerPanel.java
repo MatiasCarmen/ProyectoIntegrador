@@ -1,5 +1,8 @@
 package vista.drawer.component;
-
+/**
+ *
+ * @author mathi
+ */
 import ren.main.VistaPrincipal;
 import vista.drawer.MyDrawerBuilder;
 import javax.swing.*;
@@ -17,7 +20,7 @@ public class DrawerPanel extends JPanel {
         setBackground(Color.WHITE);
         setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(230, 230, 230)));
 
-        // Usar el MyDrawerBuilder para construir el menú
+        // Usa el MyDrawerBuilder para construir el menú
         add(builder.build(), BorderLayout.CENTER);
     }
 }

@@ -1,5 +1,8 @@
 package vista;
-
+/**
+ *
+ * @author mathi
+ */
 import controladores.ControladorUsuarios;
 import entidades.Usuario;
 import net.miginfocom.swing.MigLayout;

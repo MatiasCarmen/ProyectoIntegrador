@@ -1,5 +1,8 @@
 package vista.drawer.component;
-
+/**
+ *
+ * @author mathi
+ */
 import javax.swing.*;
 import java.awt.*;
 import vista.drawer.component.header.SimpleHeaderData;

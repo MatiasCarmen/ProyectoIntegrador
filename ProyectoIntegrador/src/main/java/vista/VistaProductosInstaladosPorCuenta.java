@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-// VistaProductosInstaladosPorCuenta.java
+/**
+ *
+ * @author mathi
+ */
 package vista;
 
 import javax.swing.*;
@@ -70,7 +73,7 @@ public class VistaProductosInstaladosPorCuenta extends JPanel {
 
     public void actualizarTabla() {
         try {
-            // Usar el método existente que ya funciona en tu implementación
+            //metodo adecuado
             Map<String, List<String>> productosMap = ctrl.obtenerProductosPorTipo(idCuenta);
 
             // Limpiar la tabla actual

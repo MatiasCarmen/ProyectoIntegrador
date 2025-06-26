@@ -1,5 +1,8 @@
 package vista.util;
-
+/**
+ *
+ * @author mathi
+ */
 import javax.swing.*;
 import java.awt.*;
 import net.miginfocom.swing.MigLayout;

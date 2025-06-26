@@ -1,5 +1,8 @@
 package vista.drawer.component.footer;
-
+/**
+ *
+ * @author mathi
+ */
 public class SimpleFooterData {
     private String title;
     private String description;

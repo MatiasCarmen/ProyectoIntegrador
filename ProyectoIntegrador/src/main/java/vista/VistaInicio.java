@@ -1,5 +1,8 @@
 package vista;
-
+/**
+ *
+ * @author mathi
+ */
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
@@ -34,7 +37,7 @@ public class VistaInicio extends JPanel {
             e.printStackTrace();
         }
 
-        // Texto de bienvenida con estilo moderno
+        // Texto de bienvenida 
         JLabel titulo = new JLabel("Bienvenido a Claro CRM");
         titulo.setFont(new Font("Segoe UI", Font.BOLD, 32));
         titulo.setForeground(new Color(237, 28, 36));
@@ -51,7 +54,7 @@ public class VistaInicio extends JPanel {
         statsPanel.add(createStatCard("Clientes Activos", "1,234", new Color(46, 125, 50)));
         statsPanel.add(createStatCard("Actividades Hoy", "56", new Color(237, 28, 36)));
         statsPanel.add(createStatCard("Solicitudes", "23", new Color(33, 150, 243)));
-
+//estos son datos irreales nose que poner ahi hjdkashdjsahdjksahdjkashdkjsahdkjashd
         // Agregar componentes al panel principal
         mainPanel.add(titulo);
         mainPanel.add(subtitulo);

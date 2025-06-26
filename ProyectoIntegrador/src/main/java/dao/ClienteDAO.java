@@ -5,7 +5,9 @@
 package dao;
 
 import BD.ConexionBD;
+import com.google.common.collect.ImmutableList;
 import entidades.Cliente;
+import utils.GuavaUtils;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +71,7 @@ public class ClienteDAO {
         return null;
     }
 
-    public List<Cliente> listarClientes() {
+    public ImmutableList<Cliente> listarClientes() {
         List<Cliente> lista = new ArrayList<>();
         String sql = "SELECT * FROM CLIENTES";
         try (Connection conn = ConexionBD.conectar();
@@ -92,7 +94,7 @@ public class ClienteDAO {
         } catch (SQLException e) {
             LOGGER.severe("Error al listar clientes: " + e.getMessage());
         }
-        return lista;
+        return GuavaUtils.toImmutableList(lista);
     }
 
     public boolean actualizarCliente(Cliente c) {

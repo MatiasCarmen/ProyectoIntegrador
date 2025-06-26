@@ -2,8 +2,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-/* VistaMesaCentral.java */
+
 package vista;
+/**
+ *
+ * @author mathi
+ */
 
 import controladores.ControladorMesa_central;
 import entidades.MesaCentral;
@@ -43,8 +47,7 @@ public class VistaMesaCentral extends JPanel {
     }
 
     private void cargarMesaCentral() {
-        // Si tu controlador tuviera listarTodos, lo usarías aquí.
-        // Por ahora, un ejemplo de llamada a obtenerMesaCentral por cada actividad conocida.
+        //ejemplo porrque aun no hay mal
         model.setRowCount(0);
         List<MesaCentral> lista = List.of(); // placeholder
         lista.forEach(m -> model.addRow(new Object[]{

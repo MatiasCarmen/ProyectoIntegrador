@@ -1,5 +1,8 @@
 package vista.drawer.component.menu;
-
+/**
+ *
+ * @author mathi
+ */
 public class MenuAction {
     private final int index;
     private final int subIndex;

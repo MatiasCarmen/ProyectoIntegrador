@@ -4,6 +4,10 @@
  */
 
 package vista;
+/**
+ *
+ * @author mathi
+ */
 
 import controladores.UsuarioControlador;
 import entidades.Usuario;
@@ -70,7 +74,7 @@ public class VistaUsuarios extends JPanel {
     }
 
     private void mostrarDialogoAgregar() {
-        // Aquí puedes abrir un diálogo custom de alta de usuario
+        // Aquí puedes abrir un diálogo custom de alta de usuario lo mejor del mundo sisisisi pero aun no funcniona
         JOptionPane.showMessageDialog(
             this,
             "Funcionalidad de agregar usuario pendiente de implementación.",

@@ -1,5 +1,8 @@
 package vista.drawer.component.menu;
-
+/**
+ *
+ * @author mathi
+ */
 public class SimpleMenuOption {
     private String[][] menus;
     private String[] icons;

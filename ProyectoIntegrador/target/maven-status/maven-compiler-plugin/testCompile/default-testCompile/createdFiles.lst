@@ -1,0 +1,3 @@
+controladores\ClienteControladorTest.class
+dao\ClienteDAOTest.class
+validators\ClienteValidatorTest.class

@@ -1,5 +1,8 @@
 package vista.drawer.component.header;
-
+/**
+ *
+ * @author mathi
+ */
 import javax.swing.Icon;
 
 public class SimpleHeaderData {

@@ -3,8 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package vista;
-
-import controladores.ActividadesControlador; // Corregido a minúsculas
+/**
+ *
+ * @author mathi
+ */
+import controladores.ActividadesControlador; 
 import entidades.Actividad;
 
 

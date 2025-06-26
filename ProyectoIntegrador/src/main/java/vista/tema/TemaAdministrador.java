@@ -1,5 +1,8 @@
 package vista.tema;
-
+/**
+ *
+ * @author mathi
+ */
 import com.formdev.flatlaf.FlatDarkLaf;
 
 import javax.swing.*;

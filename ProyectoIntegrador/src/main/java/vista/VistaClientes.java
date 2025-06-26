@@ -16,12 +16,14 @@ import entidades.Cliente;
 import entidades.Comuna;
 import net.miginfocom.swing.MigLayout;
 import ren.main.VistaPrincipal;
+import reportes.ReporteClientes; //para la libreria siuuu
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
 import java.util.List;
 
 public class VistaClientes extends JPanel {
@@ -36,6 +38,7 @@ public class VistaClientes extends JPanel {
         "Todos","Cliente","Servicio","Facturacion"
     });
     private final JButton btnBuscar        = new JButton("Aplicar filtros");
+    private final JButton btnExportar      = new JButton("Exportar a Excel");
 
     private final DefaultTableModel model;
     private final JTable tblClientes;
@@ -65,7 +68,7 @@ public class VistaClientes extends JPanel {
             "[pref][grow,fill][pref][100!][pref][100!][pref!]", "[]10[]10[]"));
         panelFiltros.setBackground(Color.WHITE);
 
-        // Estilizar campos con efectos modernos
+        // Estilizar campos con efectos modernos siempre el prime
         configurarCampoModerno(txtNombre, "Ingrese nombre a buscar");
         configurarCampoModerno(txtRut, "Ingrese RUT");
         configurarCampoModerno(txtDireccion, "Ingrese dirección");
@@ -76,6 +79,7 @@ public class VistaClientes extends JPanel {
         vista.util.UIHelper.setupButtonHover(btnBuscar,
             new Color(237, 28, 36),  // Color normal (Rojo Claro)
             new Color(200, 16, 46)   // Color hover (Rojo oscuro)
+                //no olvidar estos colores, son del sistema en general, recordatorio de mi mismo
         );
 
         // Agregar componentes al panel de filtros
@@ -138,8 +142,8 @@ public class VistaClientes extends JPanel {
                     if (fila != null && fila.length == 7) {  // Verificamos que tenga todas las columnas
                         model.addRow(new Object[]{
                             fila[0] != null ? fila[0] : "",  // Nombre
-                            fila[1] != null ? fila[1] : "",  // Apellido P
-                            fila[2] != null ? fila[2] : "",  // Apellido M
+                            fila[1] != null ? fila[1] : "",  // Apellido Paterno
+                            fila[2] != null ? fila[2] : "",  // Apellido Materno
                             fila[3] != null ? fila[3] : "",  // RUT
                             fila[4] != null ? fila[4] : "",  // Dirección
                             fila[5] != null ? fila[5] : "",  // Comuna
@@ -165,6 +169,12 @@ public class VistaClientes extends JPanel {
 
         // Cargar comunas en el combo
         cargarComunas();
+
+        // Agregar botón Exportar a Excel después del botón Buscar
+        add(btnExportar, "cell 6 0");
+
+        // Configurar el evento del botón exportar
+        btnExportar.addActionListener(e -> exportarAExcel());
     }
 
     private void configurarCampo(JTextField campo, String placeholder) {
@@ -204,7 +214,7 @@ public class VistaClientes extends JPanel {
     private void mostrarDetalleCliente() {
         int row = tblClientes.getSelectedRow();
         if (row >= 0) {
-            String rut = (String) model.getValueAt(row, 3); // RUT está en la columna 3
+            String rut = (String) model.getValueAt(row, 3); // RUT esta en la columna 3
             Cliente cliente = clienteCtrl.obtenerClientePorRut(rut);
             if (cliente != null) {
                 VistaPrincipal vp = (VistaPrincipal) SwingUtilities.getWindowAncestor(this);
@@ -212,6 +222,27 @@ public class VistaClientes extends JPanel {
                     vp.showDetalleCliente(cliente);
                 }
             }
+        }
+    }
+//esto explica como se implementa la libreria Apache POI
+    private void exportarAExcel() {
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            String archivo = ReporteClientes.generarExcel();
+            if (archivo != null) {
+                JOptionPane.showMessageDialog(this,
+                    "Reporte generado exitosamente en:\n" + archivo,
+                    "Éxito", JOptionPane.INFORMATION_MESSAGE);
+
+                try {
+                    // Abrir el directorio donde se guardó el archivo
+                    Runtime.getRuntime().exec("explorer.exe /select," + archivo);
+                } catch (IOException ex) {
+                    System.err.println("Error al abrir el explorador: " + ex.getMessage());
+                }
+            }
+        } finally {
+            setCursor(Cursor.getDefaultCursor());
         }
     }
 
@@ -224,8 +255,8 @@ public class VistaClientes extends JPanel {
                 if (fila != null) {
                     model.addRow(new Object[]{
                         fila[0] != null ? fila[0] : "",  // Nombre
-                        fila[1] != null ? fila[1] : "",  // Apellido P
-                        fila[2] != null ? fila[2] : "",  // Apellido M
+                        fila[1] != null ? fila[1] : "",  // Apellido Paterno
+                        fila[2] != null ? fila[2] : "",  // Apellido Materno
                         fila[3] != null ? fila[3] : "",  // RUT
                         fila[4] != null ? fila[4] : "",  // Dirección
                         fila[5] != null ? fila[5] : "",  // Comuna

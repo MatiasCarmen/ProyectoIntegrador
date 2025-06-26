@@ -1,3 +1,4 @@
+vista\VistaAgregarCliente$ShadowBorder.class
 vista\VistaAgregarCliente.class
 vista\VistaInicio.class
 controladores\ControladorFunciones.class
@@ -18,6 +19,7 @@ entidades\Oferta.class
 vista\util\DialogHelper.class
 controladores\ControladorActividades_pedidos.class
 vista\VistaMesaCentral.class
+vista\VistaAgregarCliente$3.class
 controladores\UsuarioControlador.class
 vista\componentes\LoadingSpinner.class
 vista\VistaClientes$2.class
@@ -30,6 +32,8 @@ controladores\ControladorUsuario_rol.class
 controladores\SolicitudControlador.class
 vista\drawer\MyDrawerBuilder.class
 vista\ClienteDetalleDialog.class
+vista\VistaAgregarCliente$6.class
+vista\VistaAgregarCliente$2.class
 entidades\Plan.class
 vista\ClienteDetalleListener.class
 vista\VistaCrearUsuario.class
@@ -66,12 +70,17 @@ entidades\Pais.class
 dao\ProductoDAO.class
 dao\RolFuncionDAO.class
 entidades\DetallePedido.class
+vista\VistaAgregarCliente$1.class
 vista\Login$4.class
+utils\GuavaUtils.class
 dao\DetallePedidoDAO.class
 vista\VistaMesaCentral$1.class
 vista\VistaAgenda$1.class
+vista\VistaAgregarCliente$7.class
 vista\Login$2.class
+reportes\ReporteClientes.class
 dao\MesaCentralDAO.class
+vista\VistaAgregarCliente$4.class
 controladores\ControladorProductosInstalados.class
 controladores\ControladorMesa_central.class
 controladores\CuentasClienteControlador.class
@@ -82,11 +91,13 @@ vista\VistaUsuarios.class
 dao\DescuentoDAO.class
 vista\Login$5.class
 vista\VistasActividades$1.class
+reportes\ReporteGenerator.class
 vista\DetalleActividadDialog.class
 vista\MainFrame.class
 dao\DetallePlanDAO.class
 dao\ActividadDAO.class
 ren\main\VistaPrincipal.class
+validators\ClienteValidator.class
 vista\Login.class
 controladores\ControladorAdicionales.class
 entidades\MesaCentral.class
@@ -110,6 +121,7 @@ BD\ConexionBD.class
 vista\DrawerButton.class
 controladores\ControladorPaises.class
 dao\DetalleDescuentoDAO.class
+vista\VistaAgregarCliente$5.class
 entidades\Adicional.class
 entidades\Producto.class
 dao\UsuarioDAO.class

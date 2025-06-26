@@ -1,5 +1,8 @@
 package vista.drawer;
-
+/**
+ *
+ * @author mathi
+ */
 import vista.drawer.component.SimpleDrawerBuilder;
 import vista.drawer.component.footer.SimpleFooterData;
 import vista.drawer.component.header.SimpleHeaderData;
@@ -139,7 +142,7 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
 
     @Override
     public int getHeaderHeight() {
-        return 120;  // Altura ajustada para mejor proporción
+        return 120;  
     }
 
 

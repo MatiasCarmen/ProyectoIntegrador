@@ -1,5 +1,8 @@
 package vista.componentes;
-
+/**
+ *
+ * @author mathi
+ */
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Arc2D;
@@ -13,7 +16,7 @@ public class LoadingSpinner extends JPanel {
     private final int size;
 
     public LoadingSpinner() {
-        this(new Color(237, 28, 36), 40); // Color Claro por defecto
+        this(new Color(237, 28, 36), 40); // Color Claro por defecto no olvidar este comando
     }
 
     public LoadingSpinner(Color color, int size) {
