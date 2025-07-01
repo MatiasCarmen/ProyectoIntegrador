@@ -3,17 +3,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package vista;
-/**
- *
- * @author mathi
- */
-import controladores.ActividadesControlador; 
+
+import controladores.ActividadesControlador; // Corregido a minúsculas
 import entidades.Actividad;
 
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Formulario para registrar nueva actividad.
@@ -44,11 +43,14 @@ public class VistaAgregarActividad extends JPanel {
             return;
         }
 
+        LocalDateTime ahora = LocalDateTime.now();
+
+
         Actividad a = new Actividad();
         a.setIdCuenta(cuenta);
         a.setDescripcion(desc);
-        a.setFechaCreacion(java.sql.Date.valueOf(LocalDate.now()));
-        a.setFechaCierre(java.sql.Date.valueOf(LocalDate.now().plusDays(1)));
+        a.setFechaCreacion(Timestamp.valueOf(ahora));
+        a.setFechaCierre(Timestamp.valueOf(ahora.plusDays(1)));
 
         a.setTipo("VISITA");
         a.setRazon("SOPORTE");

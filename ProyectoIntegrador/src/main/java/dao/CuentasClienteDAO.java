@@ -67,4 +67,141 @@ public class CuentasClienteDAO {
         }
         return lista;
     }
+    
+       
+public static String obtenerRutPorIdCuenta(String idCuenta) {
+    String rut = null;
+    String sql = "SELECT RUT FROM CUENTAS_CLIENTES WHERE IDCUENTA = ?";
+
+    try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setString(1, idCuenta);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                rut = rs.getString("RUT");
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return rut;
+}
+
+public static List<String> obtenerCuentasServicioPorRut(String rut) {
+    List<String> lista = new ArrayList<>();
+    try {
+        Connection con = new ConexionBD().conectar();
+        PreparedStatement stmt = con.prepareStatement(
+            "SELECT IDCUENTA FROM cuentas_clientes WHERE CLASE = 'SERVICIO' AND RUT = ?");
+        stmt.setString(1, rut);
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            lista.add(rs.getString("IDCUENTA"));
+        }
+        con.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return lista;
+}
+
+public static String obtenerCuentaServicioAsociada(String idFacturacion) {
+    try {
+        Connection con = new ConexionBD().conectar();
+        PreparedStatement stmt = con.prepareStatement(
+            "SELECT IDCUENTA_SERVICIO FROM cuentas_clientes WHERE IDCUENTA = ? AND CLASE = 'FACTURACION'");
+        stmt.setString(1, idFacturacion);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            return rs.getString("IDCUENTA_SERVICIO");
+        }
+        con.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+
+public static CuentaCliente obtenerCuentaClientePorIdCuenta(String idCuenta) {
+    CuentaCliente cuenta = null;
+    String sql = "SELECT * FROM CUENTAS_CLIENTES WHERE IDCUENTA = ?";
+    
+    try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+         
+        ps.setString(1, idCuenta);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                cuenta = new CuentaCliente();
+                cuenta.setIdCuenta(rs.getString("IDCUENTA"));
+                cuenta.setRut(rs.getString("RUT"));
+                cuenta.setClase(rs.getString("CLASE"));
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    
+    return cuenta;
+}
+
+public String obtenerIdCuentaServicioDesdeFacturacion(String idCuentaFacturacion) {
+    String idCuentaServicio = null;
+    String sql = "SELECT IDCUENTA_SERVICIO FROM CUENTA_SERVICIO_FACTURACION WHERE IDCUENTA_FACTURACION = ?";
+
+    try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setString(1, idCuentaFacturacion);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                idCuentaServicio = rs.getString("IDCUENTA_SERVICIO");
+            }
+        }
+
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return idCuentaServicio;
+}
+
+public static String generarIdCuentaUnico(String clase) {
+    String prefijo = "";
+    if ("FACTURACION".equalsIgnoreCase(clase)) {
+        prefijo = "-FAC";
+    } else if ("SERVICIO".equalsIgnoreCase(clase)) {
+        prefijo = "-SERV";
+    } else if ("CLIENTE".equalsIgnoreCase(clase)) {
+        prefijo = "-CLI";
+    } else {
+        throw new IllegalArgumentException("Clase no válida");
+    }
+
+    String idGenerado;
+    boolean existe = true;
+    do {
+        long numero = (long) (Math.random() * 1_000_000_000L);
+        idGenerado = numero+prefijo;
+        existe = verificarExistenciaIdCuenta(idGenerado);
+    } while (existe);
+    return idGenerado;
+}
+
+private static boolean verificarExistenciaIdCuenta(String idCuenta) {
+    String sql = "SELECT 1 FROM CUENTAS_CLIENTES WHERE IDCUENTA = ?";
+    try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, idCuenta);
+        try (ResultSet rs = ps.executeQuery()) {
+            return rs.next();
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return true;
+}
+
+
 }

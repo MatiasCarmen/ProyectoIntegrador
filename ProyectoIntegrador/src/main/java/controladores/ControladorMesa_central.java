@@ -46,4 +46,9 @@ public class ControladorMesa_central {
         LOGGER.info("[Ctrl] listarTodos");
         return dao.listarTodos();
     }
+    
+    public List<MesaCentral> listarTodosPorIdCuenta(String idCuenta) {
+        LOGGER.info("[Ctrl] listarTodosPorIdCuenta");
+        return dao.listarTodosPorIdCuenta(idCuenta);
+    }
 }

@@ -100,4 +100,27 @@ public class AdicionalDAO {
             return false;
         }
     }
+    
+    public Adicional obtenerAdicionalPorIdCuenta(String idCuenta) {
+    Adicional adicional = null;
+    String sql = "SELECT a.* FROM PRODUCTOS_INSTALADOS pi " +
+            "JOIN ADICIONALES a ON pi.IDADICIONALES = a.IDADICIONALES " +
+            "WHERE pi.IDCUENTA = ?";
+    try (Connection conn = ConexionBD.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+      
+        ps.setString(1, idCuenta);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            adicional = new Adicional(
+                rs.getString("IDADICIONALES"),
+                rs.getBigDecimal("COSTOT")
+               
+            );
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return adicional;
+}
 }

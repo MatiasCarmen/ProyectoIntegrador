@@ -246,16 +246,30 @@ public class VistaPrincipal extends JFrame {
             productosPanel.actualizarTabla();
         }
     }
+    
+    
 
-    public void showDetalleCliente(Cliente cliente) {
+    public void showDetalleCliente(Cliente cliente,String idCuenta) {
         if (cliente != null) {
             SwingUtilities.invokeLater(() -> {
-                ClienteDetalleDialog dialog = new ClienteDetalleDialog(this, true, cliente);
+                ClienteDetalleDialog dialog = new ClienteDetalleDialog(this, cliente, idCuenta);
                 dialog.setLocationRelativeTo(this);
                 dialog.setVisible(true);
             });
         }
     }
+
+    
+       public void showAgregarActividades(String idCuenta) {
+        if (!idCuenta.equals("")) {
+            SwingUtilities.invokeLater(() -> {
+                VistaNuevaActividad dialog = new VistaNuevaActividad(this,  idCuenta);
+                dialog.setLocationRelativeTo(this);
+                dialog.setVisible(true);
+            });
+        }
+    }
+
 
     public void mostrarProductos() {
         mostrarPanel(TARJETA_PRODUCTOS);

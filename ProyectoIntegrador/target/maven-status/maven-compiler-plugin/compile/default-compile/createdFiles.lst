@@ -101,6 +101,7 @@ validators\ClienteValidator.class
 vista\Login.class
 controladores\ControladorAdicionales.class
 entidades\MesaCentral.class
+pruebas\PruebaCliente.class
 entidades\Pedido.class
 entidades\DetallePlan.class
 entidades\Comuna.class
@@ -135,10 +136,10 @@ vista\VistaActividadesPorCuenta.class
 vista\VistaProductosInstaladosPorCuenta.class
 vista\drawer\component\menu\MenuValidation.class
 controladores\PedidoControlador.class
+vista\VistaNuevaActividad.class
 entidades\DetalleAdicional.class
 ren\main\main.class
 vista\util\UIHelper$ElevatedPanel.class
-Pruebas\PruebaCliente.class
 controladores\RolControlador.class
 vista\drawer\component\footer\SimpleFooterData.class
 vista\VistaActividadesPorCuenta$1.class

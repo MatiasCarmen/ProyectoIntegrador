@@ -16,10 +16,10 @@ public class ConexionBD {
     private static final Logger logger = LoggerFactory.getLogger(ConexionBD.class); //manda al look que cree para que aparesca en una carpetita
 
     // 1. Atributos de conexión
-    private static final String BD = "SistemasCRM_V2"; // nombre de la base de datos actual
+    private static final String BD = "proyectointegrador"; // nombre de la base de datos actual
     private static final String URL = "jdbc:mysql://localhost:3306/" + BD;
     private static final String USER = "root"; // modificar solo es para local
-    private static final String PASSWORD = "Ms211596321*"; // modificar solo es local
+    private static final String PASSWORD = "thiago21122019"; // modificar solo es local
 
     // 2. Método público para obtener la conexión
     public static Connection conectar() {

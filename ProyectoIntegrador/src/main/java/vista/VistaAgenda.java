@@ -51,7 +51,7 @@ public class VistaAgenda extends JPanel {
         model.setRowCount(0);
         DateTimeFormatter fmt = DateTimeFormatter.ISO_DATE;
         lista.forEach(a -> model.addRow(new Object[]{
-            a.getFechaCreacion().toLocalDate().format(fmt),
+            a.getFechaCreacion(),
             a.getIdActividad(),
             a.getDescripcion(),
             a.getTipo()

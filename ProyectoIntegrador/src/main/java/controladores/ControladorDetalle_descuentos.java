@@ -11,6 +11,7 @@ package controladores;
 
 import dao.DetalleDescuentoDAO;
 import entidades.DetalleDescuento;
+import java.util.ArrayList;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -41,4 +42,9 @@ public class ControladorDetalle_descuentos {
         LOGGER.info("eliminarDetalleDescuento: disc=" + idDisc + " prod=" + idProd);
         return dao.eliminar(idDisc, idProd);
     }
+    
+     public ArrayList<DetalleDescuento> obtenerDetallesDescuento(String idDescuento) {
+       LOGGER.info("obtenerDetallesDescuento: disc=" + idDescuento);
+        return dao.obtenerDetallesDescuento(idDescuento);
+     }
 }

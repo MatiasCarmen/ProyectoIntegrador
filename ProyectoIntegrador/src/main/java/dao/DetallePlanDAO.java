@@ -70,4 +70,28 @@ public class DetallePlanDAO {
             return false;
         }
     }
+    
+      public ArrayList<DetallePlan> obtenerDetallesPlan(String idPlan) {
+        ArrayList<DetallePlan> lista = new ArrayList<>();
+        String sql =  "SELECT * FROM DETALLE_PLANES WHERE IDPLAN = ?";
+        try (Connection conn = ConexionBD.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+            
+               
+         
+            ps.setString(1, idPlan);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                DetallePlan detalle = new DetallePlan(
+                    rs.getString("IDPLAN"),
+                    rs.getString("IDPRODUCTO"),
+                    rs.getBigDecimal("COSTO")
+                );
+                lista.add(detalle);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }

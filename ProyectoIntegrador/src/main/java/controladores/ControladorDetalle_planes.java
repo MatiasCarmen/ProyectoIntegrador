@@ -10,6 +10,7 @@ package controladores;
  */
 import dao.DetallePlanDAO;
 import entidades.DetallePlan;
+import java.util.ArrayList;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -34,5 +35,9 @@ public class ControladorDetalle_planes {
     public boolean eliminar(String idPlan) {
        	LOGGER.info("eliminarDetallePlan: plan=" + idPlan);
         return dao.eliminar(idPlan);
+    }
+      public ArrayList<DetallePlan> obtenerDetallesPlan(String idPlan) {
+        LOGGER.info("obtenerDetallesPlan: plan=" + idPlan);
+        return dao.obtenerDetallesPlan(idPlan);
     }
 }

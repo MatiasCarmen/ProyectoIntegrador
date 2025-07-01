@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  */
 public class ActividadesControlador {
     private static final Logger LOGGER = Logger.getLogger(ActividadesControlador.class.getName());
-    private final ActividadDAO dao = new ActividadDAO();
+    private static final ActividadDAO dao = new ActividadDAO();
 
     public boolean crearActividad(Actividad a) {
         LOGGER.info("[Ctrl] crearActividad → " + a.getIdActividad());
@@ -51,4 +51,13 @@ public class ActividadesControlador {
         LOGGER.info("[Ctrl] obtenerActividadesAgendadas");
         return dao.listarTodas();  // Usando tu método existente del DAO
     }
+    
+     public List<Actividad> obtenerActividadesPorCuenta(String idCuenta) {
+         LOGGER.info("[Ctrl] obtenerActividadesPorCuenta");
+        return dao.obtenerActividadesPorCuenta(idCuenta);
+      }
+        public static String generarIdActividadUnico()  {
+         LOGGER.info("[Ctrl] obtenerIdActividadUnico");
+        return dao.generarIdActividadUnico();
+      }
 }

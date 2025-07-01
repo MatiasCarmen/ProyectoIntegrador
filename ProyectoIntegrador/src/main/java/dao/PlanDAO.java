@@ -103,6 +103,7 @@ public class PlanDAO {
            	return false;
        	}
     }
+   
     public List<Plan> obtenerPlanesInstaladosPorCuenta(String idCuenta) {
     List<Plan> lista = new ArrayList<>();
     String sql = """
@@ -127,6 +128,29 @@ public class PlanDAO {
         LOGGER.severe("Error obtener planes instalados: " + e.getMessage());
     }
     return lista;
+}
+ public Plan obtenerPlanPorIdCuenta(String idCuenta) {
+    Plan plan = null;
+        String sql = "SELECT p.* FROM PRODUCTOS_INSTALADOS pi " +
+            "JOIN PLANES p ON pi.IDPLAN = p.IDPLAN " +
+            "WHERE pi.IDCUENTA = ?";
+    try    (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)){
+        ps.setString(1, idCuenta);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            plan = new Plan(
+                rs.getString("p.IDPLAN"),
+                rs.getString("p.NOMBRE"),
+                rs.getBigDecimal("p.COSTOT")
+            );
+            
+           
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return plan;
 }
 
 }

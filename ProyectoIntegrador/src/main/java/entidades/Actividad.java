@@ -11,6 +11,7 @@ package entidades;
 
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  * Entidad que representa una Actividad o caso de gestión en el sistema.
@@ -19,8 +20,6 @@ public class Actividad {
     private String idActividad;
     private String idCuenta;
     private String descripcion;
-    private Date fechaCreacion;
-    private Date fechaCierre;
     private String tipo;
     private String razon;
     private String detalle;
@@ -28,21 +27,24 @@ public class Actividad {
     private String comentarios;
     private Long telefono;
     private String correo;
+    private Timestamp fechaCreacion;
+    private Timestamp fechaCierre;
+    private  String idUsuario;
 
     public Actividad() { }
 
     public Actividad(String idActividad,
                      String idCuenta,
                      String descripcion,
-                     Date fechaCreacion,
-                     Date fechaCierre,
+                     Timestamp fechaCreacion,
+                     Timestamp fechaCierre,
                      String tipo,
                      String razon,
                      String detalle,
                      String resolucion,
                      String comentarios,
                      Long telefono,
-                     String correo) {
+                     String correo, String idUsuario) {
         this.idActividad   = idActividad;
         this.idCuenta      = idCuenta;
         this.descripcion   = descripcion;
@@ -55,8 +57,8 @@ public class Actividad {
         this.comentarios   = comentarios;
         this.telefono      = telefono;
         this.correo        = correo;
+        this.idUsuario =  idUsuario;
     }
-
     public String getIdActividad() {
         return idActividad;
     }
@@ -78,17 +80,17 @@ public class Actividad {
         this.descripcion = descripcion;
     }
 
-    public Date getFechaCreacion() {
+    public Timestamp getFechaCreacion() {
         return fechaCreacion;
     }
-    public void setFechaCreacion(Date fechaCreacion) {
+    public void setFechaCreacion(Timestamp fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public Date getFechaCierre() {
+    public Timestamp getFechaCierre() {
         return fechaCierre;
     }
-    public void setFechaCierre(Date fechaCierre) {
+    public void setFechaCierre(Timestamp fechaCierre) {
         this.fechaCierre = fechaCierre;
     }
 
@@ -140,5 +142,15 @@ public class Actividad {
     public void setCorreo(String correo) {
         this.correo = correo;
     }
+
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
+    
+    
 }
 

@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  */
 public class CuentasClienteControlador {
     private static final Logger LOGGER = Logger.getLogger(CuentasClienteControlador.class.getName());
-    private final CuentasClienteDAO dao = new CuentasClienteDAO();
+    private static final CuentasClienteDAO dao = new CuentasClienteDAO();
 
     /**
      * Inserta una nueva cuenta cliente en la BD.
@@ -39,5 +39,33 @@ public class CuentasClienteControlador {
     public List<CuentaCliente> listarTodas() {
         LOGGER.info("CuentasClienteControlador: listarTodas");
         return dao.listarTodas();
+    }
+    
+    public static String obtenerRutPorIdCuenta(String idCuenta) {
+         LOGGER.info("obtenerRutPorIdCuenta");
+        return dao.obtenerRutPorIdCuenta(idCuenta);
+    }
+    
+    public static List<String> obtenerCuentasServicioPorRut(String rut) {
+        LOGGER.info("obtenerCuentasServicioPorRut");
+        return dao.obtenerCuentasServicioPorRut(rut);
+    }
+    public static String obtenerCuentaServicioAsociada(String idFacturacion) {
+         LOGGER.info("obtenerCuentaServicioAsociada");
+        return dao.obtenerCuentaServicioAsociada(idFacturacion);
+    }
+    public static CuentaCliente obtenerCuentaClientePorIdCuenta(String idCuenta) {
+        LOGGER.info("obtenerCuentaClientePorIdCuenta");
+        return dao.obtenerCuentaClientePorIdCuenta(idCuenta);
+    }
+    
+    public String obtenerIdCuentaServicioDesdeFacturacion(String idCuentaFacturacion) {
+        LOGGER.info("obtenerIdCuentaServicioDesdeFacturacion");
+        return dao.obtenerIdCuentaServicioDesdeFacturacion(idCuentaFacturacion);
+    }
+    
+    public static String generarIdCuentaUnico(String clase) {
+          LOGGER.info("generarIdCuentaUnico");
+        return dao.obtenerIdCuentaServicioDesdeFacturacion(clase);
     }
 }

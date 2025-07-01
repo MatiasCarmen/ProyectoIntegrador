@@ -4,6 +4,7 @@ package ren.main;
  * @author matias papu
  */
 import com.formdev.flatlaf.FlatLightLaf;
+import entidades.Usuario;
 import vista.Login;
 import vista.tema.TemaAdministrador;
 
@@ -11,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class main {
+      public static Usuario  logeado ;
     public static void main(String[] args) {
         // mejora aspectos waos
         SwingUtilities.invokeLater(() -> {

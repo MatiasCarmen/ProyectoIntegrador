@@ -99,4 +99,26 @@ public class DescuentoDAO {
            	return false;
         }
     }
+    
+    public Descuento obtenerDescuentoPorIdCuenta(String idCuenta) {
+    Descuento descuento = null;
+    String sql =  "SELECT d.* FROM PRODUCTOS_INSTALADOS pi " +
+            "JOIN DESCUENTOS d ON pi.IDDESCUENTOS = d.IDDESCUENTOS " +
+            "WHERE pi.IDCUENTA = ?";
+    try (Connection conn = ConexionBD.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)){
+     
+        ps.setString(1, idCuenta);
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            descuento = new Descuento(
+                rs.getString("IDDESCUENTOS"),
+                rs.getBigDecimal("COSTOT")
+            );
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return descuento;
+}
 }

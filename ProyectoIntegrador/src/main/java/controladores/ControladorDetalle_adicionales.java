@@ -11,6 +11,7 @@ package controladores;
 
 import dao.DetalleAdicionalDAO;
 import entidades.DetalleAdicional;
+import java.util.ArrayList;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -41,4 +42,9 @@ public class ControladorDetalle_adicionales {
         LOGGER.info("eliminarDetalleAdicional: adic=" + idAd + " prod=" + idProd);
         return dao.eliminar(idAd, idProd);
     }
+    
+    public ArrayList<DetalleAdicional> obtenerDetallesAdicional(String idAdicionales) {
+         LOGGER.info("eliminarDetalleAdicional: adic=" + idAdicionales );
+        return dao.obtenerDetallesAdicional(idAdicionales);
+     }
 }

@@ -46,9 +46,16 @@ public class ControladorPlanes {
        	LOGGER.info("eliminarPlan: " + id);
         return dao.eliminar(id);
     }
-    public List<Plan> getPlanesInstalados(String idCuenta) {
+ 
+    
+     public List<Plan> getPlanesInstalados(String idCuenta) {
     LOGGER.info("getPlanesInstalados → " + idCuenta);
     return dao.obtenerPlanesInstaladosPorCuenta(idCuenta);
 }
+    
+     public Plan obtenerPlanPorIdCuenta(String idCuenta) {
+     LOGGER.info("obtenerPlanPorIdCuenta → " + idCuenta);
+        return dao.obtenerPlanPorIdCuenta(idCuenta);
+     }
 
 }

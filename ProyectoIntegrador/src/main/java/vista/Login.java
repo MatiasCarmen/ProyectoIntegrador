@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import ren.main.main;
 
 public class Login extends JPanel {
     private JTextField txtUsername;
@@ -282,6 +283,7 @@ public class Login extends JPanel {
 
             Usuario usuario = controlador.validarLogin(username, password);
             if (usuario != null) {
+                main.logeado = usuario;
                 lblEstado.setText("¡Bienvenido!");
                 lblEstado.setForeground(new Color(46, 125, 50));
 

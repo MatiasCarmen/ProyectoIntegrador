@@ -93,4 +93,26 @@ public class DetalleDescuentoDAO {
            	return false;
        	}
     }
+    
+      public ArrayList<DetalleDescuento> obtenerDetallesDescuento(String idDescuento) {
+        ArrayList<DetalleDescuento> lista = new ArrayList<>();
+        String sql = "SELECT * FROM DETALLE_DESCUENTOS WHERE IDDESCUENTOS = ?";
+        try(Connection conn = ConexionBD.conectar();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+          
+            ps.setString(1, idDescuento);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                DetalleDescuento detalle = new DetalleDescuento(
+                    rs.getString("IDDESCUENTOS"),
+                    rs.getString("IDPRODUCTO"),
+                    rs.getBigDecimal("COSTO")
+                );
+                lista.add(detalle);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return lista;
+    }
 }

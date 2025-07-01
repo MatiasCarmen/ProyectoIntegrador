@@ -104,5 +104,28 @@ public class MesaCentralDAO {
             LOGGER.severe("Error al listar mesa central: " + e.getMessage());
         }
         return lista;
+    } 
+    
+      public List<MesaCentral> listarTodosPorIdCuenta(String idCuenta) {
+        List<MesaCentral> lista = new ArrayList<>();
+        try (Connection conn = ConexionBD.conectar()) {
+            String sql = "SELECT M.ID_ACTIVIDAD,M.TELEFONO,M.LUGAR FROM MESA_CENTRAL AS M INNER JOIN " +
+"ACTIVIDADES AS A ON M.IDACTIVIDAD = A.IDACTIVIDAD " +
+"WHERE A.IDCUENTA = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1,idCuenta);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                MesaCentral mc = new MesaCentral();
+                mc.setIdActividad(rs.getString("M.ID_ACTIVIDAD"));
+                mc.setTelefono(rs.getLong("TELEFONO")); 
+                mc.setLugar(rs.getString("LUGAR"));
+                lista.add(mc);
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error al listar mesa central: " + e.getMessage());
+        }
+        return lista;
     }
 }

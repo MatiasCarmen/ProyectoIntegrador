@@ -18,9 +18,11 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import ren.main.main;
 
 /**
  * Panel para registrar y listar Actividades.
@@ -108,22 +110,29 @@ public class VistasActividades extends JPanel {
         txtCorreo.setText("");
     }
 
-    private void registrarActividad() {
+   private void registrarActividad() {
         String idAct = "A" + System.currentTimeMillis();
-        String now   = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        
+        LocalDateTime ldt = LocalDateTime.now();
+
+
+Timestamp tsCreacion = Timestamp.valueOf(ldt);
+
+Timestamp tsCierre   = Timestamp.valueOf(ldt.plusDays(1));
         Actividad a = new Actividad(
             idAct,
             txtIdCuenta.getText().trim(),
             txtDescripcion.getText().trim(),
-            java.sql.Date.valueOf(now.substring(0,10)),
-            null,
+           tsCreacion,
+            tsCierre,
             txtTipo.getText().trim(),
             txtRazon.getText().trim(),
             txtDetalle.getText().trim(),
             txtResolucion.getText().trim(),
             txtComentarios.getText().trim(),
             Long.parseLong(txtTelefono.getText().trim()),
-            txtCorreo.getText().trim()
+            txtCorreo.getText().trim(),
+                main.logeado.getIdUsuario()
         );
         if (ctrl.crearActividad(a)) {
             JOptionPane.showMessageDialog(this, "Actividad registrada");

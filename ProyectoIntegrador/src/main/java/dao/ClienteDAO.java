@@ -174,7 +174,9 @@ public class ClienteDAO {
         return lista;
     }
 
-    public List<Object[]> buscarClientesAvanzado(
+    
+    
+     public List<Object[]> buscarClientesAvanzado(
             String rut,
             String nombre,
             String apellidoP,
@@ -185,9 +187,10 @@ public class ClienteDAO {
 
         List<Object[]> resultados = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
-            "SELECT c.NOMBRES, c.APELLIDOP, c.APELLIDOM, " +
-            "c.RUT, c.DIRECCION, co.DESCRIPCION as COMUNA, " +
-            "COALESCE(cc.CLASE, 'Sin Cuenta') as TIPO_CUENTA " +
+            "SELECT c.NOMBRES, c.APELLIDOP, c.APELLIDOM, \n" +
+"       c.RUT, c.DIRECCION, co.DESCRIPCION as COMUNA, \n" +
+"       COALESCE(cc.CLASE, 'Sin Cuenta') as TIPO_CUENTA, \n" +
+"       cc.IDCUENTA as IDCUENTA_CLIENTE " +
             "FROM CLIENTES c " +
             "LEFT JOIN CUENTAS_CLIENTES cc ON c.RUT = cc.RUT " +
             "LEFT JOIN COMUNAS co ON c.IDCOMUNA = co.IDCOMUNA " +
@@ -252,7 +255,7 @@ public class ClienteDAO {
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    Object[] fila = new Object[7];
+                    Object[] fila = new Object[8];
                     fila[0] = rs.getString("NOMBRES");
                     fila[1] = rs.getString("APELLIDOP");
                     fila[2] = rs.getString("APELLIDOM");
@@ -260,6 +263,7 @@ public class ClienteDAO {
                     fila[4] = rs.getString("DIRECCION");
                     fila[5] = rs.getString("COMUNA");
                     fila[6] = rs.getString("TIPO_CUENTA");
+                    fila[7] = rs.getString("IDCUENTA_CLIENTE");
                     resultados.add(fila);
                 }
             }

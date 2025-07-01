@@ -46,4 +46,9 @@ public class ControladorAdicionales {
         LOGGER.info("eliminarAdicional: " + id);
         return dao.eliminar(id);
     }
+    
+    public Adicional obtenerAdicionalPorIdCuenta(String idCuenta) {
+         LOGGER.info("obtenerAdicionalPorIdCuenta: " + idCuenta);
+        return dao.obtenerAdicionalPorIdCuenta(idCuenta);
+    }
 }

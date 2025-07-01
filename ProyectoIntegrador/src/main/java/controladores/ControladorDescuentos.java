@@ -45,4 +45,9 @@ public class ControladorDescuentos {
         LOGGER.info("eliminarDescuento: " + id);
         return dao.eliminar(id);
     }
+    
+       public Descuento obtenerDescuentoPorIdCuenta(String idCuenta) {
+           LOGGER.info("obtenerDescuentoPorIdCuenta: " + idCuenta);
+        return dao.obtenerDescuentoPorIdCuenta(idCuenta);
+     }
 }
