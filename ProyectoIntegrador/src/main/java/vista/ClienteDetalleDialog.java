@@ -169,33 +169,64 @@ public class ClienteDetalleDialog extends JDialog {
         return panel;
     }
     
-    
     private JPanel crearPanelAgenda() {
-        JPanel panel = new JPanel(new BorderLayout());
-        String[] columnas = { "IdActividad", "Telefono","Lugar", "Fecha" };
-        DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
-        JTable tabla = new JTable(modelo);
-        panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
-        if (idCuenta != null) {
-          List<MesaCentral> todos = new ControladorMesa_central().listarTodosPorIdCuenta(idCuenta);
-            System.out.println("Estado:"+todos);
-            for (MesaCentral m : todos) {
-                System.out.println("m:"+m);
+    JPanel panel = new JPanel(new BorderLayout());
+    String[] columnas = { "IdActividad", "Telefono", "Lugar", "Fecha" };
+    DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+    JTable tabla = new JTable(modelo);
+    panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
+
+    if (idCuenta != null) {
+        List<MesaCentral> todos = new ControladorMesa_central().listarTodosPorIdCuenta(idCuenta);
+        for (MesaCentral m : todos) {
+            Actividad a = new ActividadesControlador().obtenerPorId(m.getIdActividad());
+            modelo.addRow(new Object[]{
+                m.getIdActividad(), m.getTelefono(), m.getLugar(), a.getFechaCreacion()
+            });
+        }
+    }
+
+    JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    JTextField txtFiltro = new JTextField(10);
+    JComboBox<String> comboCampo = new JComboBox<>(new String[]{ "LUGAR", "TELEFONO"});
+    JButton btnFiltrar = new JButton("Filtrar");
+
+    btnFiltrar.addActionListener(e -> {
+        String campo = comboCampo.getSelectedItem().toString();
+        String valor = txtFiltro.getText().trim();
+        if (!valor.isEmpty()) {
+            List<MesaCentral> filtrados;
+            if (campo.equalsIgnoreCase("TELEFONO")) {
+                try {
+                    filtrados = new ControladorMesa_central().filtrarPorCampoYValor(idCuenta, campo, Long.parseLong(valor));
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(panel, "Ingrese un número válido para teléfono.");
+                    return;
+                }
+            } else {
+                filtrados = new ControladorMesa_central().filtrarPorCampoYValorLike(idCuenta, campo, valor);
+            }
+
+            modelo.setRowCount(0);
+            for (MesaCentral m : filtrados) {
                 Actividad a = new ActividadesControlador().obtenerPorId(m.getIdActividad());
                 modelo.addRow(new Object[]{
-                    m.getIdActividad(), m.getTelefono(), m.getLugar(),a.getFechaCreacion()
+                    m.getIdActividad(), m.getTelefono(), m.getLugar(), a.getFechaCreacion()
                 });
             }
         }
-         
+    });
 
-  
-    JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+    panelBoton.add(new JLabel("Campo:"));
+    panelBoton.add(comboCampo);
+    panelBoton.add(new JLabel("Valor:"));
+    panelBoton.add(txtFiltro);
+    panelBoton.add(btnFiltrar);
 
     panel.add(panelBoton, BorderLayout.SOUTH);
-        
-        return panel;
-    }
+    return panel;
+}
+  
     
     
 

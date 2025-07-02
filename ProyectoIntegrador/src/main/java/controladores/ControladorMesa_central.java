@@ -51,4 +51,14 @@ public class ControladorMesa_central {
         LOGGER.info("[Ctrl] listarTodosPorIdCuenta");
         return dao.listarTodosPorIdCuenta(idCuenta);
     }
+    
+     public List<MesaCentral> filtrarPorCampoYValor(String idCuenta, String campo, Object valor) {
+        LOGGER.info("[Ctrl] filtrarPorCampoYValor");
+        return dao.filtrarPorCampoYValor(idCuenta, campo, valor);
+     }
+     
+      public List<MesaCentral> filtrarPorCampoYValorLike(String idCuenta, String campo, String valor) {
+        LOGGER.info("[Ctrl] iltrarPorCampoYValorLike");
+        return dao.filtrarPorCampoYValorLike(idCuenta, campo, valor);
+      }
 }

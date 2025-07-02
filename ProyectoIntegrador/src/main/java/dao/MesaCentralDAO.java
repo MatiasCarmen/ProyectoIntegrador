@@ -109,7 +109,7 @@ public class MesaCentralDAO {
       public List<MesaCentral> listarTodosPorIdCuenta(String idCuenta) {
         List<MesaCentral> lista = new ArrayList<>();
         try (Connection conn = ConexionBD.conectar()) {
-            String sql = "SELECT M.ID_ACTIVIDAD,M.TELEFONO,M.LUGAR FROM MESA_CENTRAL AS M INNER JOIN " +
+            String sql = "SELECT M.IDACTIVIDAD,M.TELEFONO,M.LUGAR FROM MESA_CENTRAL AS M INNER JOIN " +
 "ACTIVIDADES AS A ON M.IDACTIVIDAD = A.IDACTIVIDAD " +
 "WHERE A.IDCUENTA = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class MesaCentralDAO {
 
             while (rs.next()) {
                 MesaCentral mc = new MesaCentral();
-                mc.setIdActividad(rs.getString("M.ID_ACTIVIDAD"));
+                mc.setIdActividad(rs.getString("M.IDACTIVIDAD"));
                 mc.setTelefono(rs.getLong("TELEFONO")); 
                 mc.setLugar(rs.getString("LUGAR"));
                 lista.add(mc);
@@ -128,4 +128,66 @@ public class MesaCentralDAO {
         }
         return lista;
     }
+      
+      public List<MesaCentral> filtrarPorCampoYValor(String idCuenta, String campo, Object valor) {
+    List<MesaCentral> lista = new ArrayList<>();
+
+    List<String> camposPermitidos = List.of("M.LUGAR", "M.TELEFONO", "M.IDACTIVIDAD");
+    if (!camposPermitidos.contains("M." + campo.toUpperCase())) {
+        return lista;
+    }
+
+    String sql = "SELECT M.IDACTIVIDAD, M.TELEFONO, M.LUGAR " +
+                 "FROM MESA_CENTRAL AS M " +
+                 "INNER JOIN ACTIVIDADES AS A ON M.IDACTIVIDAD = A.IDACTIVIDAD " +
+                 "WHERE A.IDCUENTA = ? AND M." + campo + " = ?";
+
+    try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, idCuenta);
+        if (valor instanceof String) {
+            ps.setString(2, (String) valor);
+        } else if (valor instanceof Long) {
+            ps.setLong(2, (Long) valor);
+        } else {
+            ps.setObject(2, valor);
+        }
+
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            MesaCentral mc = new MesaCentral();
+            mc.setIdActividad(rs.getString("IDACTIVIDAD"));
+            mc.setTelefono(rs.getLong("TELEFONO"));
+            mc.setLugar(rs.getString("LUGAR"));
+            lista.add(mc);
+        }
+    } catch (SQLException e) {
+        LOGGER.severe("Error al filtrar mesa central: " + e.getMessage());
+    }
+    return lista;
+}
+      
+      public List<MesaCentral> filtrarPorCampoYValorLike(String idCuenta, String campo, String valor) {
+    List<MesaCentral> lista = new ArrayList<>();
+    String sql = "SELECT M.IDACTIVIDAD, M.TELEFONO, M.LUGAR FROM MESA_CENTRAL M " +
+                 "JOIN ACTIVIDADES A ON M.IDACTIVIDAD = A.IDACTIVIDAD " +
+                 "WHERE A.IDCUENTA = ? AND M." + campo + " LIKE ?";
+    try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, idCuenta);
+        ps.setString(2, "%" + valor + "%");
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            MesaCentral mc = new MesaCentral();
+            mc.setIdActividad(rs.getString("IDACTIVIDAD"));
+            mc.setTelefono(rs.getLong("TELEFONO"));
+            mc.setLugar(rs.getString("LUGAR"));
+            lista.add(mc);
+        }
+    } catch (SQLException e) {
+        LOGGER.severe("Error al filtrar mesa central: " + e.getMessage());
+    }
+    return lista;
+}
+
 }
