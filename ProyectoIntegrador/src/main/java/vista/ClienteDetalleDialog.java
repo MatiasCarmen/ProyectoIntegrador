@@ -141,7 +141,7 @@ public class ClienteDetalleDialog extends JDialog {
 
     private JPanel crearPanelActividades() {
     JPanel panel = new JPanel(new BorderLayout());
-    String[] columnas = { "ID", "Tipo", "Fecha Creación", "Fecha Cierre", "Descripción" };
+    String[] columnas = { "ID", "Tipo", "Fecha Creación", "Fecha Cierre", "Descripción", "IdUsuario" };
     DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
     JTable tabla = new JTable(modelo);
     panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
@@ -150,7 +150,7 @@ public class ClienteDetalleDialog extends JDialog {
         List<Actividad> actividades = new ActividadesControlador().obtenerActividadesPorCuenta(idCuenta);
         for (Actividad a : actividades) {
             modelo.addRow(new Object[]{
-                a.getIdActividad(), a.getTipo(), a.getFechaCreacion(), a.getFechaCierre(), a.getDescripcion()
+                a.getIdActividad(), a.getTipo(), a.getFechaCreacion(), a.getFechaCierre(), a.getDescripcion(),a.getIdUsuario()
             });
         }
     }
