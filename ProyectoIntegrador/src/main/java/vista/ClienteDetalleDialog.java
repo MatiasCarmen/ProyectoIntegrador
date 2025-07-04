@@ -10,6 +10,7 @@ import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import ren.main.VistaPrincipal;
@@ -139,35 +140,65 @@ public class ClienteDetalleDialog extends JDialog {
     }
 
     private JPanel crearPanelActividades() {
-        JPanel panel = new JPanel(new BorderLayout());
-        String[] columnas = { "ID", "Tipo", "Fecha Creación", "Fecha Cierre", "Descripción" };
-        DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
-        JTable tabla = new JTable(modelo);
-        panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
-        if (idCuenta != null) {
-            List<Actividad> actividades = new ActividadesControlador().obtenerActividadesPorCuenta(idCuenta);
-            for (Actividad a : actividades) {
-                modelo.addRow(new Object[]{
-                    a.getIdActividad(), a.getTipo(), a.getFechaCreacion(), a.getFechaCierre(), a.getDescripcion()
-                });
-            }
-        }
-         JButton btnAgregarActividad = new JButton("Agregar Actividad");
-    btnAgregarActividad.addActionListener(e ->{
-        VistaPrincipal vp = (VistaPrincipal) SwingUtilities.getWindowAncestor(this);
-                if (vp != null) {
-                    vp.showAgregarActividades(idCuenta);
-                }
-    } );
+    JPanel panel = new JPanel(new BorderLayout());
+    String[] columnas = { "ID", "Tipo", "Fecha Creación", "Fecha Cierre", "Descripción" };
+    DefaultTableModel modelo = new DefaultTableModel(columnas, 0);
+    JTable tabla = new JTable(modelo);
+    panel.add(new JScrollPane(tabla), BorderLayout.CENTER);
 
-    
-    
+    if (idCuenta != null) {
+        List<Actividad> actividades = new ActividadesControlador().obtenerActividadesPorCuenta(idCuenta);
+        for (Actividad a : actividades) {
+            modelo.addRow(new Object[]{
+                a.getIdActividad(), a.getTipo(), a.getFechaCreacion(), a.getFechaCierre(), a.getDescripcion()
+            });
+        }
+    }
+
+    JButton btnAgregarActividad = new JButton("Agregar Actividad");
+    btnAgregarActividad.addActionListener(e -> {
+        VistaPrincipal vp = (VistaPrincipal) SwingUtilities.getWindowAncestor(this);
+        if (vp != null) {
+            vp.showAgregarActividades(idCuenta);
+        }
+    });
+
+    JButton btnEditarActividad = new JButton("Editar Actividad");
+    btnEditarActividad.addActionListener(e -> {
+        int filaSeleccionada = tabla.getSelectedRow();
+        if (filaSeleccionada != -1) {
+            String idActividad = tabla.getValueAt(filaSeleccionada, 0).toString();
+            Actividad act = new ActividadesControlador().obtenerPorId(idActividad);
+
+            if (act != null && "PENDIENTE".equalsIgnoreCase(act.getResolucion())) {
+                VistaEditarActividad vista = new VistaEditarActividad(SwingUtilities.getWindowAncestor(this), idActividad);
+                vista.setVisible(true);
+
+                // Refrescar tabla al cerrar la ventana
+                modelo.setRowCount(0);
+                List<Actividad> actividadesActualizadas = new ActividadesControlador().obtenerActividadesPorCuenta(idCuenta);
+                for (Actividad a : actividadesActualizadas) {
+                    modelo.addRow(new Object[]{
+                        a.getIdActividad(), a.getTipo(), a.getFechaCreacion(), a.getFechaCierre(), a.getDescripcion()
+                    });
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Solo se pueden editar actividades en estado PENDIENTE.", "No editable", JOptionPane.WARNING_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una actividad para editar.", "Sin selección", JOptionPane.WARNING_MESSAGE);
+        }
+    });
+
     JPanel panelBoton = new JPanel(new FlowLayout(FlowLayout.RIGHT));
     panelBoton.add(btnAgregarActividad);
+    panelBoton.add(btnEditarActividad);  // nuevo botón aquí
     panel.add(panelBoton, BorderLayout.SOUTH);
-        
-        return panel;
-    }
+
+    return panel;
+}
+
     
     private JPanel crearPanelAgenda() {
     JPanel panel = new JPanel(new BorderLayout());
@@ -274,19 +305,19 @@ public class ClienteDetalleDialog extends JDialog {
             Plan plan = new ControladorPlanes().obtenerPlanPorIdCuenta(idCuentaServicio);
             if (plan != null) {
                 for (DetallePlan d : new ControladorDetalle_planes().obtenerDetallesPlan(plan.getIdPlan())) {
-                    agregarProducto(d.getIdProducto(), tipo, productos);
+                    agregarProducto(d.getIdProducto(), tipo, productos,idCuenta,d.getCosto());
                 }
             }
             Adicional adicional = new ControladorAdicionales().obtenerAdicionalPorIdCuenta(idCuentaServicio);
             if (adicional != null) {
                 for (DetalleAdicional d : new ControladorDetalle_adicionales().obtenerDetallesAdicional(adicional.getIdAdicionales())) {
-                    agregarProducto(d.getIdProducto(), tipo, productos);
+                    agregarProducto(d.getIdProducto(), tipo, productos,idCuenta,d.getCosto());
                 }
             }
             Descuento descuento = new ControladorDescuentos().obtenerDescuentoPorIdCuenta(idCuentaServicio);
             if (descuento != null) {
                 for (DetalleDescuento d : new ControladorDetalle_descuentos().obtenerDetallesDescuento(descuento.getIdDescuentos())) {
-                    agregarProducto(d.getIdProducto(), tipo, productos);
+                    agregarProducto(d.getIdProducto(), tipo, productos,idCuenta,d.getCosto());
                 }
             }
         } catch (Exception ex) {
@@ -299,18 +330,28 @@ public class ClienteDetalleDialog extends JDialog {
         return contenedor;
     }
 
-    private void agregarProducto(String idProducto, String tipo, JPanel panel) throws Exception {
+    private void agregarProducto(String idProducto, String tipo, JPanel panel, String idCuenta, BigDecimal precio) throws Exception {
         Producto p = new ControladorProductos().obtenerProducto(idProducto);
         if (p != null) {
             boolean coincide = tipo.equalsIgnoreCase(p.getTipo()) ||
                     (tipo.equalsIgnoreCase("MOVIL") && (p.getTipo().equalsIgnoreCase("PREPAGO") || p.getTipo().equalsIgnoreCase("POSTPAGO")));
             if (coincide) {
-                JLabel lbl = new JLabel("- " + p.getDescripcion());
+                switch(CuentasClienteControlador.obtenerCuentaClientePorIdCuenta(idCuenta).getClase()){
+                    case "FACTURACION": 
+                        JLabel lbl = new JLabel("- " + p.getDescripcion()+" Precio actual: "+ precio );
                 lbl.setBorder(new EmptyBorder(5, 20, 5, 5));
                 panel.add(lbl);
+                     break;
+                    default:
+                        JLabel lbl1 = new JLabel("- " + p.getDescripcion());
+                        lbl1.setBorder(new EmptyBorder(5, 20, 5, 5));
+                      panel.add(lbl1);
+                }
             }
         }
     }
+    
+ 
 
     public boolean isAceptado() {
         return aceptado;

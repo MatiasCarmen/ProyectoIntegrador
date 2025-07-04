@@ -9,6 +9,7 @@ dao\DetalleOfertaDAO.class
 vista\VistaAgregarActividad.class
 vista\tema\TemaAdministrador.class
 vista\drawer\component\menu\SimpleMenuOption.class
+vista\VistaEditarActividad.class
 controladores\ControladorUsuarios.class
 entidades\ActividadSolicitud.class
 dao\PlanDAO.class

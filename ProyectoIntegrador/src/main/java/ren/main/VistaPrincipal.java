@@ -56,12 +56,12 @@ public class VistaPrincipal extends JFrame {
         // Establecer look and feel moderno
         FlatLightLaf.setup();
 
-        // Inicializar componentes
+      
         cardLayout = new CardLayout();
         panelContenedor = new JPanel(cardLayout);
         panelContenedor.setBackground(Color.WHITE);
 
-        // Crear overlay para loading
+      
         overlayPanel = new JPanel(new GridBagLayout());
         overlayPanel.setBackground(new Color(255, 255, 255, 200));
         overlayPanel.setVisible(false);

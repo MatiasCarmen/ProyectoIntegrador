@@ -112,7 +112,7 @@ public class ActividadDAO {
 
     public boolean actualizarActividad(Actividad a) {
         String sql = "UPDATE ACTIVIDADES SET "
-                   + "DESCRIPCION=?, FECHACIERRE=?, TIPO=?, RAZON=?, DETALLE=?, RESOLUCION=?, COMENTARIOS=?, TELEFONO=?, CORREO=? "
+                   + "DESCRIPCION=?, FECHA_CIERRE=?, TIPO=?, RAZON=?, DETALLE=?, RESOLUCION=?, COMENTARIOS=?, TELEFONO=?, CORREO=? "
                    + "WHERE IDACTIVIDAD=?";
         try (Connection conn = ConexionBD.conectar();
              PreparedStatement ps = conn.prepareStatement(sql)) {
