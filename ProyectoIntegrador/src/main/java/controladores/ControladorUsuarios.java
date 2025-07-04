@@ -93,4 +93,27 @@ public class ControladorUsuarios {
 
         return null;
     }
+
+    /**
+     * Crea un nuevo usuario en la base de datos.
+     * @param user Objeto Usuario con datos a insertar
+     * @throws SQLException si ocurre un error de BD
+     */
+    public void crearUsuario(Usuario user) throws SQLException {
+        String sql = "INSERT INTO USUARIOS (IDUSUARIO, RUT, IDROL, IDPAIS, CLAVE, NOMBRES, APELLIDOP, APELLIDOM, AREA, FECHA_CREACION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        PreparedStatement ps = conn.prepareStatement(sql);
+        ps.setString(1, user.getIdUsuario());
+        ps.setString(2, user.getRut());
+        // Asignar rol y país por defecto si no están definidos
+        ps.setString(3, user.getIdRol() != null ? user.getIdRol() : "D001");
+        ps.setString(4, user.getIdPais() != null ? user.getIdPais() : "CHL");
+        ps.setString(5, user.getClave());
+        ps.setString(6, user.getNombres());
+        ps.setString(7, user.getApellidoP());
+        ps.setString(8, user.getApellidoM());
+        // Área opcional
+        ps.setString(9, user.getArea() != null ? user.getArea() : "");
+        ps.setDate(10, new java.sql.Date(System.currentTimeMillis()));
+        ps.executeUpdate();
+    }
 }

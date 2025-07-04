@@ -23,6 +23,7 @@ vista\VistaMesaCentral.class
 vista\VistaAgregarCliente$3.class
 controladores\UsuarioControlador.class
 vista\componentes\LoadingSpinner.class
+vista\VistaCrearUsuario$3.class
 vista\VistaClientes$2.class
 BD\TestConexion.class
 entidades\DetalleOferta.class
@@ -46,6 +47,7 @@ vista\VistaProductosInstaladosPorCuenta$1.class
 dao\PedidoDAO.class
 vista\Login$3.class
 dao\ActividadSolicitudDAO.class
+vista\VistaCrearUsuario$2.class
 vista\VistasActividades.class
 dao\SolicitudDAO.class
 vista\drawer\component\DrawerPanel.class
@@ -65,6 +67,7 @@ vista\drawer\component\SimpleDrawerBuilder$1.class
 vista\VistaClientes$1.class
 entidades\CuentaCliente.class
 vista\PanelContenedor.class
+vista\VistaCrearUsuario$1.class
 dao\DetalleAdicionalDAO.class
 entidades\Descuento.class
 entidades\Pais.class
@@ -76,10 +79,12 @@ vista\Login$4.class
 utils\GuavaUtils.class
 dao\DetallePedidoDAO.class
 vista\VistaMesaCentral$1.class
+vista\VistaCrearUsuario$4.class
 vista\VistaAgenda$1.class
 vista\VistaAgregarCliente$7.class
 vista\Login$2.class
 reportes\ReporteClientes.class
+vista\VistaCrearUsuario$ShadowBorder.class
 dao\MesaCentralDAO.class
 vista\VistaAgregarCliente$4.class
 controladores\ControladorProductosInstalados.class
@@ -91,6 +96,7 @@ dao\PaisDAO.class
 vista\VistaUsuarios.class
 dao\DescuentoDAO.class
 vista\Login$5.class
+vista\VistaCrearUsuario$ButtonHoverEffect.class
 vista\VistasActividades$1.class
 reportes\ReporteGenerator.class
 vista\DetalleActividadDialog.class
