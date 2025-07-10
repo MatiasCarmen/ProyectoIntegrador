@@ -44,4 +44,38 @@ public class ReporteGenerator {
             workbook.write(fileOut);
         }
     }
+
+    public static String exportarListaAExcel(String nombreArchivo, String[] columnas, java.util.List<Object[]> datos) {
+        try (Workbook workbook = crearLibro()) {
+            Sheet sheet = workbook.createSheet(nombreArchivo);
+            CellStyle headerStyle = crearEstiloEncabezado(workbook);
+            Row headerRow = sheet.createRow(0);
+            for (int i = 0; i < columnas.length; i++) {
+                Cell cell = headerRow.createCell(i);
+                cell.setCellValue(columnas[i]);
+                cell.setCellStyle(headerStyle);
+                sheet.autoSizeColumn(i);
+            }
+            int rowNum = 1;
+            for (Object[] fila : datos) {
+                Row row = sheet.createRow(rowNum++);
+                for (int i = 0; i < fila.length; i++) {
+                    if (fila[i] != null) {
+                        row.createCell(i).setCellValue(fila[i].toString());
+                    } else {
+                        row.createCell(i).setCellValue("");
+                    }
+                }
+            }
+            for (int i = 0; i < columnas.length; i++) {
+                sheet.autoSizeColumn(i);
+            }
+            String archivo = obtenerNombreArchivo(nombreArchivo);
+            guardarLibro(workbook, archivo);
+            return archivo;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

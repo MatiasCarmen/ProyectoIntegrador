@@ -18,8 +18,8 @@ public class ConexionBD {
     // 1. Atributos de conexión
     private static final String BD = "sistemascrm_v2"; // nombre de la base de datos actual
     private static final String URL = "jdbc:mysql://localhost:3306/" + BD;
-     private static final String USER = ""; // modificar solo es para local
-    private static final String PASSWORD = ""; // modificar solo es local
+     private static final String USER = "root"; // modificar solo es para local
+    private static final String PASSWORD = "root123*"; // modificar solo es local
 
     // 2. Método público para obtener la conexión
     public static Connection conectar() {

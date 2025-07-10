@@ -7,7 +7,7 @@
  *
  * @author mathi
  */
-package controladores; 
+package controladores;
 
 import entidades.Actividad;
 import dao.ActividadDAO;
@@ -49,15 +49,26 @@ public class ActividadesControlador {
 
     public List<Actividad> obtenerActividadesAgendadas() {
         LOGGER.info("[Ctrl] obtenerActividadesAgendadas");
-        return dao.listarTodas();  // Usando tu método existente del DAO
+        return dao.listarTodas(); // Usando tu método existente del DAO
     }
-    
-     public List<Actividad> obtenerActividadesPorCuenta(String idCuenta) {
-         LOGGER.info("[Ctrl] obtenerActividadesPorCuenta");
+
+    public List<Actividad> obtenerActividadesPorCuenta(String idCuenta) {
+        LOGGER.info("[Ctrl] obtenerActividadesPorCuenta");
         return dao.obtenerActividadesPorCuenta(idCuenta);
-      }
-        public static String generarIdActividadUnico()  {
-         LOGGER.info("[Ctrl] obtenerIdActividadUnico");
+    }
+
+    /**
+     * Obtiene las actividades pendientes para mostrar en notificaciones
+     * 
+     * @return Lista de actividades con fecha_cierre >= hoy
+     */
+    public List<Actividad> obtenerActividadesPendientes() {
+        LOGGER.info("[Ctrl] obtenerActividadesPendientes");
+        return dao.obtenerActividadesPendientes();
+    }
+
+    public static String generarIdActividadUnico() {
+        LOGGER.info("[Ctrl] obtenerIdActividadUnico");
         return dao.generarIdActividadUnico();
-      }
+    }
 }

@@ -1,6 +1,7 @@
 vista\VistaAgregarCliente$ShadowBorder.class
 vista\VistaAgregarCliente.class
 vista\VistaInicio.class
+vista\VistaClienteDetallePanel$2.class
 controladores\ControladorFunciones.class
 vista\DrawerPanel.class
 dao\ActividadPedidoDAO.class
@@ -8,6 +9,7 @@ dao\CuentasClienteDAO.class
 dao\DetalleOfertaDAO.class
 vista\VistaAgregarActividad.class
 vista\tema\TemaAdministrador.class
+vista\componentes\NotificacionPanel$2.class
 vista\drawer\component\menu\SimpleMenuOption.class
 vista\VistaEditarActividad.class
 controladores\ControladorUsuarios.class
@@ -29,6 +31,7 @@ BD\TestConexion.class
 entidades\DetalleOferta.class
 controladores\ControladorDetalle_ofertas.class
 entidades\ActividadPedido.class
+vista\componentes\NotificacionPanel.class
 controladores\ControladorDetalle_adicionales.class
 controladores\ControladorUsuario_rol.class
 controladores\SolicitudControlador.class
@@ -53,6 +56,7 @@ dao\SolicitudDAO.class
 vista\drawer\component\DrawerPanel.class
 controladores\ControladorDescuentos.class
 controladores\ControladorDetalle_descuentos.class
+vista\VistaClienteDetallePanel$1.class
 controladores\ComunasControlador.class
 vista\drawer\component\SimpleDrawerBuilder.class
 controladores\ActividadesControlador.class
@@ -77,6 +81,7 @@ entidades\DetallePedido.class
 vista\VistaAgregarCliente$1.class
 vista\Login$4.class
 utils\GuavaUtils.class
+utils\PermisoUtils.class
 dao\DetallePedidoDAO.class
 vista\VistaMesaCentral$1.class
 vista\VistaCrearUsuario$4.class
@@ -95,10 +100,12 @@ dao\ClienteDAO.class
 dao\PaisDAO.class
 vista\VistaUsuarios.class
 dao\DescuentoDAO.class
+vista\componentes\NotificacionPanel$1.class
 vista\Login$5.class
 vista\VistaCrearUsuario$ButtonHoverEffect.class
 vista\VistasActividades$1.class
 reportes\ReporteGenerator.class
+vista\componentes\UserHeaderPanel.class
 vista\DetalleActividadDialog.class
 vista\MainFrame.class
 dao\DetallePlanDAO.class

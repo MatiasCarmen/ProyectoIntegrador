@@ -8,7 +8,7 @@
  */
 package vista;
 
-import controladores.ActividadesControlador;  
+import controladores.ActividadesControlador;
 import entidades.Actividad;
 import net.miginfocom.swing.MigLayout;
 import com.formdev.flatlaf.FlatClientProperties;
@@ -18,6 +18,9 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import javax.swing.SwingUtilities;
+import java.awt.Color;
+import java.awt.Font;
+import reportes.ReporteGenerator;
 
 /**
  * Panel que muestra las actividades de una cuenta dada.
@@ -28,16 +31,20 @@ public class VistaActividadesPorCuenta extends JPanel {
 
     private final DefaultTableModel model;
     private final JTable tblActividades;
-    private final JButton btnRefresh       = new JButton("Actualizar Actividades");
-    private final JButton btnVerProductos  = new JButton("Ver Productos");
+    private final JButton btnRefresh = new JButton("Actualizar Actividades");
+    private final JButton btnVerProductos = new JButton("Ver Productos");
+    private final JButton btnExportarExcel = new JButton("Exportar a Excel");
 
     public VistaActividadesPorCuenta() {
-        setLayout(new MigLayout("fill","[grow][pref][pref]","[grow][]"));
+        setLayout(new MigLayout("fill", "[grow][pref][pref]", "[grow][]"));
 
-        model = new DefaultTableModel(new String[]{
-            "ID Actividad","Descripción","Fecha Creación","Fecha Cierre","Tipo","Razón"
+        model = new DefaultTableModel(new String[] {
+                "ID Actividad", "Descripción", "Fecha Creación", "Fecha Cierre", "Tipo", "Razón"
         }, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
         };
         tblActividades = new JTable(model);
         add(new JScrollPane(tblActividades), "grow, wrap");
@@ -46,13 +53,19 @@ public class VistaActividadesPorCuenta extends JPanel {
         btnRefresh.addActionListener(e -> cargarActividades());
         btnVerProductos.putClientProperty(FlatClientProperties.STYLE, "font:bold");
         btnVerProductos.addActionListener(e -> {
-            VistaPrincipal vp = (VistaPrincipal)
-                SwingUtilities.getAncestorOfClass(VistaPrincipal.class, this);
-            if (vp != null) vp.mostrarProductos();
+            VistaPrincipal vp = (VistaPrincipal) SwingUtilities.getAncestorOfClass(VistaPrincipal.class, this);
+            if (vp != null)
+                vp.mostrarProductos();
         });
 
-        add(btnRefresh, "split 2");
-        add(btnVerProductos, "wrap");
+        add(btnRefresh, "split 3");
+        add(btnVerProductos);
+        btnExportarExcel.setBackground(new Color(46, 125, 50));
+        btnExportarExcel.setForeground(Color.WHITE);
+        btnExportarExcel.setFocusPainted(false);
+        btnExportarExcel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnExportarExcel.addActionListener(e -> exportarExcelActividades());
+        add(btnExportarExcel, "wrap");
     }
 
     /** Debe llamarse antes de cargar los datos. */
@@ -72,13 +85,13 @@ public class VistaActividadesPorCuenta extends JPanel {
         if (lista != null) {
             lista.forEach(a -> {
                 if (a != null) {
-                    model.addRow(new Object[]{
-                        a.getIdActividad(),
-                        a.getDescripcion(),
-                        a.getFechaCreacion(),
-                        a.getFechaCierre(),
-                        a.getTipo(),
-                        a.getRazon()
+                    model.addRow(new Object[] {
+                            a.getIdActividad(),
+                            a.getDescripcion(),
+                            a.getFechaCreacion(),
+                            a.getFechaCierre(),
+                            a.getTipo(),
+                            a.getRazon()
                     });
                 }
             });
@@ -104,13 +117,13 @@ public class VistaActividadesPorCuenta extends JPanel {
             if (actividades != null) {
                 for (Actividad actividad : actividades) {
                     if (actividad != null) {
-                        model.addRow(new Object[]{
-                            actividad.getIdActividad(),
-                            actividad.getDescripcion(),
-                            actividad.getFechaCreacion(),
-                            actividad.getFechaCierre(),
-                            actividad.getTipo(),
-                            actividad.getRazon()
+                        model.addRow(new Object[] {
+                                actividad.getIdActividad(),
+                                actividad.getDescripcion(),
+                                actividad.getFechaCreacion(),
+                                actividad.getFechaCierre(),
+                                actividad.getTipo(),
+                                actividad.getRazon()
                         });
                     }
                 }
@@ -121,9 +134,28 @@ public class VistaActividadesPorCuenta extends JPanel {
         } catch (Exception e) {
             System.err.println("Error actualizando tabla: " + e.getMessage());
             JOptionPane.showMessageDialog(this,
-                "Error al actualizar la tabla de actividades: " + e.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "Error al actualizar la tabla de actividades: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void exportarExcelActividades() {
+        String[] columnas = { "ID Actividad", "Descripción", "Fecha Creación", "Fecha Cierre", "Tipo", "Razón" };
+        java.util.List<Object[]> datos = new java.util.ArrayList<>();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            Object[] fila = new Object[columnas.length];
+            for (int j = 0; j < columnas.length; j++) {
+                fila[j] = model.getValueAt(i, j);
+            }
+            datos.add(fila);
+        }
+        String archivo = reportes.ReporteGenerator.exportarListaAExcel("Actividades", columnas, datos);
+        JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (archivo != null) {
+            vista.util.UIHelper.showToast(parent, "Reporte de actividades exportado exitosamente", false);
+        } else {
+            vista.util.UIHelper.showToast(parent, "Error al exportar el reporte de actividades", true);
         }
     }
 }

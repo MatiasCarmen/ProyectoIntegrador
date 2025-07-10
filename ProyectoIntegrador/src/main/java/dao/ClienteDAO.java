@@ -23,7 +23,7 @@ public class ClienteDAO {
     public boolean crearCliente(Cliente c) {
         String sql = "INSERT INTO CLIENTES (RUT, CORREO, NOMBRES, APELLIDOP, APELLIDOM, TELEFONO, EDAD, DIRECCION, IDCOMUNA) VALUES (?,?,?,?,?,?,?,?,?)";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, c.getRut());
             ps.setString(2, c.getCorreo());
@@ -47,7 +47,7 @@ public class ClienteDAO {
     public Cliente obtenerClientePorRut(String rut) {
         String sql = "SELECT * FROM CLIENTES WHERE RUT = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, rut);
             try (ResultSet rs = ps.executeQuery()) {
@@ -75,8 +75,8 @@ public class ClienteDAO {
         List<Cliente> lista = new ArrayList<>();
         String sql = "SELECT * FROM CLIENTES";
         try (Connection conn = ConexionBD.conectar();
-             Statement st = conn.createStatement();
-             ResultSet rs = st.executeQuery(sql)) {
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
 
             while (rs.next()) {
                 Cliente c = new Cliente();
@@ -100,7 +100,7 @@ public class ClienteDAO {
     public boolean actualizarCliente(Cliente c) {
         String sql = "UPDATE CLIENTES SET CORREO=?, NOMBRES=?, APELLIDOP=?, APELLIDOM=?, TELEFONO=?, EDAD=?, DIRECCION=?, IDCOMUNA=? WHERE RUT=?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, c.getCorreo());
             ps.setString(2, c.getNombres());
@@ -124,7 +124,7 @@ public class ClienteDAO {
     public boolean eliminarCliente(String rut) {
         String sql = "DELETE FROM CLIENTES WHERE RUT=?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setString(1, rut);
             int r = ps.executeUpdate();
@@ -139,14 +139,14 @@ public class ClienteDAO {
     public List<Cliente> buscarPorCriterio(String criterio) {
         List<Cliente> lista = new ArrayList<>();
         String sql = "SELECT * FROM CLIENTES WHERE " +
-                    "RUT LIKE ? OR " +
-                    "NOMBRES LIKE ? OR " +
-                    "APELLIDOP LIKE ? OR " +
-                    "APELLIDOM LIKE ? OR " +
-                    "CORREO LIKE ?";
+                "RUT LIKE ? OR " +
+                "NOMBRES LIKE ? OR " +
+                "APELLIDOP LIKE ? OR " +
+                "APELLIDOM LIKE ? OR " +
+                "CORREO LIKE ?";
 
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
 
             String patron = "%" + criterio + "%";
             for (int i = 1; i <= 5; i++) {
@@ -174,9 +174,7 @@ public class ClienteDAO {
         return lista;
     }
 
-    
-    
-     public List<Object[]> buscarClientesAvanzado(
+    public List<Object[]> buscarClientesAvanzado(
             String rut,
             String nombre,
             String apellidoP,
@@ -187,21 +185,20 @@ public class ClienteDAO {
 
         List<Object[]> resultados = new ArrayList<>();
         StringBuilder sql = new StringBuilder(
-            "SELECT c.NOMBRES, c.APELLIDOP, c.APELLIDOM, \n" +
-"       c.RUT, c.DIRECCION, co.DESCRIPCION as COMUNA, \n" +
-"       COALESCE(cc.CLASE, 'Sin Cuenta') as TIPO_CUENTA, \n" +
-"       cc.IDCUENTA as IDCUENTA_CLIENTE " +
-            "FROM CLIENTES c " +
-            "LEFT JOIN CUENTAS_CLIENTES cc ON c.RUT = cc.RUT " +
-            "LEFT JOIN COMUNAS co ON c.IDCOMUNA = co.IDCOMUNA " +
-            "WHERE 1=1"
-        );
+                "SELECT c.NOMBRES, c.APELLIDOP, c.APELLIDOM, \n" +
+                        "       c.RUT, c.DIRECCION, co.DESCRIPCION as COMUNA, \n" +
+                        "       COALESCE(cc.CLASE, 'Sin Cuenta') as TIPO_CUENTA, \n" +
+                        "       cc.IDCUENTA as IDCUENTA_CLIENTE " +
+                        "FROM CLIENTES c " +
+                        "LEFT JOIN CUENTAS_CLIENTES cc ON c.RUT = cc.RUT " +
+                        "LEFT JOIN COMUNAS co ON c.IDCOMUNA = co.IDCOMUNA " +
+                        "WHERE 1=1");
         List<String> params = new ArrayList<>();
 
         // Búsqueda por nombre completo
         if (nombre != null && !nombre.trim().isEmpty()) {
             sql.append(" AND (CONCAT(c.NOMBRES, ' ', c.APELLIDOP, ' ', c.APELLIDOM) LIKE ? " +
-                      "OR c.NOMBRES LIKE ?)");
+                    "OR c.NOMBRES LIKE ?)");
             params.add("%" + nombre + "%");
             params.add("%" + nombre + "%");
         }
@@ -240,7 +237,7 @@ public class ClienteDAO {
         long startTime = System.currentTimeMillis();
 
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+                PreparedStatement ps = conn.prepareStatement(sql.toString())) {
 
             // Configurar parámetros
             for (int i = 0; i < params.size(); i++) {
@@ -282,5 +279,19 @@ public class ClienteDAO {
         }
 
         return resultados;
+    }
+
+    public int contarClientes() {
+        String sql = "SELECT COUNT(*) FROM CLIENTES";
+        try (Connection conn = ConexionBD.conectar();
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error al contar clientes: " + e.getMessage());
+        }
+        return 0;
     }
 }

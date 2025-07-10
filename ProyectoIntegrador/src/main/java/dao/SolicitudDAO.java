@@ -25,10 +25,10 @@ public class SolicitudDAO {
 
     public boolean crear(Solicitud s) {
         String sql = "INSERT INTO SOLICITUDES " +
-          "(IDSOLICITUD, IDCUENTA, DESCRIPCION, FECHASOLICITUD, ESTADO, COMENTARIOS) " +
-          "VALUES (?,?,?,?,?,?)";
+                "(IDSOLICITUD, IDCUENTA, DESCRIPCION, FECHASOLICITUD, ESTADO, COMENTARIOS) " +
+                "VALUES (?,?,?,?,?,?)";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, s.getIdSolicitud());
             ps.setString(2, s.getIdCuenta());
             ps.setString(3, s.getDescripcion());
@@ -46,18 +46,17 @@ public class SolicitudDAO {
     public Solicitud obtenerPorId(String id) {
         String sql = "SELECT * FROM SOLICITUDES WHERE IDSOLICITUD = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, id);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     return new Solicitud(
-                      rs.getString("IDSOLICITUD"),
-                      rs.getString("IDCUENTA"),
-                      rs.getString("DESCRIPCION"),
-                      rs.getDate("FECHASOLICITUD"),
-                      rs.getString("ESTADO"),
-                      rs.getString("COMENTARIOS")
-                    );
+                            rs.getString("IDSOLICITUD"),
+                            rs.getString("IDCUENTA"),
+                            rs.getString("DESCRIPCION"),
+                            rs.getDate("FECHASOLICITUD"),
+                            rs.getString("ESTADO"),
+                            rs.getString("COMENTARIOS"));
                 }
             }
         } catch (SQLException e) {
@@ -70,17 +69,16 @@ public class SolicitudDAO {
         List<Solicitud> lista = new ArrayList<>();
         String sql = "SELECT * FROM SOLICITUDES";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 lista.add(new Solicitud(
-                  rs.getString("IDSOLICITUD"),
-                  rs.getString("IDCUENTA"),
-                  rs.getString("DESCRIPCION"),
-                  rs.getDate("FECHASOLICITUD"),
-                  rs.getString("ESTADO"),
-                  rs.getString("COMENTARIOS")
-                ));
+                        rs.getString("IDSOLICITUD"),
+                        rs.getString("IDCUENTA"),
+                        rs.getString("DESCRIPCION"),
+                        rs.getDate("FECHASOLICITUD"),
+                        rs.getString("ESTADO"),
+                        rs.getString("COMENTARIOS")));
             }
         } catch (SQLException e) {
             LOGGER.severe("Error listar Solicitudes: " + e.getMessage());
@@ -90,9 +88,9 @@ public class SolicitudDAO {
 
     public boolean actualizar(Solicitud s) {
         String sql = "UPDATE SOLICITUDES SET IDCUENTA=?, DESCRIPCION=?, FECHASOLICITUD=?, " +
-                     "ESTADO=?, COMENTARIOS=? WHERE IDSOLICITUD=?";
+                "ESTADO=?, COMENTARIOS=? WHERE IDSOLICITUD=?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, s.getIdCuenta());
             ps.setString(2, s.getDescripcion());
             ps.setDate(3, s.getFechaSolicitud());
@@ -110,7 +108,7 @@ public class SolicitudDAO {
     public boolean eliminar(String id) {
         String sql = "DELETE FROM SOLICITUDES WHERE IDSOLICITUD = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, id);
             LOGGER.info("Eliminar Solicitud: " + id);
             return ps.executeUpdate() > 0;
@@ -118,5 +116,19 @@ public class SolicitudDAO {
             LOGGER.severe("Error eliminar Solicitud: " + e.getMessage());
             return false;
         }
+    }
+
+    public int contarSolicitudesAbiertas() {
+        String sql = "SELECT COUNT(*) FROM SOLICITUDES WHERE ESTADO = 'ABIERTA'";
+        try (Connection conn = ConexionBD.conectar();
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error al contar solicitudes abiertas: " + e.getMessage());
+        }
+        return 0;
     }
 }

@@ -1,4 +1,5 @@
 package vista.util;
+
 /**
  *
  * @author mathi
@@ -12,7 +13,7 @@ public class UIHelper {
 
     // Método para crear animación de fade
     public static void fadeIn(JComponent component, int duration) {
-        float[] alpha = {0f};
+        float[] alpha = { 0f };
         component.setOpaque(false);
 
         Timer timer = new Timer(20, null);
@@ -34,6 +35,7 @@ public class UIHelper {
         JDialog dialog = new JDialog(parent);
         dialog.setUndecorated(true);
         dialog.setBackground(new Color(0, 0, 0, 0));
+        dialog.setAlwaysOnTop(true);
 
         JPanel panel = new JPanel() {
             @Override
@@ -45,7 +47,6 @@ public class UIHelper {
                 g2.dispose();
             }
         };
-
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
         panel.setOpaque(false);
 
@@ -57,43 +58,40 @@ public class UIHelper {
         dialog.add(panel);
         dialog.pack();
 
-        // Centrar en la parte inferior
+        // Centrar en el medio de la pantalla
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         int x = (screenSize.width - dialog.getWidth()) / 2;
-        int y = screenSize.height - dialog.getHeight() - 100;
+        int y = (screenSize.height - dialog.getHeight()) / 2;
         dialog.setLocation(x, y);
 
         // Mostrar con animación
-        dialog.setOpacity(0f);
+        dialog.setOpacity(1f);
         dialog.setVisible(true);
 
-        Timer fadeInTimer = new Timer(50, null);
-        fadeInTimer.addActionListener(e -> {
-            float opacity = dialog.getOpacity();
-            if (opacity < 1f) {
-                dialog.setOpacity(opacity + 0.1f);
-            } else {
-                fadeInTimer.stop();
-
-                // Timer para ocultar
-                Timer hideTimer = new Timer(3000, e2 -> {
-                    Timer fadeOutTimer = new Timer(50, null);
-                    fadeOutTimer.addActionListener(e3 -> {
-                        float currentOpacity = dialog.getOpacity();
-                        if (currentOpacity > 0f) {
-                            dialog.setOpacity(currentOpacity - 0.1f);
-                        } else {
-                            fadeOutTimer.stop();
-                            dialog.dispose();
-                        }
-                    });
-                    fadeOutTimer.start();
-                });
-                hideTimer.setRepeats(false);
-                hideTimer.start();
-            }
+        // Timer para ocultar después de 3 segundos
+        Timer autoHideTimer = new Timer(3000, e -> {
+            // Timer para fade out
+            Timer fadeOutTimer = new Timer(50, null);
+            fadeOutTimer.addActionListener(e2 -> {
+                float currentOpacity = dialog.getOpacity();
+                if (currentOpacity > 0f) {
+                    dialog.setOpacity(Math.max(0f, currentOpacity - 0.1f));
+                } else {
+                    fadeOutTimer.stop();
+                    dialog.dispose();
+                }
+            });
+            fadeOutTimer.start();
         });
-        fadeInTimer.start();
+        autoHideTimer.setRepeats(false);
+        autoHideTimer.start();
+    }
+
+    // Método simplificado para mostrar toast con colores automáticos
+    public static void showToast(JFrame parent, String message, boolean isError) {
+        Color backgroundColor = isError ? new Color(220, 53, 69) : new Color(40, 167, 69); // Rojo para error, verde
+                                                                                           // para éxito
+        showToast(parent, message, backgroundColor);
     }
 
     // Método para crear efecto de elevación
@@ -116,22 +114,22 @@ public class UIHelper {
             // Dibujar sombra
             for (int i = 0; i < shadowSize; i++) {
                 float opacity = shadowOpacity * (1 - (float) i / shadowSize);
-                g2.setColor(new Color(shadowColor.getRed()/255f,
-                                    shadowColor.getGreen()/255f,
-                                    shadowColor.getBlue()/255f,
-                                    opacity));
+                g2.setColor(new Color(shadowColor.getRed() / 255f,
+                        shadowColor.getGreen() / 255f,
+                        shadowColor.getBlue() / 255f,
+                        opacity));
                 g2.fill(new RoundRectangle2D.Float(shadowSize - i, shadowSize - i,
-                                                 getWidth() - 2*shadowSize + 2*i,
-                                                 getHeight() - 2*shadowSize + 2*i,
-                                                 cornerRadius + i, cornerRadius + i));
+                        getWidth() - 2 * shadowSize + 2 * i,
+                        getHeight() - 2 * shadowSize + 2 * i,
+                        cornerRadius + i, cornerRadius + i));
             }
 
             // Dibujar panel
             g2.setColor(getBackground());
             g2.fill(new RoundRectangle2D.Float(shadowSize, shadowSize,
-                                             getWidth() - 2*shadowSize,
-                                             getHeight() - 2*shadowSize,
-                                             cornerRadius, cornerRadius));
+                    getWidth() - 2 * shadowSize,
+                    getHeight() - 2 * shadowSize,
+                    cornerRadius, cornerRadius));
             g2.dispose();
         }
     }
@@ -159,7 +157,7 @@ public class UIHelper {
 
     private static void animateButtonColor(JButton button, Color from, Color to) {
         Timer timer = new Timer(20, null);
-        final float[] progress = {0f};
+        final float[] progress = { 0f };
 
         timer.addActionListener(e -> {
             progress[0] += 0.1f;
@@ -186,16 +184,16 @@ public class UIHelper {
         Graphics2D g2 = (Graphics2D) icon.getImage().getGraphics();
         g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-        int padding = size/4;
-        int[] xPoints = {size/2, padding, size-padding};
-        int[] yPoints = {padding, size-padding, size-padding};
+        int padding = size / 4;
+        int[] xPoints = { size / 2, padding, size - padding };
+        int[] yPoints = { padding, size - padding, size - padding };
 
         g2.setColor(color);
         g2.fillPolygon(xPoints, yPoints, 3);
         g2.setStroke(new BasicStroke(2));
         g2.setColor(Color.WHITE);
-        g2.drawLine(size/2, size/2-2, size/2, size/2+5);
-        g2.fillOval(size/2-1, size/2+7, 3, 3);
+        g2.drawLine(size / 2, size / 2 - 2, size / 2, size / 2 + 5);
+        g2.fillOval(size / 2 - 1, size / 2 + 7, 3, 3);
 
         g2.dispose();
         return icon;

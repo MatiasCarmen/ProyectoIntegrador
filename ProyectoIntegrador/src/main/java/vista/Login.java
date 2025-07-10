@@ -27,11 +27,11 @@ public class Login extends JPanel {
     private final ControladorUsuarios controlador = new ControladorUsuarios();
 
     public Login(JFrame loginFrame) {
-        // Configuracion de la ventana 
+        // Configuracion de la ventana
         loginFrame.setUndecorated(true);
         init(loginFrame);
 
-            // Ajusta el tamaño para que se adapte mejor :b
+        // Ajusta el tamaño para que se adapte mejor :b
         loginFrame.setSize(500, 700);
         loginFrame.setLocationRelativeTo(null);
 
@@ -141,8 +141,7 @@ public class Login extends JPanel {
                 // Gradiente más suave
                 GradientPaint gp = new GradientPaint(
                         0, 0, new Color(250, 250, 250),
-                        0, getHeight(), new Color(245, 245, 245)
-                );
+                        0, getHeight(), new Color(245, 245, 245));
                 g2.setPaint(gp);
                 g2.fillRect(0, 0, getWidth(), getHeight());
 
@@ -169,7 +168,7 @@ public class Login extends JPanel {
         logoLabel.setIcon(new ImageIcon(scaledImage));
         contentPanel.add(logoLabel, "align center, gapbottom 20");
 
-        // Título de bienvenida 
+        // Título de bienvenida
         JLabel lblTitle = new JLabel("¡Bienvenido Papu!");
         lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 28));
         lblTitle.setForeground(new Color(237, 28, 36));
@@ -202,7 +201,7 @@ public class Login extends JPanel {
                 "showRevealButton:true");
         contentPanel.add(txtPassword, "width 280!, height 40!, gapbottom 10");
 
-        // Panel de opciones 
+        // Panel de opciones
         JPanel optionsPanel = new JPanel(new MigLayout("insets 0", "[left][push,right]"));
         optionsPanel.setOpaque(false);
 
@@ -219,7 +218,7 @@ public class Login extends JPanel {
 
         contentPanel.add(optionsPanel, "width 280!, gapbottom 20");
 
-        // Botón de login 
+        // Botón de login
         cmdLogin = new JButton("Iniciar Sesión");
         cmdLogin.putClientProperty(FlatClientProperties.STYLE, "" +
                 "background:#ED1C24;" +
@@ -264,7 +263,7 @@ public class Login extends JPanel {
         mainPanel.add(contentPanel, "width 420!, align center, gaptop 30");
         add(mainPanel, "grow");
 
-        // esto le da animacion al login, transiciones mas que nada, a nada 
+        // esto le da animacion al login, transiciones mas que nada, a nada
         cmdLogin.addActionListener(e -> handleLogin(loginFrame));
 
         // Manejar Enter en campos
@@ -287,10 +286,10 @@ public class Login extends JPanel {
                 lblEstado.setText("¡Bienvenido!");
                 lblEstado.setForeground(new Color(46, 125, 50));
 
-                // Crear y configurar la ventana principal primero
+                // Crear y configurar la ventana principal ANTES de hacerla visible
                 VistaPrincipal vp = new VistaPrincipal();
                 vp.setLocationRelativeTo(null);
-                vp.setUndecorated(true); 
+                vp.setUndecorated(true); // Configurar ANTES de setVisible
                 vp.setOpacity(0.0f);
                 vp.setVisible(true);
 

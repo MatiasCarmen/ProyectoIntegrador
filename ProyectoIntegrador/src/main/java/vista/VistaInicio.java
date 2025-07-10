@@ -1,4 +1,5 @@
 package vista;
+
 /**
  *
  * @author mathi
@@ -7,6 +8,9 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
 import java.net.URL;
+import dao.ClienteDAO;
+import dao.ActividadDAO;
+import dao.SolicitudDAO;
 
 public class VistaInicio extends JPanel {
 
@@ -37,7 +41,7 @@ public class VistaInicio extends JPanel {
             e.printStackTrace();
         }
 
-        // Texto de bienvenida 
+        // Texto de bienvenida
         JLabel titulo = new JLabel("Bienvenido a Claro CRM");
         titulo.setFont(new Font("Segoe UI", Font.BOLD, 32));
         titulo.setForeground(new Color(237, 28, 36));
@@ -50,11 +54,18 @@ public class VistaInicio extends JPanel {
         JPanel statsPanel = new JPanel(new MigLayout("wrap 3, insets 0, gap 20", "[grow,fill][grow,fill][grow,fill]"));
         statsPanel.setOpaque(false);
 
-        // Crear tarjetas de estadísticas
-        statsPanel.add(createStatCard("Clientes Activos", "1,234", new Color(46, 125, 50)));
-        statsPanel.add(createStatCard("Actividades Hoy", "56", new Color(237, 28, 36)));
-        statsPanel.add(createStatCard("Solicitudes", "23", new Color(33, 150, 243)));
-//estos son datos irreales nose que poner ahi hjdkashdjsahdjksahdjkashdkjsahdkjashd
+        // Obtener datos reales de la base de datos
+        int clientesActivos = new ClienteDAO().contarClientes();
+        int actividadesPendientes = new ActividadDAO().contarActividadesPendientes();
+        int solicitudesAbiertas = new SolicitudDAO().contarSolicitudesAbiertas();
+
+        // Crear tarjetas de estadísticas con datos reales
+        statsPanel.add(createStatCard("Clientes Activos", String.valueOf(clientesActivos), new Color(46, 125, 50)));
+        statsPanel.add(createStatCard("Actividades Pendientes", String.valueOf(actividadesPendientes),
+                new Color(237, 28, 36)));
+        statsPanel.add(
+                createStatCard("Solicitudes Abiertas", String.valueOf(solicitudesAbiertas), new Color(33, 150, 243)));
+
         // Agregar componentes al panel principal
         mainPanel.add(titulo);
         mainPanel.add(subtitulo);

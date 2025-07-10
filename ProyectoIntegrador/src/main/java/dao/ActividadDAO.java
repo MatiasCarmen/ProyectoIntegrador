@@ -24,11 +24,11 @@ public class ActividadDAO {
 
     public boolean crearActividad(Actividad a) {
         String sql = "INSERT INTO ACTIVIDADES "
-                   + "(IDACTIVIDAD, IDCUENTA, DESCRIPCION, FECHA_CREACION, FECHA_CIERRE,"
-                   + "TIPO, RAZON, DETALLE, RESOLUCION, COMENTARIOS, TELEFONO, CORREO,IDUSUARIO) "
-                   + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+                + "(IDACTIVIDAD, IDCUENTA, DESCRIPCION, FECHA_CREACION, FECHA_CIERRE,"
+                + "TIPO, RAZON, DETALLE, RESOLUCION, COMENTARIOS, TELEFONO, CORREO,IDUSUARIO) "
+                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, a.getIdActividad());
             ps.setString(2, a.getIdCuenta());
             ps.setString(3, a.getDescripcion());
@@ -41,7 +41,7 @@ public class ActividadDAO {
             ps.setString(10, a.getComentarios());
             ps.setLong(11, a.getTelefono());
             ps.setString(12, a.getCorreo());
-            ps.setString(13,a.getIdUsuario());
+            ps.setString(13, a.getIdUsuario());
             int r = ps.executeUpdate();
             LOGGER.info("Filas insertadas ACTIVIDADES: " + r);
             return r > 0;
@@ -55,23 +55,23 @@ public class ActividadDAO {
         List<Actividad> lista = new ArrayList<>();
         String sql = "SELECT * FROM ACTIVIDADES WHERE IDCUENTA = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, idCuenta);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
                     Actividad a = new Actividad();
                     a.setIdActividad(rs.getString("IDACTIVIDAD"));
-                    a.setIdCuenta    (rs.getString("IDCUENTA"));
+                    a.setIdCuenta(rs.getString("IDCUENTA"));
                     a.setDescripcion(rs.getString("DESCRIPCION"));
                     a.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
                     a.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
-                    a.setTipo        (rs.getString("TIPO"));
-                    a.setRazon       (rs.getString("RAZON"));
-                    a.setDetalle     (rs.getString("DETALLE"));
-                    a.setResolucion  (rs.getString("RESOLUCION"));
-                    a.setComentarios (rs.getString("COMENTARIOS"));
-                    a.setTelefono    (rs.getLong("TELEFONO"));
-                    a.setCorreo      (rs.getString("CORREO"));
+                    a.setTipo(rs.getString("TIPO"));
+                    a.setRazon(rs.getString("RAZON"));
+                    a.setDetalle(rs.getString("DETALLE"));
+                    a.setResolucion(rs.getString("RESOLUCION"));
+                    a.setComentarios(rs.getString("COMENTARIOS"));
+                    a.setTelefono(rs.getLong("TELEFONO"));
+                    a.setCorreo(rs.getString("CORREO"));
                     lista.add(a);
                 }
             }
@@ -84,23 +84,23 @@ public class ActividadDAO {
     public Actividad obtenerPorId(String idActividad) {
         String sql = "SELECT * FROM ACTIVIDADES WHERE IDACTIVIDAD = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, idActividad);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     Actividad a = new Actividad();
                     a.setIdActividad(rs.getString("IDACTIVIDAD"));
-                    a.setIdCuenta    (rs.getString("IDCUENTA"));
+                    a.setIdCuenta(rs.getString("IDCUENTA"));
                     a.setDescripcion(rs.getString("DESCRIPCION"));
                     a.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
                     a.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
-                    a.setTipo        (rs.getString("TIPO"));
-                    a.setRazon       (rs.getString("RAZON"));
-                    a.setDetalle     (rs.getString("DETALLE"));
-                    a.setResolucion  (rs.getString("RESOLUCION"));
-                    a.setComentarios (rs.getString("COMENTARIOS"));
-                    a.setTelefono    (rs.getLong("TELEFONO"));
-                    a.setCorreo      (rs.getString("CORREO"));
+                    a.setTipo(rs.getString("TIPO"));
+                    a.setRazon(rs.getString("RAZON"));
+                    a.setDetalle(rs.getString("DETALLE"));
+                    a.setResolucion(rs.getString("RESOLUCION"));
+                    a.setComentarios(rs.getString("COMENTARIOS"));
+                    a.setTelefono(rs.getLong("TELEFONO"));
+                    a.setCorreo(rs.getString("CORREO"));
                     return a;
                 }
             }
@@ -112,10 +112,10 @@ public class ActividadDAO {
 
     public boolean actualizarActividad(Actividad a) {
         String sql = "UPDATE ACTIVIDADES SET "
-                   + "DESCRIPCION=?, FECHA_CIERRE=?, TIPO=?, RAZON=?, DETALLE=?, RESOLUCION=?, COMENTARIOS=?, TELEFONO=?, CORREO=? "
-                   + "WHERE IDACTIVIDAD=?";
+                + "DESCRIPCION=?, FECHA_CIERRE=?, TIPO=?, RAZON=?, DETALLE=?, RESOLUCION=?, COMENTARIOS=?, TELEFONO=?, CORREO=? "
+                + "WHERE IDACTIVIDAD=?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, a.getDescripcion());
             ps.setTimestamp(2, a.getFechaCierre());
             ps.setString(3, a.getTipo());
@@ -138,7 +138,7 @@ public class ActividadDAO {
     public boolean eliminarActividad(String idActividad) {
         String sql = "DELETE FROM ACTIVIDADES WHERE IDACTIVIDAD = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
+                PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setString(1, idActividad);
             int r = ps.executeUpdate();
             LOGGER.info("Filas eliminadas ACTIVIDADES: " + r);
@@ -177,12 +177,12 @@ public class ActividadDAO {
         }
         return lista;
     }
-    
-     public List<Actividad> obtenerActividadesPorCuenta(String idCuenta) {
+
+    public List<Actividad> obtenerActividadesPorCuenta(String idCuenta) {
         List<Actividad> lista = new ArrayList<>();
         try (Connection con = ConexionBD.conectar();
-             PreparedStatement ps = con.prepareStatement(
-                 "SELECT * FROM ACTIVIDADES WHERE IDCUENTA = ?")) {
+                PreparedStatement ps = con.prepareStatement(
+                        "SELECT * FROM ACTIVIDADES WHERE IDCUENTA = ?")) {
 
             ps.setString(1, idCuenta);
             ResultSet rs = ps.executeQuery();
@@ -202,7 +202,7 @@ public class ActividadDAO {
                 act.setTelefono(rs.getLong("TELEFONO"));
                 act.setCorreo(rs.getString("CORREO"));
                 act.setIdUsuario(rs.getString("IDUSUARIO"));
-      
+
                 lista.add(act);
             }
 
@@ -212,32 +212,84 @@ public class ActividadDAO {
 
         return lista;
     }
-    
 
-public static String generarIdActividadUnico() {
-    String id;
-    String query = "SELECT 1 FROM ACTIVIDADES WHERE IDACTIVIDAD = ? LIMIT 1";
-    do {
-        StringBuilder sb = new StringBuilder();
-        sb.append("1-");
-        String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-        for (int i = 0; i < 8; i++) {
-            int idx = (int) (Math.random() * caracteres.length());
-            sb.append(caracteres.charAt(idx));
-        }
-        id = sb.toString();
+    /**
+     * Obtiene las actividades pendientes (fecha_cierre >= hoy)
+     * 
+     * @return Lista de actividades pendientes
+     */
+    public List<Actividad> obtenerActividadesPendientes() {
+        List<Actividad> lista = new ArrayList<>();
+        String sql = "SELECT * FROM ACTIVIDADES WHERE FECHA_CIERRE >= CURDATE() ORDER BY FECHA_CIERRE ASC";
 
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setString(1, id);
-            ResultSet rs = stmt.executeQuery();
-            if (!rs.next()) break;
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                Actividad actividad = new Actividad();
+                actividad.setIdActividad(rs.getString("IDACTIVIDAD"));
+                actividad.setIdCuenta(rs.getString("IDCUENTA"));
+                actividad.setDescripcion(rs.getString("DESCRIPCION"));
+                actividad.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
+                actividad.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
+                actividad.setTipo(rs.getString("TIPO"));
+                actividad.setRazon(rs.getString("RAZON"));
+                actividad.setDetalle(rs.getString("DETALLE"));
+                actividad.setResolucion(rs.getString("RESOLUCION"));
+                actividad.setComentarios(rs.getString("COMENTARIOS"));
+                actividad.setTelefono(rs.getLong("TELEFONO"));
+                actividad.setCorreo(rs.getString("CORREO"));
+                actividad.setIdUsuario(rs.getString("IDUSUARIO"));
+                lista.add(actividad);
+            }
+
         } catch (SQLException e) {
-            LOGGER.severe("Error generarIdActividadUnico: " + e.getMessage());
-            return null;
+            LOGGER.severe("Error obtenerActividadesPendientes: " + e.getMessage());
         }
 
-    } while (true);
-    return id;
-}
+        return lista;
+    }
+
+    public int contarActividadesPendientes() {
+        String sql = "SELECT COUNT(*) FROM ACTIVIDADES WHERE FECHA_CIERRE >= CURDATE() AND RESOLUCION = 'PENDIENTE'";
+        try (Connection conn = ConexionBD.conectar();
+                Statement st = conn.createStatement();
+                ResultSet rs = st.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error al contar actividades pendientes: " + e.getMessage());
+        }
+        return 0;
+    }
+
+    public static String generarIdActividadUnico() {
+        String id;
+        String query = "SELECT 1 FROM ACTIVIDADES WHERE IDACTIVIDAD = ? LIMIT 1";
+        do {
+            StringBuilder sb = new StringBuilder();
+            sb.append("1-");
+            String caracteres = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            for (int i = 0; i < 8; i++) {
+                int idx = (int) (Math.random() * caracteres.length());
+                sb.append(caracteres.charAt(idx));
+            }
+            id = sb.toString();
+
+            try (Connection conn = ConexionBD.conectar();
+                    PreparedStatement stmt = conn.prepareStatement(query)) {
+                stmt.setString(1, id);
+                ResultSet rs = stmt.executeQuery();
+                if (!rs.next())
+                    break;
+            } catch (SQLException e) {
+                LOGGER.severe("Error generarIdActividadUnico: " + e.getMessage());
+                return null;
+            }
+
+        } while (true);
+        return id;
+    }
 }

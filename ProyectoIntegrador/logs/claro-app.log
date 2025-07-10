@@ -3436,3 +3436,745 @@ java.sql.SQLSyntaxErrorException: Unknown database 'proyectointegrador'
 2025-07-03 22:14:03 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
 2025-07-03 22:14:03 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
 2025-07-03 22:14:03 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:09:00 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:09:00 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:09:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:14:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:14:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:20 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:20 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:20 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:20 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:20 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:21 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:33 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:33 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:43 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:43 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:47 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:47 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:58:58 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:58:58 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:00 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:00 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:02 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:02 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:04 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:04 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:07 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:07 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:34 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:34 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:38 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:38 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:41 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:41 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:45 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:45 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 15:59:47 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 15:59:47 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:00:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:00:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:00:57 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:00:57 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:11 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:46 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:46 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:54 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:54 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:54 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:54 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:54 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:54 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:54 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:54 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:01:55 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:01:55 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:49 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:08:50 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:09:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:09:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:10:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:10:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:10:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:10:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:10:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:10:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:10:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:10:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:10:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:10:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:04 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:04 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:35 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:35 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:38 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:38 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:11:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:00 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:01 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:02 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:12 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:12 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:28 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:16:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:16:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:17:13 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:17:13 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:17:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:17:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:19:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:19:27 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:21:13 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:21:13 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:33 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:33 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:34 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:34 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:35 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:35 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:37 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:37 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:38 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:38 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:40 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:40 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:41 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:41 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:23:59 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:23:59 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:03 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:03 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:08 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:08 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:41 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:55 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:55 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:58 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:58 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:24:59 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:24:59 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:01 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:01 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:26 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:26 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:26 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:26 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:43 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:43 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:47 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:47 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:52 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:52 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:25:53 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:25:53 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:29:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:29:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:30:44 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:30:44 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:57:52 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:57:53 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:04 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:04 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:13 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:13 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:21 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:21 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:25 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:52 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:52 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:53 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:53 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 16:58:56 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 16:58:56 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:04:46 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:04:46 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:04:57 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:04:58 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:06 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:10 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:12 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:12 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:15 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:15 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:21 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:21 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:22 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:22 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:31 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:31 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:34 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:34 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:47 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:47 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:05:48 [main] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:08 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:22 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:22 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:23 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:23 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:24 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:24 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:29 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:30 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:33 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:33 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:36 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:36 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:41 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:41 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:42 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:06:43 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:06:43 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:07:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:07:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:07:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:07:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:03 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:03 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:09:21 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:09:21 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:12 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:12 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:13 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:13 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:14 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:15 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:15 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:19 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:10:20 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:18:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:18:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:18:55 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:18:55 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:08 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:08 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:08 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:08 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:08 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:08 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:15 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:15 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:16 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:17 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:18 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:19:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:19:50 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:20:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:20:05 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D
+2025-07-10 17:20:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conectando a la base de datos: sistemascrm_v2
+2025-07-10 17:20:09 [AWT-EventQueue-0] INFO  BD.ConexionBD - Conexión exitosa a la base de datos :D

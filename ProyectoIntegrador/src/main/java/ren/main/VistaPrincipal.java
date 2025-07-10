@@ -11,7 +11,10 @@ package ren.main;
 
 import com.formdev.flatlaf.FlatLightLaf;
 import entidades.Cliente;
+import entidades.Usuario;
+import utils.PermisoUtils;
 import vista.*;
+import vista.componentes.UserHeaderPanel;
 import vista.drawer.MyDrawerBuilder;
 import vista.componentes.LoadingSpinner;
 import vista.util.UIHelper;
@@ -25,6 +28,7 @@ public class VistaPrincipal extends JFrame {
     public static final String TARJETA_CLIENTES = "CLIENTES";
     public static final String TARJETA_BUSCAR_CLIENTE = "BUSCAR_CLIENTE";
     public static final String TARJETA_AGREGAR_CLIENTE = "AGREGAR_CLIENTE";
+    public static final String TARJETA_DETALLE_CLIENTE = "DETALLE_CLIENTE";
     public static final String TARJETA_USUARIOS = "USUARIOS";
     public static final String TARJETA_CREAR_USUARIO = "CREAR_USUARIO";
     public static final String TARJETA_NUEVA_ACTIVIDAD = "NUEVA_ACTIVIDAD";
@@ -38,6 +42,7 @@ public class VistaPrincipal extends JFrame {
     private final JComponent menuLateral;
     private final LoadingSpinner loadingSpinner;
     private final JPanel overlayPanel;
+    private final UserHeaderPanel userHeaderPanel;
 
     // Panels embebidos
     private final VistaClientes clientesPanel;
@@ -56,12 +61,19 @@ public class VistaPrincipal extends JFrame {
         // Establecer look and feel moderno
         FlatLightLaf.setup();
 
-      
+        // Verificar que hay un usuario logueado
+        if (main.logeado == null) {
+            JOptionPane.showMessageDialog(this,
+                    "Error: No hay usuario logueado",
+                    "Error de Autenticación",
+                    JOptionPane.ERROR_MESSAGE);
+            System.exit(1);
+        }
+
         cardLayout = new CardLayout();
         panelContenedor = new JPanel(cardLayout);
         panelContenedor.setBackground(Color.WHITE);
 
-      
         overlayPanel = new JPanel(new GridBagLayout());
         overlayPanel.setBackground(new Color(255, 255, 255, 200));
         overlayPanel.setVisible(false);
@@ -82,9 +94,12 @@ public class VistaPrincipal extends JFrame {
         MyDrawerBuilder builder = new MyDrawerBuilder(this);
         menuLateral = builder.build();
 
+        // Crear el header del usuario
+        userHeaderPanel = new UserHeaderPanel();
+
         // Configurar la ventana principal
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Claro CRM");
+        setTitle("Claro CRM - " + main.logeado.getNombres());
         setMinimumSize(new Dimension(1024, 768));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
 
@@ -99,19 +114,44 @@ public class VistaPrincipal extends JFrame {
         // Panel de contenido con margen y sombra
         JPanel contentPanel = new UIHelper.ElevatedPanel();
         contentPanel.setLayout(new BorderLayout());
-        contentPanel.setBorder(BorderFactory.createEmptyBorder(15, 15, 15, 15));
+        contentPanel.setBorder(BorderFactory.createEmptyBorder(0, 15, 15, 15));
         contentPanel.setBackground(Color.WHITE);
+
+        // Agregar header del usuario en la parte superior
+        contentPanel.add(userHeaderPanel, BorderLayout.NORTH);
         contentPanel.add(panelContenedor, BorderLayout.CENTER);
 
-        // Agregar todos los paneles al CardLayout
+        // Agregar todos los paneles al CardLayout (solo los permitidos)
+        agregarPanelesSegunPermisos();
+
+        // Agregar los paneles al frame principal
+        mainPanel.add(menuLateral, BorderLayout.WEST);
+        mainPanel.add(contentPanel, BorderLayout.CENTER);
+
+        setContentPane(mainPanel);
+
+        // Mostrar panel inicial según el rol (sin validación de permisos)
+        mostrarPanelInicialSegunRol();
+    }
+
+    /**
+     * Agrega solo los paneles permitidos según el rol del usuario
+     */
+    private void agregarPanelesSegunPermisos() {
+        Usuario usuario = main.logeado;
+
+        // Paneles básicos para todos
         panelContenedor.add(new VistaInicio(), TARJETA_INICIO);
         panelContenedor.add(clientesPanel, TARJETA_CLIENTES);
+        panelContenedor.add(actividadesPanel, TARJETA_ACTIVIDADES);
+        panelContenedor.add(agendaPanel, TARJETA_AGENDA);
+        panelContenedor.add(productosPanel, TARJETA_PRODUCTOS);
 
         // Agregar paneles adicionales si existen
         try {
             Class<?> vistaBuscarClienteClass = Class.forName("vista.VistaBuscarCliente");
             panelContenedor.add((JPanel) vistaBuscarClienteClass.getDeclaredConstructor().newInstance(),
-                              TARJETA_BUSCAR_CLIENTE);
+                    TARJETA_BUSCAR_CLIENTE);
         } catch (Exception e) {
             System.out.println("VistaBuscarCliente no encontrada");
         }
@@ -119,30 +159,51 @@ public class VistaPrincipal extends JFrame {
         try {
             Class<?> vistaAgregarClienteClass = Class.forName("vista.VistaAgregarCliente");
             panelContenedor.add((JPanel) vistaAgregarClienteClass.getDeclaredConstructor().newInstance(),
-                              TARJETA_AGREGAR_CLIENTE);
+                    TARJETA_AGREGAR_CLIENTE);
         } catch (Exception e) {
             System.out.println("VistaAgregarCliente no encontrada");
         }
 
-        // Agregar el resto de los paneles
-        panelContenedor.add(usuariosPanel, TARJETA_USUARIOS);
-        panelContenedor.add(new VistaCrearUsuario(), TARJETA_CREAR_USUARIO);
-        panelContenedor.add(new VistasActividades(), TARJETA_NUEVA_ACTIVIDAD);  // Cambiado a tu clase existente
-        panelContenedor.add(actividadesPanel, TARJETA_ACTIVIDADES);
-        panelContenedor.add(agendaPanel, TARJETA_AGENDA);
-        panelContenedor.add(mesaCentralPanel, TARJETA_MESA);
-        panelContenedor.add(productosPanel, TARJETA_PRODUCTOS);
+        // Paneles solo para administradores y supervisores
+        if (PermisoUtils.esAdministrador(usuario) || PermisoUtils.esSupervisor(usuario)) {
+            panelContenedor.add(usuariosPanel, TARJETA_USUARIOS);
+            panelContenedor.add(new VistaCrearUsuario(), TARJETA_CREAR_USUARIO);
+            panelContenedor.add(mesaCentralPanel, TARJETA_MESA);
+        }
 
-        // Agregar los paneles al frame principal
-        mainPanel.add(menuLateral, BorderLayout.WEST);
-        mainPanel.add(contentPanel, BorderLayout.CENTER);
-
-        setContentPane(mainPanel);
-        mostrarPanel(TARJETA_INICIO);
+        // Paneles de actividades para todos
+        panelContenedor.add(new VistasActividades(), TARJETA_NUEVA_ACTIVIDAD);
     }
 
-    // Mejorar el cambio entre paneles con animación
+    /**
+     * Muestra el panel inicial según el rol del usuario (sin validación de
+     * permisos)
+     */
+    private void mostrarPanelInicialSegunRol() {
+        Usuario usuario = main.logeado;
+
+        if (PermisoUtils.esAdministrador(usuario) || PermisoUtils.esSupervisor(usuario)) {
+            cardLayout.show(panelContenedor, TARJETA_INICIO);
+        } else {
+            // Usuarios comunes van directo a clientes
+            cardLayout.show(panelContenedor, TARJETA_CLIENTES);
+        }
+
+        // Refrescar notificaciones
+        userHeaderPanel.refrescarNotificaciones();
+    }
+
+    // Mejorar el cambio entre paneles con animación y validación de permisos
     public void mostrarPanel(String nombrePanel) {
+        // Validar permisos antes de mostrar el panel (solo para navegación manual)
+        if (!PermisoUtils.tienePermisoVista(main.logeado, nombrePanel)) {
+            JOptionPane.showMessageDialog(this,
+                    "No tienes permisos para acceder a esta vista.",
+                    "Acceso Denegado",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         SwingUtilities.invokeLater(() -> {
             showLoading();
 
@@ -152,8 +213,12 @@ public class VistaPrincipal extends JFrame {
                 panelContenedor.revalidate();
                 panelContenedor.repaint();
                 hideLoading();
+
+                // Refrescar notificaciones al cambiar de panel
+                userHeaderPanel.refrescarNotificaciones();
+
                 System.out.println("Panel " + nombrePanel + " cargado ✅");
-                ((Timer)e.getSource()).stop();
+                ((Timer) e.getSource()).stop();
             });
             timer.setRepeats(false);
             timer.start();
@@ -192,7 +257,8 @@ public class VistaPrincipal extends JFrame {
             drawerPanel.setPreferredSize(new Dimension(280, 0));
             drawerPanel.add(menuLateral, BorderLayout.CENTER);
             drawerPanel.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, new Color(200, 200, 200)));
-            System.out.println("Drawer creado: " + menuLateral.getClass() + ", prefSize=" + menuLateral.getPreferredSize());
+            System.out.println(
+                    "Drawer creado: " + menuLateral.getClass() + ", prefSize=" + menuLateral.getPreferredSize());
 
             // Panel para el contenido con margen
             JPanel contentPanel = new JPanel(new BorderLayout());
@@ -246,30 +312,55 @@ public class VistaPrincipal extends JFrame {
             productosPanel.actualizarTabla();
         }
     }
-    
-    
 
-    public void showDetalleCliente(Cliente cliente,String idCuenta) {
+    public void showDetalleCliente(Cliente cliente, String idCuenta) {
         if (cliente != null) {
             SwingUtilities.invokeLater(() -> {
-                ClienteDetalleDialog dialog = new ClienteDetalleDialog(this, cliente, idCuenta);
-                dialog.setLocationRelativeTo(this);
-                dialog.setVisible(true);
+                // Crear el panel de detalle de cliente
+                VistaClienteDetallePanel detallePanel = new VistaClienteDetallePanel(cliente, idCuenta);
+
+                // Agregar al CardLayout si no existe
+                panelContenedor.add(detallePanel, TARJETA_DETALLE_CLIENTE);
+
+                // Mostrar el panel
+                cardLayout.show(panelContenedor, TARJETA_DETALLE_CLIENTE);
+                panelContenedor.revalidate();
+                panelContenedor.repaint();
+
+                System.out.println("Panel de detalle de cliente cargado ✅");
             });
         }
     }
 
-    
-       public void showAgregarActividades(String idCuenta) {
+    public void showAgregarActividades(String idCuenta) {
         if (!idCuenta.equals("")) {
             SwingUtilities.invokeLater(() -> {
-                VistaNuevaActividad dialog = new VistaNuevaActividad(this,  idCuenta);
+                VistaNuevaActividad dialog = new VistaNuevaActividad(this, idCuenta);
                 dialog.setLocationRelativeTo(this);
                 dialog.setVisible(true);
             });
         }
     }
 
+    public void mostrarPanelAgregarActividad(String idCuenta) {
+        if (!idCuenta.equals("")) {
+            SwingUtilities.invokeLater(() -> {
+                VistaNuevaActividad dialog = new VistaNuevaActividad(this, idCuenta);
+                dialog.setLocationRelativeTo(this);
+                dialog.setVisible(true);
+            });
+        }
+    }
+
+    public void mostrarPanelEditarActividad(String idActividad) {
+        if (!idActividad.equals("")) {
+            SwingUtilities.invokeLater(() -> {
+                VistaEditarActividad dialog = new VistaEditarActividad(this, idActividad);
+                dialog.setLocationRelativeTo(this);
+                dialog.setVisible(true);
+            });
+        }
+    }
 
     public void mostrarProductos() {
         mostrarPanel(TARJETA_PRODUCTOS);

@@ -23,25 +23,27 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import reportes.ReporteClientes;
 
 public class VistaClientes extends JPanel {
 
-    private final JTextField txtNombre    = new JTextField();
-    private final JTextField txtRut       = new JTextField();
+    private final JTextField txtNombre = new JTextField();
+    private final JTextField txtRut = new JTextField();
     private final JTextField txtDireccion = new JTextField();
     private final JTextField txtApellidoP = new JTextField();
     private final JTextField txtApellidoM = new JTextField();
-    private final JComboBox<String> cmbComuna     = new JComboBox<>();
-    private final JComboBox<String> cmbTipoCuenta = new JComboBox<>(new String[]{
-        "Todos","Cliente","Servicio","Facturacion"
+    private final JComboBox<String> cmbComuna = new JComboBox<>();
+    private final JComboBox<String> cmbTipoCuenta = new JComboBox<>(new String[] {
+            "Todos", "Cliente", "Servicio", "Facturacion"
     });
-    private final JButton btnBuscar        = new JButton("Aplicar filtros");
+    private final JButton btnBuscar = new JButton("Aplicar filtros");
+    private final JButton btnExportarExcel = new JButton("Exportar a Excel");
 
     private final DefaultTableModel model;
     private final JTable tblClientes;
 
     private final ClienteControlador clienteCtrl = new ClienteControlador();
-    private final ComunasControlador comunaCtrl  = new ComunasControlador();
+    private final ComunasControlador comunaCtrl = new ComunasControlador();
 
     public VistaClientes() {
         setLayout(new MigLayout("fillx, insets 20",
@@ -62,7 +64,7 @@ public class VistaClientes extends JPanel {
         // Panel de filtros con borde y efecto de elevación
         JPanel panelFiltros = new vista.util.UIHelper.ElevatedPanel();
         panelFiltros.setLayout(new MigLayout("fillx, insets 15",
-            "[pref][grow,fill][pref][100!][pref][100!][pref!]", "[]10[]10[]"));
+                "[pref][grow,fill][pref][100!][pref][100!][pref!]", "[]10[]10[]"));
         panelFiltros.setBackground(Color.WHITE);
 
         // Estilizar campos con efectos modernos
@@ -74,8 +76,8 @@ public class VistaClientes extends JPanel {
 
         // Estilizar botón de búsqueda
         vista.util.UIHelper.setupButtonHover(btnBuscar,
-            new Color(237, 28, 36),  // Color normal (Rojo Claro)
-            new Color(200, 16, 46)   // Color hover (Rojo oscuro)
+                new Color(237, 28, 36), // Color normal (Rojo Claro)
+                new Color(200, 16, 46) // Color hover (Rojo oscuro)
         );
 
         // Agregar componentes al panel de filtros
@@ -100,9 +102,13 @@ public class VistaClientes extends JPanel {
         add(panelFiltros, "span 7, grow, wrap");
 
         // Tabla con estilo moderno
-        String[] cols = {"Nombre", "Apellido P", "Apellido M", "RUT", "Dirección", "Comuna", "Tipo Cuenta", "Id Cuenta"};
+        String[] cols = { "Nombre", "Apellido P", "Apellido M", "RUT", "Dirección", "Comuna", "Tipo Cuenta",
+                "Id Cuenta" };
         model = new DefaultTableModel(cols, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
         };
         tblClientes = new JTable(model);
         tblClientes.setRowHeight(35);
@@ -115,6 +121,15 @@ public class VistaClientes extends JPanel {
         JPanel tablePanel = new vista.util.UIHelper.ElevatedPanel();
         tablePanel.setLayout(new BorderLayout());
         tablePanel.add(new JScrollPane(tblClientes), BorderLayout.CENTER);
+
+        // Botón de exportar a Excel
+        btnExportarExcel.setBackground(new Color(46, 125, 50));
+        btnExportarExcel.setForeground(Color.WHITE);
+        btnExportarExcel.setFocusPainted(false);
+        btnExportarExcel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnExportarExcel.addActionListener(e -> exportarExcelClientes());
+        tablePanel.add(btnExportarExcel, BorderLayout.SOUTH);
+
         add(tablePanel, "span 7, grow");
 
         // Protección contra nulos al cargar datos
@@ -124,27 +139,26 @@ public class VistaClientes extends JPanel {
             System.out.println("Filtrando por nombre = '" + nombreBusqueda + "'");
 
             List<Object[]> resultados = clienteCtrl.buscarClientesAvanzado(
-                txtRut.getText().trim(),
-                nombreBusqueda,
-                txtApellidoP.getText().trim(),
-                txtApellidoM.getText().trim(),
-                txtDireccion.getText().trim(),
-                cmbTipoCuenta.getSelectedItem().toString(),
-                cmbComuna.getSelectedItem().toString()
-            );
+                    txtRut.getText().trim(),
+                    nombreBusqueda,
+                    txtApellidoP.getText().trim(),
+                    txtApellidoM.getText().trim(),
+                    txtDireccion.getText().trim(),
+                    cmbTipoCuenta.getSelectedItem().toString(),
+                    cmbComuna.getSelectedItem().toString());
 
             if (resultados != null) {
                 resultados.forEach(fila -> {
-                    if (fila != null && fila.length == 8) {  // Verificamos que tenga todas las columnas
-                        model.addRow(new Object[]{
-                            fila[0] != null ? fila[0] : "",  // Nombre
-                            fila[1] != null ? fila[1] : "",  // Apellido P
-                            fila[2] != null ? fila[2] : "",  // Apellido M
-                            fila[3] != null ? fila[3] : "",  // RUT
-                            fila[4] != null ? fila[4] : "",  // Dirección
-                            fila[5] != null ? fila[5] : "",  // Comuna
-                            fila[6] != null ? fila[6] : "" , // Tipo Cuenta
-                            fila[7] != null ? fila[7] : ""   // Id Cuenta
+                    if (fila != null && fila.length == 8) { // Verificamos que tenga todas las columnas
+                        model.addRow(new Object[] {
+                                fila[0] != null ? fila[0] : "", // Nombre
+                                fila[1] != null ? fila[1] : "", // Apellido P
+                                fila[2] != null ? fila[2] : "", // Apellido M
+                                fila[3] != null ? fila[3] : "", // RUT
+                                fila[4] != null ? fila[4] : "", // Dirección
+                                fila[5] != null ? fila[5] : "", // Comuna
+                                fila[6] != null ? fila[6] : "", // Tipo Cuenta
+                                fila[7] != null ? fila[7] : "" // Id Cuenta
                         });
                     }
                 });
@@ -177,11 +191,11 @@ public class VistaClientes extends JPanel {
         campo.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, placeholder);
         campo.putClientProperty(FlatClientProperties.TEXT_FIELD_SHOW_CLEAR_BUTTON, true);
         campo.putClientProperty(FlatClientProperties.STYLE, "" +
-            "arc: 8;" +
-            "focusWidth: 1;" +
-            "focusColor: #ED1C24;" +
-            "borderWidth: 1;" +
-            "innerFocusWidth: 0");
+                "arc: 8;" +
+                "focusWidth: 1;" +
+                "focusColor: #ED1C24;" +
+                "borderWidth: 1;" +
+                "innerFocusWidth: 0");
     }
 
     private JLabel crearLabel(String texto) {
@@ -211,7 +225,7 @@ public class VistaClientes extends JPanel {
             if (cliente != null) {
                 VistaPrincipal vp = (VistaPrincipal) SwingUtilities.getWindowAncestor(this);
                 if (vp != null) {
-                    vp.showDetalleCliente(cliente,idCuenta);
+                    vp.showDetalleCliente(cliente, idCuenta);
                 }
             }
         }
@@ -224,21 +238,31 @@ public class VistaClientes extends JPanel {
         if (resultados != null) {
             for (Object[] fila : resultados) {
                 if (fila != null) {
-                    model.addRow(new Object[]{
-                        fila[0] != null ? fila[0] : "",  // Nombre
-                        fila[1] != null ? fila[1] : "",  // Apellido P
-                        fila[2] != null ? fila[2] : "",  // Apellido M
-                        fila[3] != null ? fila[3] : "",  // RUT
-                        fila[4] != null ? fila[4] : "",  // Dirección
-                        fila[5] != null ? fila[5] : "",  // Comuna
-                        fila[6] != null ? fila[6] : ""  , // Tipo Cuenta
-                        fila[7] != null ? fila[7] : ""   // Id Cuenta
+                    model.addRow(new Object[] {
+                            fila[0] != null ? fila[0] : "", // Nombre
+                            fila[1] != null ? fila[1] : "", // Apellido P
+                            fila[2] != null ? fila[2] : "", // Apellido M
+                            fila[3] != null ? fila[3] : "", // RUT
+                            fila[4] != null ? fila[4] : "", // Dirección
+                            fila[5] != null ? fila[5] : "", // Comuna
+                            fila[6] != null ? fila[6] : "", // Tipo Cuenta
+                            fila[7] != null ? fila[7] : "" // Id Cuenta
                     });
                 }
             }
             System.out.println("Tabla actualizada: " + resultados.size() + " clientes cargados");
         } else {
             System.out.println("No se pudieron cargar los clientes");
+        }
+    }
+
+    private void exportarExcelClientes() {
+        String archivo = reportes.ReporteClientes.generarExcel();
+        JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (archivo != null) {
+            vista.util.UIHelper.showToast(parent, "Reporte de clientes exportado exitosamente", false);
+        } else {
+            vista.util.UIHelper.showToast(parent, "Error al exportar el reporte de clientes", true);
         }
     }
 }
