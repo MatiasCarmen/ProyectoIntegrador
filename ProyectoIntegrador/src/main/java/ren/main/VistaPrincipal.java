@@ -34,7 +34,6 @@ public class VistaPrincipal extends JFrame {
     public static final String TARJETA_NUEVA_ACTIVIDAD = "NUEVA_ACTIVIDAD";
     public static final String TARJETA_ACTIVIDADES = "ACTIVIDADES";
     public static final String TARJETA_AGENDA = "AGENDA";
-    public static final String TARJETA_MESA = "MESA_CENTRAL";
     public static final String TARJETA_PRODUCTOS = "PRODUCTOS";
 
     private final CardLayout cardLayout;
@@ -48,8 +47,7 @@ public class VistaPrincipal extends JFrame {
     private final VistaClientes clientesPanel;
     private final VistaUsuarios usuariosPanel;
     private final VistaAgenda agendaPanel;
-    private final VistaMesaCentral mesaCentralPanel;
-    private final VistaActividadesPorCuenta actividadesPanel;
+    private final VistasActividades actividadesPanel;
     private final VistaProductosInstaladosPorCuenta productosPanel;
 
     private JPanel currentPanel;
@@ -86,8 +84,7 @@ public class VistaPrincipal extends JFrame {
         clientesPanel = new VistaClientes();
         usuariosPanel = new VistaUsuarios();
         agendaPanel = new VistaAgenda();
-        mesaCentralPanel = new VistaMesaCentral();
-        actividadesPanel = new VistaActividadesPorCuenta();
+        actividadesPanel = new VistasActividades();
         productosPanel = new VistaProductosInstaladosPorCuenta();
 
         // Crear el drawer con efecto de sombra
@@ -168,7 +165,7 @@ public class VistaPrincipal extends JFrame {
         if (PermisoUtils.esAdministrador(usuario) || PermisoUtils.esSupervisor(usuario)) {
             panelContenedor.add(usuariosPanel, TARJETA_USUARIOS);
             panelContenedor.add(new VistaCrearUsuario(), TARJETA_CREAR_USUARIO);
-            panelContenedor.add(mesaCentralPanel, TARJETA_MESA);
+            
         }
 
         // Paneles de actividades para todos
@@ -295,15 +292,11 @@ public class VistaPrincipal extends JFrame {
         }
     }
 
-    public void actualizarMesaCentral() {
-        if (mesaCentralPanel != null) {
-            mesaCentralPanel.actualizarTabla();
-        }
-    }
+  
 
     public void actualizarActividades() {
         if (actividadesPanel != null) {
-            actividadesPanel.actualizarTabla();
+            actividadesPanel.recargarTabla();
         }
     }
 
@@ -372,7 +365,7 @@ public class VistaPrincipal extends JFrame {
     public void mostrarActividades() {
         mostrarPanel(TARJETA_ACTIVIDADES);
         if (actividadesPanel != null) {
-            actividadesPanel.actualizarTabla();
+            actividadesPanel.recargarTabla();
         }
     }
 }

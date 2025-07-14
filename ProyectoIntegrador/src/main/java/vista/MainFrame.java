@@ -69,7 +69,6 @@ public class MainFrame extends JFrame {
                 yield vpc;
             }
             case "Agenda"          -> new VistaAgenda();
-            case "Mesa Central"    -> new VistaMesaCentral();
             default                -> new JPanel();
         };
 

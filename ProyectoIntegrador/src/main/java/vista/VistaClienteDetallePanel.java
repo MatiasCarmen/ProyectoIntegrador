@@ -22,6 +22,7 @@ import java.awt.event.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import ren.main.main;
 
 /**
  * Panel de detalle de cliente con pestañas para Actividades, Agenda y
@@ -44,10 +45,12 @@ public class VistaClienteDetallePanel extends JPanel {
     private final JTextField txtEdad = new JTextField();
     private final JTextField txtDireccion = new JTextField();
     private final JComboBox<Comuna> cboComuna = new JComboBox<>();
+    private DefaultTableModel modelo = null;
 
     public VistaClienteDetallePanel(Cliente cliente, String idCuenta) {
         this.cliente = cliente;
         this.idCuenta = idCuenta;
+         main.ventanap= this;
         initUI();
     }
 
@@ -123,7 +126,7 @@ public class VistaClienteDetallePanel extends JPanel {
         JPanel panel = new JPanel(new BorderLayout());
 
         String[] columnas = { "ID", "Tipo", "Fecha Creación", "Fecha Cierre", "Descripción", "IdUsuario" };
-        DefaultTableModel modelo = new DefaultTableModel(columnas, 0) {
+         modelo = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -186,6 +189,17 @@ public class VistaClienteDetallePanel extends JPanel {
                         JOptionPane.WARNING_MESSAGE);
             }
         });
+        
+        tabla.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getClickCount() == 2 && tabla.getSelectedRow() != -1) {
+            String idActividad = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+            VistaVerActividad vista = new VistaVerActividad(SwingUtilities.getWindowAncestor(VistaClienteDetallePanel.this), idActividad);
+            vista.setVisible(true);
+        }
+    }
+});
 
         panelBotones.add(btnAgregarActividad);
         panelBotones.add(btnEditarActividad);
@@ -480,4 +494,17 @@ public class VistaClienteDetallePanel extends JPanel {
             vp.actualizarTablaClientes();
         }
     }
+    
+     public void refrescarTablaActividades() {
+        modelo.setRowCount(0);
+        List<Actividad> actividades = new ActividadesControlador().obtenerActividadesPorCuenta(idCuenta);
+        for (Actividad a : actividades) {
+            modelo.addRow(new Object[]{
+                a.getIdActividad(), a.getTipo(), a.getFechaCreacion(), a.getFechaCierre(), a.getDescripcion(), a.getIdUsuario()
+            });
+        }
+    }
+
+    
+
 }

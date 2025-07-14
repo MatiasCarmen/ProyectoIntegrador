@@ -90,20 +90,10 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                                             JOptionPane.WARNING_MESSAGE);
                                 }
                             }
-                            case "Nueva Actividad" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_NUEVA_ACTIVIDAD);
+                   
                             case "Lista Actividades" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_ACTIVIDADES);
                             case "Agenda" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_AGENDA);
-                            case "Mesa Central" -> {
-                                // Validar permisos antes de mostrar
-                                if (PermisoUtils.esAdministrador(usuario) || PermisoUtils.esSupervisor(usuario)) {
-                                    mainFrame.mostrarPanel(VistaPrincipal.TARJETA_MESA);
-                                } else {
-                                    JOptionPane.showMessageDialog(mainFrame,
-                                            "No tienes permisos para acceder a Mesa Central.",
-                                            "Acceso Denegado",
-                                            JOptionPane.WARNING_MESSAGE);
-                                }
-                            }
+                       
                             case "Cerrar Sesión" -> {
                                 int confirm = JOptionPane.showConfirmDialog(
                                         mainFrame,

@@ -1,125 +1,128 @@
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\BD\ConexionBD.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\BD\TestConexion.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ActividadesControlador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ClienteControlador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ComunasControlador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorActividades_pedidos.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorActividades_solicitudes.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorAdicionales.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDescuentos.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_adicionales.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_descuentos.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_ofertas.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_pedidos.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_planes.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorFunciones.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorMesa_central.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorPaises.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorPlanes.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorProductos.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorProductosInstalados.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorRol_funcion.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorUsuario_rol.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorUsuarios.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\CuentasClienteControlador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\OfertaControlador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\PedidoControlador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\RolControlador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\SolicitudControlador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\UsuarioControlador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ActividadDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ActividadPedidoDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ActividadSolicitudDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\AdicionalDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ClienteDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ComunaDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\CuentasClienteDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DescuentoDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetalleAdicionalDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetalleDescuentoDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetalleOfertaDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetallePedidoDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetallePlanDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\FuncionDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\MesaCentralDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\OfertaDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\PaisDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\PedidoDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\PlanDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ProductoDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\RolDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\RolFuncionDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\SolicitudDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\UsuarioDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\UsuarioRolDAO.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Actividad.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\ActividadPedido.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\ActividadSolicitud.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Adicional.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Cliente.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Comuna.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\CuentaCliente.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Descuento.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetalleAdicional.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetalleDescuento.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetalleOferta.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetallePedido.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetallePlan.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Funcion.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\MesaCentral.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Oferta.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Pais.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Pedido.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Plan.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Producto.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\ProductoInstalado.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Rol.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\RolFuncion.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Solicitud.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Usuario.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\UsuarioRol.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\Pruebas\PruebaCliente.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\ren\main\main.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\ren\main\VistaPrincipal.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\reportes\ReporteClientes.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\reportes\ReporteGenerator.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\utils\GuavaUtils.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\utils\PermisoUtils.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\validators\ClienteValidator.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\ClienteDetalleDialog.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\ClienteDetalleListener.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\componentes\LoadingSpinner.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\componentes\NotificacionPanel.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\componentes\UserHeaderPanel.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\DetalleActividadDialog.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\DrawerPanel.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\footer\SimpleFooterData.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\header\SimpleHeaderData.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\menu\MenuAction.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\menu\MenuEvent.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\menu\MenuValidation.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\menu\SimpleMenuOption.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\SimpleDrawerBuilder.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\MyDrawerBuilder.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\DrawerButton.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\DrawerPanel.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\Login.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\MainFrame.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\PanelContenedor.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\tema\TemaAdministrador.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\util\DialogHelper.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\util\UIHelper.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaActividadesPorCuenta.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaAgenda.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaAgregarActividad.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaAgregarCliente.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaClienteDetallePanel.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaClientes.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaCrearUsuario.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaEditarActividad.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaInicio.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaMesaCentral.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaNuevaActividad.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaProductosInstaladosPorCuenta.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistasActividades.java
-C:\Users\mathi\Desktop\ULTIMO COMMIT\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaUsuarios.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\BD\ConexionBD.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\BD\TestConexion.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ActividadesControlador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ClienteControlador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ComunasControlador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorActividades_pedidos.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorActividades_solicitudes.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorAdicionales.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDescuentos.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_adicionales.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_descuentos.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_ofertas.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_pedidos.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorDetalle_planes.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorFunciones.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorMesa_central.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorPaises.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorPlanes.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorProductos.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorProductosInstalados.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorRol_funcion.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorUsuario_rol.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\ControladorUsuarios.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\CuentasClienteControlador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\OfertaControlador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\PedidoControlador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\RolControlador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\SolicitudControlador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\controladores\UsuarioControlador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ActividadDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ActividadPedidoDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ActividadSolicitudDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\AdicionalDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ClienteDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ComunaDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\CuentasClienteDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DescuentoDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetalleAdicionalDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetalleDescuentoDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetalleOfertaDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetallePedidoDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\DetallePlanDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\FuncionDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\MesaCentralDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\OfertaDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\PaisDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\PedidoDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\PlanDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\ProductoDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\RolDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\RolFuncionDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\SolicitudDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\UsuarioDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\dao\UsuarioRolDAO.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Actividad.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\ActividadPedido.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\ActividadSolicitud.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Adicional.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Cliente.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Comuna.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\CuentaCliente.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Descuento.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetalleAdicional.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetalleDescuento.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetalleOferta.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetallePedido.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\DetallePlan.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Funcion.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\MesaCentral.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Oferta.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Pais.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Pedido.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Plan.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Producto.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\ProductoInstalado.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Rol.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\RolFuncion.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Solicitud.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\Usuario.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\entidades\UsuarioRol.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\Pruebas\PruebaCliente.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\ren\main\main.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\ren\main\VistaPrincipal.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\reportes\ReporteClientes.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\reportes\ReporteGenerator.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\utils\BCryptUtil.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\utils\GuavaUtils.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\utils\PermisoUtils.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\validators\ActividadValidator.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\validators\ClienteValidator.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\validators\MesaCentralValidator.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\ClienteDetalleListener.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\componentes\LoadingSpinner.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\componentes\NotificacionPanel.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\componentes\UserHeaderPanel.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\DetalleActividadDialog.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\DrawerPanel.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\footer\SimpleFooterData.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\header\SimpleHeaderData.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\menu\MenuAction.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\menu\MenuEvent.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\menu\MenuValidation.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\menu\SimpleMenuOption.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\component\SimpleDrawerBuilder.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\drawer\MyDrawerBuilder.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\DrawerButton.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\DrawerPanel.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\Login.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\MainFrame.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\PanelContenedor.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\tema\TemaAdministrador.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\util\DialogHelper.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\util\UIHelper.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaActividadesPorCuenta.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaAgenda.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaAgregarActividad.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaAgregarCliente.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaClienteDetallePanel.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaClientes.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaCrearUsuario.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaEditarActividad.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaInicio.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaMesaCentral.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaNuevaActividad.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaProductosInstaladosPorCuenta.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistasActividades.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaUsuarios.java
+C:\Users\Thiago\Videos\ProyectoFinalIntegrador\ProyectoIntegrador\ProyectoIntegrador\src\main\java\vista\VistaVerActividad.java

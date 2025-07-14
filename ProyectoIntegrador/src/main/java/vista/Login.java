@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import ren.main.main;
+import utils.BCryptUtil;
 
 public class Login extends JPanel {
     private JTextField txtUsername;
@@ -279,7 +280,9 @@ public class Login extends JPanel {
         Timer timer = new Timer(500, evt -> {
             String username = txtUsername.getText().trim();
             String password = new String(txtPassword.getPassword());
-
+            
+            System.out.println(BCryptUtil.hashPassword(password));
+            
             Usuario usuario = controlador.validarLogin(username, password);
             if (usuario != null) {
                 main.logeado = usuario;

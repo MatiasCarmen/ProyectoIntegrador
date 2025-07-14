@@ -16,6 +16,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
+import utils.BCryptUtil;
 
 /**
  * DAO – UsuarioDAO: abstracción de persistencia para Usuario.
@@ -24,33 +25,41 @@ import java.util.logging.Logger;
 public class UsuarioDAO {
     private static final Logger LOGGER = Logger.getLogger(UsuarioDAO.class.getName());
 
-    public Usuario validarLogin(String idUsuario, String clave) {
-        String sql = "SELECT IDUSUARIO, RUT, IDROL, IDPAIS, CLAVE, NOMBRES, APELLIDOP, APELLIDOM, AREA FROM USUARIOS WHERE IDUSUARIO = ? AND CLAVE = ?";
-        try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idUsuario);
-            ps.setString(2, clave);
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    return new Usuario(
-                      rs.getString("IDUSUARIO"),
-                      rs.getString("RUT"),
-                      rs.getString("IDROL"),
-                      rs.getString("IDPAIS"),
-                      rs.getString("CLAVE"),
-                      rs.getString("NOMBRES"),
-                      rs.getString("APELLIDOP"),
-                      rs.getString("APELLIDOM"),
-                      rs.getString("AREA"),
-                      null  // Ya no usamos FECHACREACION
-                    );
+   public Usuario validarLogin(String idUsuario, String clave) {
+    String sql = "SELECT IDUSUARIO, RUT, IDROL, IDPAIS, CLAVE, NOMBRES, APELLIDOP, APELLIDOM, AREA FROM USUARIOS WHERE IDUSUARIO = ?";
+    try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+        ps.setString(1, idUsuario);
+
+        try (ResultSet rs = ps.executeQuery()) {
+          
+            if (rs.next()) {
+                Usuario u = new Usuario(
+                    rs.getString("IDUSUARIO"),
+                    rs.getString("RUT"),
+                    rs.getString("IDROL"),
+                    rs.getString("IDPAIS"),
+                    rs.getString("CLAVE"),
+                    rs.getString("NOMBRES"),
+                    rs.getString("APELLIDOP"),
+                    rs.getString("APELLIDOM"),
+                    rs.getString("AREA"),
+                    null  // FECHACREACION no se usa
+                );
+                
+             
+
+                if (BCryptUtil.checkPassword(clave, u.getClave())) {
+                    return u;
                 }
             }
-        } catch (SQLException e) {
-            LOGGER.severe("Error validar Usuario: " + e.getMessage());
         }
-        return null;
+    } catch (SQLException e) {
+        LOGGER.severe("Error validar Usuario: " + e.getMessage());
     }
+    return null;
+}
 
     public List<Usuario> listarTodos() {
         List<Usuario> lista = new ArrayList<>();

@@ -190,9 +190,8 @@ public class ClienteDAO {
                         "       COALESCE(cc.CLASE, 'Sin Cuenta') as TIPO_CUENTA, \n" +
                         "       cc.IDCUENTA as IDCUENTA_CLIENTE " +
                         "FROM CLIENTES c " +
-                        "LEFT JOIN CUENTAS_CLIENTES cc ON c.RUT = cc.RUT " +
-                        "LEFT JOIN COMUNAS co ON c.IDCOMUNA = co.IDCOMUNA " +
-                        "WHERE 1=1");
+                        "INNER  JOIN CUENTAS_CLIENTES cc ON c.RUT = cc.RUT " +
+                        "INNER JOIN COMUNAS co ON c.IDCOMUNA = co.IDCOMUNA ");
         List<String> params = new ArrayList<>();
 
         // Búsqueda por nombre completo

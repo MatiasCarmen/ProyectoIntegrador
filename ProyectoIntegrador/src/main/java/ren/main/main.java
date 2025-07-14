@@ -10,9 +10,12 @@ import vista.tema.TemaAdministrador;
 
 import javax.swing.*;
 import java.awt.*;
+import vista.VistaClienteDetallePanel;
 
 public class main {
       public static Usuario  logeado ;
+      
+      public static VistaClienteDetallePanel ventanap;
     public static void main(String[] args) {
         // mejora aspectos waos
         SwingUtilities.invokeLater(() -> {

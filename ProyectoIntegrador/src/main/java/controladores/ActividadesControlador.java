@@ -71,4 +71,9 @@ public class ActividadesControlador {
         LOGGER.info("[Ctrl] obtenerIdActividadUnico");
         return dao.generarIdActividadUnico();
     }
+    
+       public List<Actividad> listarPorUsuario(String idUsuario) {
+         LOGGER.info("[Ctrl] listarPorUsuario");
+        return dao.listarPorUsuario(idUsuario);
+       }
 }

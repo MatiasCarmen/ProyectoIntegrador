@@ -15,6 +15,7 @@ import java.sql.Timestamp;
 import javax.swing.*;
 import net.miginfocom.swing.MigLayout;
 import java.util.Optional;
+import ren.main.main;
 
 public class VistaEditarActividad extends JDialog {
 
@@ -28,6 +29,7 @@ public class VistaEditarActividad extends JDialog {
     private final JComboBox<String> cmbResolucion = new JComboBox<>(new String[]{"PENDIENTE", "FINALIZADO"});
     private final JTextArea txaDescripcion = new JTextArea(4, 20);
     private final JTextArea txaObservacion = new JTextArea(4, 20);
+ 
 
     private final String idActividad;
     private Actividad actividadActual;
@@ -36,7 +38,7 @@ public class VistaEditarActividad extends JDialog {
     public VistaEditarActividad(Window owner, String idActividad) {
         super(owner, "Editar Actividad", ModalityType.APPLICATION_MODAL);
         this.idActividad = idActividad;
-
+       
         setLayout(new MigLayout("wrap 2, insets 20", "[right][grow,fill]"));
 
         add(new JLabel("Tipo de actividad:"));
@@ -173,5 +175,9 @@ public class VistaEditarActividad extends JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "No se pudo actualizar la actividad.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        if(main.ventanap != null){
+           main.ventanap.refrescarTablaActividades();
+       }
     }
 }

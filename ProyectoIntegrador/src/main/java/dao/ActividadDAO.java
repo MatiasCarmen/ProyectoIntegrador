@@ -101,6 +101,7 @@ public class ActividadDAO {
                     a.setComentarios(rs.getString("COMENTARIOS"));
                     a.setTelefono(rs.getLong("TELEFONO"));
                     a.setCorreo(rs.getString("CORREO"));
+                    a.setIdUsuario(rs.getString("IDUSUARIO"));
                     return a;
                 }
             }
@@ -292,4 +293,39 @@ public class ActividadDAO {
         } while (true);
         return id;
     }
+    
+    public List<Actividad> listarPorUsuario(String idUsuario) {
+    List<Actividad> lista = new ArrayList<>();
+    try {
+        Connection con = ConexionBD.conectar();
+        String sql = "SELECT * FROM actividades WHERE idUsuario = ?";
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, idUsuario);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Actividad a = new Actividad();
+            a.setIdActividad(rs.getString("idActividad"));
+            a.setIdCuenta(rs.getString("idCuenta"));
+            a.setDescripcion(rs.getString("descripcion"));
+            a.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
+            a.setFechaCierre(rs.getTimestamp("fecha_cierre"));
+            a.setTipo(rs.getString("tipo"));
+            a.setRazon(rs.getString("razon"));
+            a.setDetalle(rs.getString("detalle"));
+            a.setResolucion(rs.getString("resolucion"));
+            a.setComentarios(rs.getString("comentarios"));
+            a.setTelefono(rs.getLong("telefono"));
+            a.setCorreo(rs.getString("correo"));
+            a.setIdUsuario(rs.getString("idUsuario"));
+            lista.add(a);
+        }
+        rs.close();
+        ps.close();
+        con.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return lista;
+}
+
 }

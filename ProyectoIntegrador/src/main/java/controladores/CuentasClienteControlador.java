@@ -66,6 +66,6 @@ public class CuentasClienteControlador {
     
     public static String generarIdCuentaUnico(String clase) {
           LOGGER.info("generarIdCuentaUnico");
-        return dao.obtenerIdCuentaServicioDesdeFacturacion(clase);
+        return dao.generarIdCuentaUnico(clase);
     }
 }
