@@ -24,6 +24,27 @@ import utils.BCryptUtil;
  */
 public class UsuarioDAO {
     private static final Logger LOGGER = Logger.getLogger(UsuarioDAO.class.getName());
+    
+     public void crearUsuario(Usuario user) throws SQLException {
+        String sql = "INSERT INTO USUARIOS (IDUSUARIO, RUT, IDROL, IDPAIS, CLAVE, NOMBRES, APELLIDOP, APELLIDOM, AREA, FECHA_CREACION) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+         try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+             ps.setString(1, user.getIdUsuario());
+        ps.setString(2, user.getRut());
+        // Asignar rol y país por defecto si no están definidos
+        ps.setString(3, user.getIdRol() != null ? user.getIdRol() : "D001");
+        ps.setString(4, user.getIdPais() != null ? user.getIdPais() : "CHL");
+        ps.setString(5, user.getClave());
+        ps.setString(6, user.getNombres());
+        ps.setString(7, user.getApellidoP());
+        ps.setString(8, user.getApellidoM());
+        // Área opcional
+        ps.setString(9, user.getArea() != null ? user.getArea() : "");
+        ps.setDate(10, new java.sql.Date(System.currentTimeMillis()));
+        ps.executeUpdate(); 
+         }
+       
+    }
 
    public Usuario validarLogin(String idUsuario, String clave) {
     String sql = "SELECT IDUSUARIO, RUT, IDROL, IDPAIS, CLAVE, NOMBRES, APELLIDOP, APELLIDOM, AREA FROM USUARIOS WHERE IDUSUARIO = ?";
@@ -86,4 +107,29 @@ public class UsuarioDAO {
         }
         return lista;
     }
+    public String generarIdUsuario(String nombre, String apellidoP) {
+    String base = (nombre.charAt(0) + apellidoP).toLowerCase();
+    String idGenerado = base;
+    int sufijo = 0;
+    while (existeUsuario(idGenerado)) {
+        idGenerado = base + (char) ('a' + sufijo);
+        sufijo++;
+    }
+    return idGenerado;
+}
+
+public boolean existeUsuario(String idUsuario) {
+    String sql = "SELECT 1 FROM USUARIOS WHERE IDUSUARIO = ?";
+    try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setString(1, idUsuario);
+        try (ResultSet rs = ps.executeQuery()) {
+            return rs.next();
+        }
+    } catch (SQLException e) {
+        LOGGER.severe("Error al verificar existencia de usuario: " + e.getMessage());
+    }
+    return false;
+}
+    
 }

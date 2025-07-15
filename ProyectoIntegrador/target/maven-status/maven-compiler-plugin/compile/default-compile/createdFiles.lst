@@ -25,7 +25,6 @@ vista\VistaMesaCentral.class
 vista\VistaAgregarCliente$3.class
 controladores\UsuarioControlador.class
 vista\componentes\LoadingSpinner.class
-vista\VistaCrearUsuario$3.class
 vista\VistaClientes$2.class
 validators\MesaCentralValidator.class
 BD\TestConexion.class
@@ -49,7 +48,6 @@ vista\VistaProductosInstaladosPorCuenta$1.class
 dao\PedidoDAO.class
 vista\Login$3.class
 dao\ActividadSolicitudDAO.class
-vista\VistaCrearUsuario$2.class
 vista\VistasActividades.class
 dao\SolicitudDAO.class
 vista\drawer\component\DrawerPanel.class
@@ -61,6 +59,7 @@ vista\drawer\component\SimpleDrawerBuilder.class
 controladores\ActividadesControlador.class
 controladores\ControladorDetalle_pedidos.class
 dao\AdicionalDAO.class
+vista\VistaAgenda$2.class
 vista\drawer\component\menu\MenuEvent.class
 dao\UsuarioRolDAO.class
 entidades\DetalleDescuento.class
@@ -70,7 +69,6 @@ vista\drawer\component\SimpleDrawerBuilder$1.class
 vista\VistaClientes$1.class
 entidades\CuentaCliente.class
 vista\PanelContenedor.class
-vista\VistaCrearUsuario$1.class
 dao\DetalleAdicionalDAO.class
 entidades\Descuento.class
 entidades\Pais.class
@@ -84,13 +82,12 @@ utils\GuavaUtils.class
 utils\PermisoUtils.class
 dao\DetallePedidoDAO.class
 vista\VistaMesaCentral$1.class
-vista\VistaCrearUsuario$4.class
 vista\VistaAgenda$1.class
 vista\Login$2.class
 reportes\ReporteClientes.class
-vista\VistaCrearUsuario$ShadowBorder.class
 dao\MesaCentralDAO.class
 vista\VistaAgregarCliente$4.class
+vista\VistaCrearUsuario$Hover.class
 controladores\ControladorProductosInstalados.class
 controladores\ControladorMesa_central.class
 controladores\CuentasClienteControlador.class
@@ -101,7 +98,6 @@ vista\VistaUsuarios.class
 dao\DescuentoDAO.class
 vista\componentes\NotificacionPanel$1.class
 vista\Login$5.class
-vista\VistaCrearUsuario$ButtonHoverEffect.class
 vista\VistasActividades$1.class
 reportes\ReporteGenerator.class
 utils\BCryptUtil.class
@@ -128,6 +124,7 @@ dao\FuncionDAO.class
 entidades\Cliente.class
 vista\util\UIHelper.class
 vista\VistaAgenda.class
+validators\UsuarioValidator.class
 vista\util\UIHelper$2.class
 dao\RolDAO.class
 controladores\OfertaControlador.class

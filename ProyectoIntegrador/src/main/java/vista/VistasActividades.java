@@ -13,28 +13,22 @@ import java.awt.event.*;
 import java.util.List;
 
 public class VistasActividades extends JPanel {
-    private final JTextField txtIdCuenta = new JTextField();
-    private final JTextArea txtDescripcion = new JTextArea(3, 20);
-    private final JTextField txtTipo = new JTextField();
-    private final JTextField txtRazon = new JTextField();
-    private final JTextField txtDetalle = new JTextField();
-    private final JTextField txtResolucion = new JTextField();
-    private final JTextArea txtComentarios = new JTextArea(3, 20);
-    private final JTextField txtTelefono = new JTextField();
-    private final JTextField txtCorreo = new JTextField();
-
-    private final JButton btnLimpiar = new JButton("Limpiar");
-    private final JButton btnVerDetalle = new JButton("Ver Detalle");
 
     private final DefaultTableModel model;
     private final JTable tblActividades;
     private final ActividadesControlador ctrl = new ActividadesControlador();
 
+    private final JTextField txtFiltro = new JTextField(15);
+    private final JComboBox<String> comboCampo = new JComboBox<>(new String[]{
+            "ID Actividad", "Cuenta", "Descripción", "Tipo", "Razón", "Resolución"
+    });
+    private final JButton btnFiltrar = new JButton("🔍 Filtrar");
+    private final JButton btnLimpiar = new JButton("❌ Limpiar Filtro");
+    private final JButton btnVerDetalle = new JButton("🔎 Ver Detalle");
+
     public VistasActividades() {
         setLayout(new BorderLayout());
 
-       
-        
         // Tabla de actividades
         String[] cols = {"IDAct", "Cuenta", "Descripción", "Fecha", "Tipo", "Razón", "Resolución"};
         model = new DefaultTableModel(cols, 0) {
@@ -43,22 +37,45 @@ public class VistasActividades extends JPanel {
         tblActividades = new JTable(model);
         tblActividades.setRowHeight(25);
         tblActividades.setSelectionBackground(new Color(220, 230, 240));
+
         JScrollPane scrollTabla = new JScrollPane(tblActividades);
 
-        // Panel de botones
-        JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        pnlButtons.add(btnLimpiar);
-        pnlButtons.add(btnVerDetalle);
+        // Panel de botones y filtros
+        JPanel pnlInferior = new JPanel(new BorderLayout());
 
-        // Estilos FlatLaf
+        JPanel pnlFiltros = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        pnlFiltros.setBorder(BorderFactory.createTitledBorder("Filtrar Actividades"));
+
+        pnlFiltros.add(new JLabel("Campo:"));
+        pnlFiltros.add(comboCampo);
+        pnlFiltros.add(new JLabel("Valor:"));
+        pnlFiltros.add(txtFiltro);
+        pnlFiltros.add(btnFiltrar);
+        pnlFiltros.add(btnLimpiar);
+
+        JPanel pnlBotones = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        pnlBotones.add(btnVerDetalle);
+
+        pnlInferior.add(pnlFiltros, BorderLayout.WEST);
+        pnlInferior.add(pnlBotones, BorderLayout.EAST);
+
+        // Estilos
+        btnFiltrar.putClientProperty(FlatClientProperties.STYLE, "font:bold");
         btnVerDetalle.putClientProperty(FlatClientProperties.STYLE, "font:bold");
         btnLimpiar.putClientProperty(FlatClientProperties.STYLE, "font:italic");
 
-       
+        // Agregar componentes
         add(scrollTabla, BorderLayout.CENTER);
-        add(pnlButtons, BorderLayout.SOUTH);
+        add(pnlInferior, BorderLayout.SOUTH);
 
-        btnLimpiar.addActionListener(e -> limpiarFormulario());
+        // Eventos
+        btnLimpiar.addActionListener(e -> {
+            txtFiltro.setText("");
+            recargarTabla();
+        });
+
+        btnFiltrar.addActionListener(e -> aplicarFiltro());
+
         btnVerDetalle.addActionListener(e -> mostrarDetalle());
 
         tblActividades.addMouseListener(new MouseAdapter() {
@@ -73,22 +90,9 @@ public class VistasActividades extends JPanel {
         recargarTabla();
     }
 
-    private void limpiarFormulario() {
-        txtIdCuenta.setText("");
-        txtDescripcion.setText("");
-        txtTipo.setText("");
-        txtRazon.setText("");
-        txtDetalle.setText("");
-        txtResolucion.setText("");
-        txtComentarios.setText("");
-        txtTelefono.setText("");
-        txtCorreo.setText("");
-    }
-
     public void recargarTabla() {
         model.setRowCount(0);
         List<Actividad> lista = ctrl.listarPorUsuario(main.logeado.getIdUsuario());
-
         if (lista != null) {
             for (Actividad a : lista) {
                 model.addRow(new Object[]{
@@ -110,22 +114,47 @@ public class VistasActividades extends JPanel {
             JOptionPane.showMessageDialog(this, "Selecciona una actividad de la tabla.");
             return;
         }
-
         String id = (String) model.getValueAt(row, 0);
         Actividad a = ctrl.obtenerPorId(id);
         if (a == null) {
-            JOptionPane.showMessageDialog(this, "No se pudo obtener la actividad seleccionada.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "No se pudo obtener la actividad seleccionada.",
+                    "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if ("PENDIENTE".equalsIgnoreCase(a.getResolucion())) {
+            new VistaEditarActividad(SwingUtilities.getWindowAncestor(this), a.getIdActividad()).setVisible(true);
+        } else {
+            new VistaVerActividad(SwingUtilities.getWindowAncestor(this), a.getIdActividad()).setVisible(true);
+        }
+        recargarTabla(); // Refrescar al volver
+    }
+
+    private void aplicarFiltro() {
+        String campoSeleccionado = comboCampo.getSelectedItem().toString();
+        String valorFiltro = txtFiltro.getText().trim().toLowerCase();
+
+        if (valorFiltro.isEmpty()) {
+            recargarTabla();
             return;
         }
 
-        if ("PENDIENTE".equalsIgnoreCase(a.getResolucion())) {
-            // Mostrar ventana para editar si está pendiente
-            new VistaEditarActividad(SwingUtilities.getWindowAncestor(this), a.getIdActividad()).setVisible(true);
-        } else {
-            // Mostrar solo lectura
-            new VistaVerActividad(SwingUtilities.getWindowAncestor(this), a.getIdActividad()).setVisible(true);
-        }
+        int columna = switch (campoSeleccionado) {
+            case "ID Actividad" -> 0;
+            case "Cuenta" -> 1;
+            case "Descripción" -> 2;
+            case "Tipo" -> 4;
+            case "Razón" -> 5;
+            case "Resolución" -> 6;
+            default -> -1;
+        };
 
-        recargarTabla(); // Refrescar al volver
+        for (int i = model.getRowCount() - 1; i >= 0; i--) {
+            String valorCelda = model.getValueAt(i, columna).toString().toLowerCase();
+            if (!valorCelda.contains(valorFiltro)) {
+                model.removeRow(i);
+            }
+        }
+        
+        recargarTabla();
     }
 }

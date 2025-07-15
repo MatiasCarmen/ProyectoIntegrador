@@ -288,7 +288,7 @@ public class VistaPrincipal extends JFrame {
 
     public void actualizarAgenda() {
         if (agendaPanel != null) {
-            agendaPanel.actualizarAgenda();
+            agendaPanel.cargarAgenda();
         }
     }
 

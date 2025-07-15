@@ -92,7 +92,8 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                             }
                    
                             case "Lista Actividades" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_ACTIVIDADES);
-                            case "Agenda" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_AGENDA);
+                            case "Agenda" -> 
+                            mainFrame.mostrarPanel(VistaPrincipal.TARJETA_AGENDA);
                        
                             case "Cerrar Sesión" -> {
                                 int confirm = JOptionPane.showConfirmDialog(

@@ -11,6 +11,7 @@ package controladores;
 
 import dao.UsuarioDAO;
 import entidades.Usuario;
+import java.sql.SQLException;
 
 import java.util.List;
 import java.util.logging.Logger;
@@ -31,5 +32,20 @@ public class UsuarioControlador {
     public List<Usuario> listarUsuarios() {
         LOGGER.info("listarUsuarios");
         return dao.listarTodos();
+    }
+    
+    public String generarIdUsuario(String nombre, String apellidoP) {
+         LOGGER.info("generarIdUsuario");
+        return dao.generarIdUsuario(nombre, apellidoP);
+    }
+    
+    public boolean existeUsuario(String idUsuario) {
+         LOGGER.info("existeUsuario");
+        return dao.existeUsuario(idUsuario);
+    }
+    
+    public void crearUsuario(Usuario user) throws SQLException {
+           LOGGER.info("crearUsuario");
+           dao.crearUsuario(user);
     }
 }
