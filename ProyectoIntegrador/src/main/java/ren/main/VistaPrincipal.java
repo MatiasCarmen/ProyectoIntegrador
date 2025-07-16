@@ -143,7 +143,6 @@ public class VistaPrincipal extends JFrame {
         panelContenedor.add(agendaPanel, TARJETA_AGENDA);
         panelContenedor.add(productosPanel, TARJETA_PRODUCTOS);
 
-      
         try {
             Class<?> vistaAgregarClienteClass = Class.forName("vista.VistaAgregarCliente");
             panelContenedor.add((JPanel) vistaAgregarClienteClass.getDeclaredConstructor().newInstance(),
@@ -156,7 +155,7 @@ public class VistaPrincipal extends JFrame {
         if (PermisoUtils.esAdministrador(usuario) || PermisoUtils.esSupervisor(usuario)) {
             panelContenedor.add(usuariosPanel, TARJETA_USUARIOS);
             panelContenedor.add(new VistaCrearUsuario(), TARJETA_CREAR_USUARIO);
-            
+
         }
 
         // Paneles de actividades para todos
@@ -283,8 +282,6 @@ public class VistaPrincipal extends JFrame {
         }
     }
 
-  
-
     public void actualizarActividades() {
         if (actividadesPanel != null) {
             actividadesPanel.recargarTabla();
@@ -358,5 +355,19 @@ public class VistaPrincipal extends JFrame {
         if (actividadesPanel != null) {
             actividadesPanel.recargarTabla();
         }
+    }
+
+    public void mostrarVistaListaClientes(VistaClientes vistaLista) {
+        SwingUtilities.invokeLater(() -> {
+            // Agregar la nueva vista al CardLayout (sin eliminar las otras)
+            panelContenedor.add(vistaLista, "LISTA_CLIENTES");
+
+            // Mostrar la vista
+            cardLayout.show(panelContenedor, "LISTA_CLIENTES");
+            panelContenedor.revalidate();
+            panelContenedor.repaint();
+
+            System.out.println("Vista Lista de Clientes cargada ✅");
+        });
     }
 }

@@ -117,6 +117,29 @@ public class VistaAgregarCliente extends JPanel {
         panel.add(new JLabel(), "wrap");
     }
 
+    private void agregarSeccion(JPanel panel, String tituloSeccion, int row) {
+        JLabel labelSeccion = new JLabel(tituloSeccion);
+        labelSeccion.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        labelSeccion.setForeground(new Color(50, 50, 50));
+        panel.add(labelSeccion, "cell 0 " + row + ", left, wrap");
+    }
+
+    private void agregarCampoComuna(JPanel panel, int row) {
+        JLabel lblComuna = new JLabel("Comuna:");
+        lblComuna.setForeground(COLOR_SECUNDARIO);
+        lblComuna.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+        // Estilizar el combo
+        comboComuna.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        comboComuna.setBackground(Color.WHITE);
+        comboComuna.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+                BorderFactory.createEmptyBorder(8, 12, 8, 12)));
+
+        panel.add(lblComuna, "cell 3 " + row + ", right");
+        panel.add(comboComuna, "cell 4 " + row + ", growx");
+    }
+
     private void agregarCampoConLabel(JPanel panel, String labelText, JTextField field, JLabel errorLabel) {
         JLabel label = new JLabel(labelText);
         label.setForeground(COLOR_SECUNDARIO);
@@ -215,10 +238,12 @@ public class VistaAgregarCliente extends JPanel {
             public void focusLost(FocusEvent e) {
                 if (ClienteValidator.isNombreValido(campo.getText())) {
                     campo.setBorder(bordeValido);
-                    if (lblError != null) lblError.setText("");
+                    if (lblError != null)
+                        lblError.setText("");
                 } else {
                     campo.setBorder(bordeError);
-                    if (lblError != null) lblError.setText("Solo letras");
+                    if (lblError != null)
+                        lblError.setText("Solo letras");
                 }
             }
         };
@@ -250,13 +275,16 @@ public class VistaAgregarCliente extends JPanel {
             if (errores == null) {
                 String idCuenta = CuentasClienteControlador.generarIdCuentaUnico("CLIENTE");
                 new CuentasClienteControlador().insertar(idCuenta, rut, "CLIENTE");
-                JOptionPane.showMessageDialog(this, "Cliente y cuenta registrados", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Cliente y cuenta registrados", "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE);
                 limpiarCampos();
             } else {
-                JOptionPane.showMessageDialog(this, String.join("\n", errores), "Errores de validación", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, String.join("\n", errores), "Errores de validación",
+                        JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Error al guardar: " + ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al guardar: " + ex.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 

@@ -134,7 +134,7 @@ public class VistaCrearUsuario extends JPanel {
             return;
         }
 
-        if (rolNombre == null || rolNombre.equals("-- Seleccione rol --")) {
+        if (rolNombre == null || rolNombre.equals("Seleccione rol")) {
             JOptionPane.showMessageDialog(this, "Selecciona un rol válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }

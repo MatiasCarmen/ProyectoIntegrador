@@ -16,6 +16,8 @@ import entidades.Usuario;
 import javax.swing.*;
 import java.awt.*;
 import vista.Login;
+import vista.VistaNuevaActividad;
+import vista.VistaClientes;
 
 public class MyDrawerBuilder extends SimpleDrawerBuilder {
     private final VistaPrincipal mainFrame;
@@ -65,7 +67,12 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                     if (!menuText.startsWith("~")) { // No procesar categorías
                         switch (menuText) {
                             case "Inicio" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_INICIO);
-                            case "Lista de Clientes" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_CLIENTES);
+                            case "Lista de Clientes" -> {
+                                // Crear una nueva instancia de VistaClientes en modo lista simple
+                                VistaClientes vistaLista = new VistaClientes(true);
+                                mainFrame.mostrarVistaListaClientes(vistaLista);
+                            }
+                            case "Buscar Cliente" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_CLIENTES);
                             case "Agregar Cliente" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_AGREGAR_CLIENTE);
                             case "Usuarios" -> {
                                 // Validar permisos antes de mostrar
@@ -89,11 +96,22 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                                             JOptionPane.WARNING_MESSAGE);
                                 }
                             }
-                   
+                            case "Nueva Actividad" -> {
+                                String idCuenta = JOptionPane.showInputDialog(mainFrame,
+                                        "Ingrese el ID de la cuenta para la nueva actividad:");
+                                if (idCuenta != null && !idCuenta.trim().isEmpty()) {
+                                    VistaNuevaActividad dialog = new VistaNuevaActividad(mainFrame, idCuenta.trim());
+                                    dialog.setLocationRelativeTo(mainFrame);
+                                    dialog.setVisible(true);
+                                } else if (idCuenta != null) {
+                                    JOptionPane.showMessageDialog(mainFrame,
+                                            "Debe ingresar un ID de cuenta válido para crear una actividad.");
+                                }
+                            }
                             case "Lista Actividades" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_ACTIVIDADES);
-                            case "Agenda" -> 
-                            mainFrame.mostrarPanel(VistaPrincipal.TARJETA_AGENDA);
-                       
+                            case "Agenda" ->
+                                mainFrame.mostrarPanel(VistaPrincipal.TARJETA_AGENDA);
+
                             case "Cerrar Sesión" -> {
                                 int confirm = JOptionPane.showConfirmDialog(
                                         mainFrame,

@@ -45,6 +45,14 @@ public class VistaClientes extends JPanel {
     private final ClienteControlador clienteCtrl = new ClienteControlador();
     private final ComunasControlador comunaCtrl = new ComunasControlador();
 
+    // Constructor para modo lista simple (sin filtros)
+    public VistaClientes(boolean modoListaSimple) {
+        this();
+        if (modoListaSimple) {
+            configurarModoListaSimple();
+        }
+    }
+
     public VistaClientes() {
         setLayout(new MigLayout("fillx, insets 20",
                 "[pref][grow,fill][pref][100!][pref][100!][pref!]",
@@ -180,6 +188,71 @@ public class VistaClientes extends JPanel {
 
         // Cargar comunas en el combo
         cargarComunas();
+
+        // Cargar todos los clientes al inicio
+        cargarTodosLosClientes();
+    }
+
+    private void configurarModoListaSimple() {
+        // Limpiar completamente el panel
+        removeAll();
+
+        // Configurar layout para modo lista simple
+        setLayout(new MigLayout("fill, insets 20", "[grow]", "[]20[grow][]"));
+        setBackground(Color.WHITE);
+
+        // Título centrado y estilizado
+        JPanel titlePanel = new vista.util.UIHelper.ElevatedPanel();
+        titlePanel.setBackground(Color.WHITE);
+        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        JLabel titulo = new JLabel("Lista de Clientes");
+        titulo.setFont(new Font("Segoe UI", Font.BOLD, 28));
+        titulo.setForeground(new Color(237, 28, 36));
+        titlePanel.add(titulo);
+
+        add(titlePanel, "grow, wrap");
+
+        // Panel de la tabla con elevación y borde
+        JPanel tablePanel = new vista.util.UIHelper.ElevatedPanel();
+        tablePanel.setLayout(new BorderLayout());
+        tablePanel.setBackground(Color.WHITE);
+        tablePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
+        // Configurar tabla
+        tblClientes.setRowHeight(35);
+        tblClientes.setShowGrid(false);
+        tblClientes.setIntercellSpacing(new Dimension(0, 0));
+        tblClientes.setSelectionBackground(new Color(255, 236, 236));
+        tblClientes.setSelectionForeground(new Color(237, 28, 36));
+        tblClientes.getTableHeader().setBackground(new Color(248, 249, 250));
+        tblClientes.getTableHeader().setForeground(new Color(51, 51, 51));
+        tblClientes.getTableHeader().setFont(new Font("Segoe UI", Font.BOLD, 12));
+
+        JScrollPane scrollPane = new JScrollPane(tblClientes);
+        scrollPane.setBorder(BorderFactory.createLineBorder(new Color(230, 230, 230)));
+        tablePanel.add(scrollPane, BorderLayout.CENTER);
+
+        add(tablePanel, "grow, wrap");
+
+        // Panel de botones centrado
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        buttonPanel.setOpaque(false);
+
+        // Estilizar botón de exportar
+        btnExportarExcel.setBackground(new Color(46, 125, 50));
+        btnExportarExcel.setForeground(Color.WHITE);
+        btnExportarExcel.setFocusPainted(false);
+        btnExportarExcel.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnExportarExcel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+        btnExportarExcel.setPreferredSize(new Dimension(150, 40));
+
+        buttonPanel.add(btnExportarExcel);
+        add(buttonPanel, "grow");
+
+        // Revalidar y repintar
+        revalidate();
+        repaint();
     }
 
     private void configurarCampo(JTextField campo, String placeholder) {
@@ -232,9 +305,22 @@ public class VistaClientes extends JPanel {
     }
 
     public void actualizarTabla() {
+        cargarTodosLosClientes();
+    }
+
+    private void exportarExcelClientes() {
+        String archivo = reportes.ReporteClientes.generarExcel();
+        JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
+        if (archivo != null) {
+            vista.util.UIHelper.showToast(parent, "Reporte de clientes exportado exitosamente", false);
+        } else {
+            vista.util.UIHelper.showToast(parent, "Error al exportar el reporte de clientes", true);
+        }
+    }
+
+    private void cargarTodosLosClientes() {
         model.setRowCount(0);
         List<Object[]> resultados = clienteCtrl.buscarClientesAvanzado("", "", "", "", "", "Todos", "Todas");
-
         if (resultados != null) {
             for (Object[] fila : resultados) {
                 if (fila != null) {
@@ -250,19 +336,9 @@ public class VistaClientes extends JPanel {
                     });
                 }
             }
-            System.out.println("Tabla actualizada: " + resultados.size() + " clientes cargados");
+            System.out.println("Todos los clientes cargados: " + resultados.size());
         } else {
             System.out.println("No se pudieron cargar los clientes");
-        }
-    }
-
-    private void exportarExcelClientes() {
-        String archivo = reportes.ReporteClientes.generarExcel();
-        JFrame parent = (JFrame) SwingUtilities.getWindowAncestor(this);
-        if (archivo != null) {
-            vista.util.UIHelper.showToast(parent, "Reporte de clientes exportado exitosamente", false);
-        } else {
-            vista.util.UIHelper.showToast(parent, "Error al exportar el reporte de clientes", true);
         }
     }
 }
