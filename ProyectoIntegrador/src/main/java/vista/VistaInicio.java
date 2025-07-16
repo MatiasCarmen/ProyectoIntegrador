@@ -4,6 +4,7 @@ package vista;
  *
  * @author mathi
  */
+import controladores.ActividadesControlador;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import java.awt.*;
@@ -57,14 +58,14 @@ public class VistaInicio extends JPanel {
         // Obtener datos reales de la base de datos
         int clientesActivos = new ClienteDAO().contarClientes();
         int actividadesPendientes = new ActividadDAO().contarActividadesPendientes();
-        int solicitudesAbiertas = new SolicitudDAO().contarSolicitudesAbiertas();
+        int actividadesCerradas  = ActividadesControlador.contarActividadesFinalizadas();
 
         // Crear tarjetas de estadísticas con datos reales
         statsPanel.add(createStatCard("Clientes Activos", String.valueOf(clientesActivos), new Color(46, 125, 50)));
         statsPanel.add(createStatCard("Actividades Pendientes", String.valueOf(actividadesPendientes),
                 new Color(237, 28, 36)));
         statsPanel.add(
-                createStatCard("Solicitudes Abiertas", String.valueOf(solicitudesAbiertas), new Color(33, 150, 243)));
+                createStatCard("Solicitudes ", String.valueOf(actividadesCerradas), new Color(33, 150, 243)));
 
         // Agregar componentes al panel principal
         mainPanel.add(titulo);

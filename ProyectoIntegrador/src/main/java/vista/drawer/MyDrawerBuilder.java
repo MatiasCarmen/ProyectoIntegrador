@@ -66,7 +66,6 @@ public class MyDrawerBuilder extends SimpleDrawerBuilder {
                         switch (menuText) {
                             case "Inicio" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_INICIO);
                             case "Lista de Clientes" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_CLIENTES);
-                            case "Buscar Cliente" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_BUSCAR_CLIENTE);
                             case "Agregar Cliente" -> mainFrame.mostrarPanel(VistaPrincipal.TARJETA_AGREGAR_CLIENTE);
                             case "Usuarios" -> {
                                 // Validar permisos antes de mostrar

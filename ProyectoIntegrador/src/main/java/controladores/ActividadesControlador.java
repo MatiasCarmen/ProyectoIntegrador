@@ -62,7 +62,7 @@ public class ActividadesControlador {
      * 
      * @return Lista de actividades con fecha_cierre >= hoy
      */
-    public List<Actividad> obtenerActividadesPendientes() {
+    public  static List<Actividad> obtenerActividadesPendientes() {
         LOGGER.info("[Ctrl] obtenerActividadesPendientes");
         return dao.obtenerActividadesPendientes();
     }
@@ -76,4 +76,17 @@ public class ActividadesControlador {
          LOGGER.info("[Ctrl] listarPorUsuario");
         return dao.listarPorUsuario(idUsuario);
        }
+          public static List<Actividad> obtenerActividadesFinalizadas() {
+                 LOGGER.info("[Ctrl] obtenerActividadesFinalizadas");
+                 return dao.obtenerActividadesFinalizadas();
+          }
+          
+             public static int contarActividadesFinalizadas() {
+                LOGGER.info("[Ctrl] contarActividadesFinalizadas");
+                 return dao.contarActividadesFinalizadas();
+             }
+                    public static int contarActividadesPendientes() {
+                LOGGER.info("[Ctrl] contarActividadesPendientes");
+                 return dao.contarActividadesPendientes();
+             }
 }

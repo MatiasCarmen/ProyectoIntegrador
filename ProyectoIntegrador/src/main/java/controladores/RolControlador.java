@@ -20,10 +20,18 @@ import java.util.logging.Logger;
  */
 public class RolControlador {
     private static final Logger LOGGER = Logger.getLogger(RolControlador.class.getName());
-    private final RolDAO dao = new RolDAO();
+    private final static RolDAO dao = new RolDAO();
 
-    public List<Rol> listarRoles() {
+    public  static List<Rol> listarRoles() {
         LOGGER.info("listarRoles");
         return dao.listarTodos();
     }
+     public static String obtenerIdPorNombre(String nombreRol) {
+          LOGGER.info("obtenerIdPorNombre");
+        return dao.obtenerIdPorNombre(nombreRol);
+     }
+     public  static String obtenerNombrePorId(String idRol) {
+          LOGGER.info("obtenerNombrePorId");
+        return dao.obtenerIdPorNombre(idRol);
+     }
 }

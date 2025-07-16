@@ -121,7 +121,7 @@ public class VistasActividades extends JPanel {
                     "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
-        if ("PENDIENTE".equalsIgnoreCase(a.getResolucion())) {
+        if ("PENDIENTE".equalsIgnoreCase(a.getResolucion()) && a.getIdUsuario().equals(main.logeado.getIdUsuario())) {
             new VistaEditarActividad(SwingUtilities.getWindowAncestor(this), a.getIdActividad()).setVisible(true);
         } else {
             new VistaVerActividad(SwingUtilities.getWindowAncestor(this), a.getIdActividad()).setVisible(true);

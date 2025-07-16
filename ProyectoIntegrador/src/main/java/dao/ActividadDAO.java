@@ -253,18 +253,21 @@ public class ActividadDAO {
     }
 
     public int contarActividadesPendientes() {
-        String sql = "SELECT COUNT(*) FROM ACTIVIDADES WHERE FECHA_CIERRE >= CURDATE() AND RESOLUCION = 'PENDIENTE'";
-        try (Connection conn = ConexionBD.conectar();
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(sql)) {
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            LOGGER.severe("Error al contar actividades pendientes: " + e.getMessage());
-        }
-        return 0;
+       int i =0;
+       for(Actividad act : obtenerActividadesPendientes()){
+           i++;
+       }
+       return i;
     }
+    
+     public int contarActividadesFinalizadas() {
+       int i =0;
+       for(Actividad act : obtenerActividadesFinalizadas()){
+           i++;
+       }
+       return i;
+    }
+
 
     public static String generarIdActividadUnico() {
         String id;
@@ -328,4 +331,36 @@ public class ActividadDAO {
     return lista;
 }
 
+    public List<Actividad> obtenerActividadesFinalizadas() {
+    List<Actividad> lista = new ArrayList<>();
+    String sql = "SELECT * FROM ACTIVIDADES WHERE RESOLUCION = 'FINALIZADO' ORDER BY FECHA_CIERRE DESC";
+
+    try (Connection conn = ConexionBD.conectar();
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            Actividad actividad = new Actividad();
+            actividad.setIdActividad(rs.getString("IDACTIVIDAD"));
+            actividad.setIdCuenta(rs.getString("IDCUENTA"));
+            actividad.setDescripcion(rs.getString("DESCRIPCION"));
+            actividad.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
+            actividad.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
+            actividad.setTipo(rs.getString("TIPO"));
+            actividad.setRazon(rs.getString("RAZON"));
+            actividad.setDetalle(rs.getString("DETALLE"));
+            actividad.setResolucion(rs.getString("RESOLUCION"));
+            actividad.setComentarios(rs.getString("COMENTARIOS"));
+            actividad.setTelefono(rs.getLong("TELEFONO"));
+            actividad.setCorreo(rs.getString("CORREO"));
+            actividad.setIdUsuario(rs.getString("IDUSUARIO"));
+            lista.add(actividad);
+        }
+
+    } catch (SQLException e) {
+        LOGGER.severe("Error obtenerActividadesFinalizadas: " + e.getMessage());
+    }
+
+    return lista;
+}
 }

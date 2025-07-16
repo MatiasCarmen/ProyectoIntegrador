@@ -48,4 +48,14 @@ public class UsuarioControlador {
            LOGGER.info("crearUsuario");
            dao.crearUsuario(user);
     }
+    
+    public Usuario obtenerPorId(String idUsuario) {
+       LOGGER.info("obtenerPorId");
+           return dao.obtenerPorId(idUsuario); 
+    }
+    
+    public void actualizarUsuario(Usuario usuario) throws SQLException {
+        LOGGER.info("actualizarUsuario");
+        dao.actualizarUsuario(usuario); 
+    }
 }

@@ -26,7 +26,6 @@ public class VistaPrincipal extends JFrame {
     // Identificadores de tarjetas
     public static final String TARJETA_INICIO = "INICIO";
     public static final String TARJETA_CLIENTES = "CLIENTES";
-    public static final String TARJETA_BUSCAR_CLIENTE = "BUSCAR_CLIENTE";
     public static final String TARJETA_AGREGAR_CLIENTE = "AGREGAR_CLIENTE";
     public static final String TARJETA_DETALLE_CLIENTE = "DETALLE_CLIENTE";
     public static final String TARJETA_USUARIOS = "USUARIOS";
@@ -144,15 +143,7 @@ public class VistaPrincipal extends JFrame {
         panelContenedor.add(agendaPanel, TARJETA_AGENDA);
         panelContenedor.add(productosPanel, TARJETA_PRODUCTOS);
 
-        // Agregar paneles adicionales si existen
-        try {
-            Class<?> vistaBuscarClienteClass = Class.forName("vista.VistaBuscarCliente");
-            panelContenedor.add((JPanel) vistaBuscarClienteClass.getDeclaredConstructor().newInstance(),
-                    TARJETA_BUSCAR_CLIENTE);
-        } catch (Exception e) {
-            System.out.println("VistaBuscarCliente no encontrada");
-        }
-
+      
         try {
             Class<?> vistaAgregarClienteClass = Class.forName("vista.VistaAgregarCliente");
             panelContenedor.add((JPanel) vistaAgregarClienteClass.getDeclaredConstructor().newInstance(),
