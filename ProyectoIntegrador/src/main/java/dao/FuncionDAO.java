@@ -18,36 +18,46 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * DAO – FuncionDAO: maneja CRUD de FUNCIONES.
+ * DAO – FuncionDAO: maneja CRUD de FUNCIONES usando procedimientos almacenados.
  */
 public class FuncionDAO {
     private static final Logger LOGGER = Logger.getLogger(FuncionDAO.class.getName());
 
+    /**
+     * Crea una nueva función usando el procedimiento almacenado insertarFuncion
+     * 
+     * @param f Función a crear
+     * @return true si se creó correctamente, false en caso contrario
+     */
     public boolean crear(Funcion f) {
-        String sql = "INSERT INTO FUNCIONES (IDFUNCION, DESCRIPCION) VALUES (?,?)";
+        String sql = "{CALL insertarFuncion(?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, f.getIdFuncion());
-            ps.setString(2, f.getDescripcion());
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, f.getIdFuncion());
+            cs.setString(2, f.getDescripcion());
             LOGGER.info("Insertando Funcion: " + f.getIdFuncion());
-            return ps.executeUpdate() > 0;
+            return cs.executeUpdate() > 0;
         } catch (SQLException e) {
             LOGGER.severe("Error crear Funcion: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Obtiene una función por su ID usando el procedimiento almacenado
+     * obtenerFuncionPorId
+     * 
+     * @param id ID de la función
+     * @return Función encontrada o null si no existe
+     */
     public Funcion obtenerPorId(String id) {
-        String sql = "SELECT * FROM FUNCIONES WHERE IDFUNCION = ?";
+        String sql = "{CALL obtenerFuncionPorId(?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, id);
+            try (ResultSet rs = cs.executeQuery()) {
                 if (rs.next()) {
-                    return new Funcion(
-                        rs.getString("IDFUNCION"),
-                        rs.getString("DESCRIPCION")
-                    );
+                    return mapearFuncion(rs);
                 }
             }
         } catch (SQLException e) {
@@ -56,17 +66,19 @@ public class FuncionDAO {
         return null;
     }
 
+    /**
+     * Lista todas las funciones usando el procedimiento almacenado listarFunciones
+     * 
+     * @return Lista de todas las funciones
+     */
     public List<Funcion> listarTodos() {
         List<Funcion> lista = new ArrayList<>();
-        String sql = "SELECT * FROM FUNCIONES";
+        String sql = "{CALL listarFunciones()}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall(sql);
+                ResultSet rs = cs.executeQuery()) {
             while (rs.next()) {
-                lista.add(new Funcion(
-                    rs.getString("IDFUNCION"),
-                    rs.getString("DESCRIPCION")
-                ));
+                lista.add(mapearFuncion(rs));
             }
         } catch (SQLException e) {
             LOGGER.severe("Error listar Funciones: " + e.getMessage());
@@ -74,30 +86,57 @@ public class FuncionDAO {
         return lista;
     }
 
+    /**
+     * Actualiza una función existente usando el procedimiento almacenado
+     * actualizarFuncion
+     * 
+     * @param f Función a actualizar
+     * @return true si se actualizó correctamente, false en caso contrario
+     */
     public boolean actualizar(Funcion f) {
-        String sql = "UPDATE FUNCIONES SET DESCRIPCION = ? WHERE IDFUNCION = ?";
+        String sql = "{CALL actualizarFuncion(?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, f.getDescripcion());
-            ps.setString(2, f.getIdFuncion());
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, f.getDescripcion());
+            cs.setString(2, f.getIdFuncion());
             LOGGER.info("Actualizando Funcion: " + f.getIdFuncion());
-            return ps.executeUpdate() > 0;
+            return cs.executeUpdate() > 0;
         } catch (SQLException e) {
             LOGGER.severe("Error actualizar Funcion: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Elimina una función por su ID usando el procedimiento almacenado
+     * eliminarFuncion
+     * 
+     * @param id ID de la función a eliminar
+     * @return true si se eliminó correctamente, false en caso contrario
+     */
     public boolean eliminar(String id) {
-        String sql = "DELETE FROM FUNCIONES WHERE IDFUNCION = ?";
+        String sql = "{CALL eliminarFuncion(?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, id);
-           	LOGGER.info("Eliminando Funcion: " + id);
-           	return ps.executeUpdate() > 0;
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, id);
+            LOGGER.info("Eliminando Funcion: " + id);
+            return cs.executeUpdate() > 0;
         } catch (SQLException e) {
-           	LOGGER.severe("Error eliminar Funcion: " + e.getMessage());
-           	return false;
+            LOGGER.severe("Error eliminar Funcion: " + e.getMessage());
+            return false;
         }
+    }
+
+    /**
+     * Mapea un ResultSet a un objeto Funcion
+     * 
+     * @param rs ResultSet con los datos de la función
+     * @return Funcion mapeada
+     * @throws SQLException Si ocurre un error al acceder a los datos
+     */
+    private Funcion mapearFuncion(ResultSet rs) throws SQLException {
+        return new Funcion(
+                rs.getString("IDFUNCION"),
+                rs.getString("DESCRIPCION"));
     }
 }

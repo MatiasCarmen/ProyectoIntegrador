@@ -18,40 +18,51 @@ import java.util.logging.Logger;
 
 /**
  * DAO – DetallePedidoDAO: maneja CRUD de DETALLE_PEDIDOS.
+ * Esta clase ha sido migrada para utilizar procedimientos almacenados.
  */
 public class DetallePedidoDAO {
     private static final Logger LOGGER = Logger.getLogger(DetallePedidoDAO.class.getName());
 
+    /**
+     * Crea un nuevo detalle de pedido.
+     * 
+     * @param dp El detalle de pedido a crear
+     * @return true si la creación fue exitosa, false en caso contrario
+     */
     public boolean crear(DetallePedido dp) {
-        String sql = "INSERT INTO DETALLE_PEDIDOS (IDPEDIDO, IDADICIONALES, IDPLAN, IDDESCUENTOS) VALUES (?,?,?,?)";
+        String sql = "{CALL sp_crear_detalle_pedido(?, ?, ?, ?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, dp.getIdPedido());
-            ps.setString(2, dp.getIdAdicionales());
-            ps.setString(3, dp.getIdPlan());
-            ps.setString(4, dp.getIdDescuentos());
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, dp.getIdPedido());
+            cs.setString(2, dp.getIdAdicionales());
+            cs.setString(3, dp.getIdPlan());
+            cs.setString(4, dp.getIdDescuentos());
+            cs.registerOutParameter(5, Types.BOOLEAN);
+
+            cs.execute();
             LOGGER.info("Insertando DetallePedido: ped=" + dp.getIdPedido());
-            return ps.executeUpdate() > 0;
+            return cs.getBoolean(5);
         } catch (SQLException e) {
             LOGGER.severe("Error crear DetallePedido: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Lista todos los detalles de un pedido específico.
+     * 
+     * @param idPedido El ID del pedido
+     * @return Lista de detalles del pedido
+     */
     public List<DetallePedido> listarPorPedido(String idPedido) {
         List<DetallePedido> lista = new ArrayList<>();
-        String sql = "SELECT * FROM DETALLE_PEDIDOS WHERE IDPEDIDO = ?";
+        String sql = "{CALL sp_listar_detalles_por_pedido(?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idPedido);
-            try (ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idPedido);
+            try (ResultSet rs = cs.executeQuery()) {
                 while (rs.next()) {
-                    lista.add(new DetallePedido(
-                        rs.getString("IDPEDIDO"),
-                        rs.getString("IDADICIONALES"),
-                        rs.getString("IDPLAN"),
-                        rs.getString("IDDESCUENTOS")
-                    ));
+                    lista.add(mapearDetallePedido(rs));
                 }
             }
         } catch (SQLException e) {
@@ -60,16 +71,40 @@ public class DetallePedidoDAO {
         return lista;
     }
 
+    /**
+     * Elimina todos los detalles de un pedido.
+     * 
+     * @param idPedido El ID del pedido cuyos detalles se eliminarán
+     * @return true si la eliminación fue exitosa, false en caso contrario
+     */
     public boolean eliminar(String idPedido) {
-        String sql = "DELETE FROM DETALLE_PEDIDOS WHERE IDPEDIDO = ?";
+        String sql = "{CALL sp_eliminar_detalles_pedido(?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idPedido);
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idPedido);
+            cs.registerOutParameter(2, Types.BOOLEAN);
+
+            cs.execute();
             LOGGER.info("Eliminando DetallePedido: ped=" + idPedido);
-            return ps.executeUpdate() > 0;
+            return cs.getBoolean(2);
         } catch (SQLException e) {
             LOGGER.severe("Error eliminar DetallePedido: " + e.getMessage());
             return false;
         }
+    }
+
+    /**
+     * Mapea un ResultSet a un objeto DetallePedido.
+     * 
+     * @param rs El ResultSet que contiene los datos
+     * @return Un objeto DetallePedido con los datos del ResultSet
+     * @throws SQLException si hay un error al acceder a los datos
+     */
+    private DetallePedido mapearDetallePedido(ResultSet rs) throws SQLException {
+        return new DetallePedido(
+                rs.getString("IDPEDIDO"),
+                rs.getString("IDADICIONALES"),
+                rs.getString("IDPLAN"),
+                rs.getString("IDDESCUENTOS"));
     }
 }

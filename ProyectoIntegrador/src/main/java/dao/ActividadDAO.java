@@ -17,32 +17,38 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * DAO de ACTIVIDADES: CRUD completo para la tabla ACTIVIDADES.
+ * DAO de ACTIVIDADES: CRUD completo para la tabla ACTIVIDADES usando
+ * procedimientos almacenados.
  */
 public class ActividadDAO {
     private static final Logger LOGGER = Logger.getLogger(ActividadDAO.class.getName());
 
+    /**
+     * Crea una nueva actividad utilizando el procedimiento almacenado
+     * insertarActividad
+     * 
+     * @param a La actividad a crear
+     * @return true si se creó correctamente, false en caso contrario
+     */
     public boolean crearActividad(Actividad a) {
-        String sql = "INSERT INTO ACTIVIDADES "
-                + "(IDACTIVIDAD, IDCUENTA, DESCRIPCION, FECHA_CREACION, FECHA_CIERRE,"
-                + "TIPO, RAZON, DETALLE, RESOLUCION, COMENTARIOS, TELEFONO, CORREO,IDUSUARIO) "
-                + "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "{CALL insertarActividad(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, a.getIdActividad());
-            ps.setString(2, a.getIdCuenta());
-            ps.setString(3, a.getDescripcion());
-            ps.setTimestamp(4, a.getFechaCreacion());
-            ps.setTimestamp(5, a.getFechaCierre());
-            ps.setString(6, a.getTipo());
-            ps.setString(7, a.getRazon());
-            ps.setString(8, a.getDetalle());
-            ps.setString(9, a.getResolucion());
-            ps.setString(10, a.getComentarios());
-            ps.setLong(11, a.getTelefono());
-            ps.setString(12, a.getCorreo());
-            ps.setString(13, a.getIdUsuario());
-            int r = ps.executeUpdate();
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, a.getIdActividad());
+            cs.setString(2, a.getIdCuenta());
+            cs.setString(3, a.getDescripcion());
+            cs.setTimestamp(4, a.getFechaCreacion());
+            cs.setTimestamp(5, a.getFechaCierre());
+            cs.setString(6, a.getTipo());
+            cs.setString(7, a.getRazon());
+            cs.setString(8, a.getDetalle());
+            cs.setString(9, a.getResolucion());
+            cs.setString(10, a.getComentarios());
+            cs.setLong(11, a.getTelefono());
+            cs.setString(12, a.getCorreo());
+            cs.setString(13, a.getIdUsuario());
+
+            int r = cs.executeUpdate();
             LOGGER.info("Filas insertadas ACTIVIDADES: " + r);
             return r > 0;
         } catch (SQLException e) {
@@ -51,28 +57,22 @@ public class ActividadDAO {
         }
     }
 
+    /**
+     * Lista las actividades por cuenta utilizando el procedimiento almacenado
+     * obtenerActividadesPorCuenta
+     * 
+     * @param idCuenta ID de la cuenta
+     * @return Lista de actividades de la cuenta
+     */
     public List<Actividad> listarPorCuenta(String idCuenta) {
         List<Actividad> lista = new ArrayList<>();
-        String sql = "SELECT * FROM ACTIVIDADES WHERE IDCUENTA = ?";
+        String sql = "{CALL obtenerActividadesPorCuenta(?)}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idCuenta);
-            try (ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idCuenta);
+            try (ResultSet rs = cs.executeQuery()) {
                 while (rs.next()) {
-                    Actividad a = new Actividad();
-                    a.setIdActividad(rs.getString("IDACTIVIDAD"));
-                    a.setIdCuenta(rs.getString("IDCUENTA"));
-                    a.setDescripcion(rs.getString("DESCRIPCION"));
-                    a.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
-                    a.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
-                    a.setTipo(rs.getString("TIPO"));
-                    a.setRazon(rs.getString("RAZON"));
-                    a.setDetalle(rs.getString("DETALLE"));
-                    a.setResolucion(rs.getString("RESOLUCION"));
-                    a.setComentarios(rs.getString("COMENTARIOS"));
-                    a.setTelefono(rs.getLong("TELEFONO"));
-                    a.setCorreo(rs.getString("CORREO"));
-                    lista.add(a);
+                    lista.add(mapearActividad(rs));
                 }
             }
         } catch (SQLException e) {
@@ -81,28 +81,21 @@ public class ActividadDAO {
         return lista;
     }
 
+    /**
+     * Obtiene una actividad por su ID utilizando el procedimiento almacenado
+     * obtenerActividadPorId
+     * 
+     * @param idActividad ID de la actividad
+     * @return La actividad encontrada o null si no existe
+     */
     public Actividad obtenerPorId(String idActividad) {
-        String sql = "SELECT * FROM ACTIVIDADES WHERE IDACTIVIDAD = ?";
+        String sql = "{CALL obtenerActividadPorId(?)}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idActividad);
-            try (ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idActividad);
+            try (ResultSet rs = cs.executeQuery()) {
                 if (rs.next()) {
-                    Actividad a = new Actividad();
-                    a.setIdActividad(rs.getString("IDACTIVIDAD"));
-                    a.setIdCuenta(rs.getString("IDCUENTA"));
-                    a.setDescripcion(rs.getString("DESCRIPCION"));
-                    a.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
-                    a.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
-                    a.setTipo(rs.getString("TIPO"));
-                    a.setRazon(rs.getString("RAZON"));
-                    a.setDetalle(rs.getString("DETALLE"));
-                    a.setResolucion(rs.getString("RESOLUCION"));
-                    a.setComentarios(rs.getString("COMENTARIOS"));
-                    a.setTelefono(rs.getLong("TELEFONO"));
-                    a.setCorreo(rs.getString("CORREO"));
-                    a.setIdUsuario(rs.getString("IDUSUARIO"));
-                    return a;
+                    return mapearActividad(rs);
                 }
             }
         } catch (SQLException e) {
@@ -111,23 +104,29 @@ public class ActividadDAO {
         return null;
     }
 
+    /**
+     * Actualiza una actividad existente utilizando el procedimiento almacenado
+     * actualizarActividad
+     * 
+     * @param a La actividad a actualizar
+     * @return true si se actualizó correctamente, false en caso contrario
+     */
     public boolean actualizarActividad(Actividad a) {
-        String sql = "UPDATE ACTIVIDADES SET "
-                + "DESCRIPCION=?, FECHA_CIERRE=?, TIPO=?, RAZON=?, DETALLE=?, RESOLUCION=?, COMENTARIOS=?, TELEFONO=?, CORREO=? "
-                + "WHERE IDACTIVIDAD=?";
+        String sql = "{CALL actualizarActividad(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, a.getDescripcion());
-            ps.setTimestamp(2, a.getFechaCierre());
-            ps.setString(3, a.getTipo());
-            ps.setString(4, a.getRazon());
-            ps.setString(5, a.getDetalle());
-            ps.setString(6, a.getResolucion());
-            ps.setString(7, a.getComentarios());
-            ps.setLong(8, a.getTelefono());
-            ps.setString(9, a.getCorreo());
-            ps.setString(10, a.getIdActividad());
-            int r = ps.executeUpdate();
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, a.getDescripcion());
+            cs.setTimestamp(2, a.getFechaCierre());
+            cs.setString(3, a.getTipo());
+            cs.setString(4, a.getRazon());
+            cs.setString(5, a.getDetalle());
+            cs.setString(6, a.getResolucion());
+            cs.setString(7, a.getComentarios());
+            cs.setLong(8, a.getTelefono());
+            cs.setString(9, a.getCorreo());
+            cs.setString(10, a.getIdActividad());
+
+            int r = cs.executeUpdate();
             LOGGER.info("Filas actualizadas ACTIVIDADES: " + r);
             return r > 0;
         } catch (SQLException e) {
@@ -136,12 +135,19 @@ public class ActividadDAO {
         }
     }
 
+    /**
+     * Elimina una actividad por su ID utilizando el procedimiento almacenado
+     * eliminarActividad
+     * 
+     * @param idActividad ID de la actividad a eliminar
+     * @return true si se eliminó correctamente, false en caso contrario
+     */
     public boolean eliminarActividad(String idActividad) {
-        String sql = "DELETE FROM ACTIVIDADES WHERE IDACTIVIDAD = ?";
+        String sql = "{CALL eliminarActividad(?)}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idActividad);
-            int r = ps.executeUpdate();
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idActividad);
+            int r = cs.executeUpdate();
             LOGGER.info("Filas eliminadas ACTIVIDADES: " + r);
             return r > 0;
         } catch (SQLException e) {
@@ -150,128 +156,108 @@ public class ActividadDAO {
         }
     }
 
+    /**
+     * Lista todas las actividades utilizando el procedimiento almacenado
+     * obtenerTodasActividades
+     * 
+     * @return Lista de todas las actividades
+     */
     public List<Actividad> listarTodas() {
         List<Actividad> lista = new ArrayList<>();
-        try (Connection conn = ConexionBD.conectar()) {
-            String sql = "SELECT * FROM ACTIVIDADES";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+        String sql = "{CALL obtenerTodasActividades()}";
+        try (Connection conn = ConexionBD.conectar();
+                CallableStatement cs = conn.prepareCall(sql);
+                ResultSet rs = cs.executeQuery()) {
 
             while (rs.next()) {
-                Actividad actividad = new Actividad();
-                actividad.setIdActividad(rs.getString("IDACTIVIDAD"));
-                actividad.setIdCuenta(rs.getString("IDCUENTA"));
-                actividad.setDescripcion(rs.getString("DESCRIPCION"));
-                actividad.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
-                actividad.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
-                actividad.setTipo(rs.getString("TIPO"));
-                actividad.setRazon(rs.getString("RAZON"));
-                actividad.setDetalle(rs.getString("DETALLE"));
-                actividad.setResolucion(rs.getString("RESOLUCION"));
-                actividad.setComentarios(rs.getString("COMENTARIOS"));
-                actividad.setTelefono(rs.getLong("TELEFONO"));
-                actividad.setCorreo(rs.getString("CORREO"));
-                lista.add(actividad);
+                lista.add(mapearActividad(rs));
             }
         } catch (SQLException e) {
-            System.err.println("Error al listar actividades: " + e.getMessage());
+            LOGGER.severe("Error al listar actividades: " + e.getMessage());
         }
-        return lista;
-    }
-
-    public List<Actividad> obtenerActividadesPorCuenta(String idCuenta) {
-        List<Actividad> lista = new ArrayList<>();
-        try (Connection con = ConexionBD.conectar();
-                PreparedStatement ps = con.prepareStatement(
-                        "SELECT * FROM ACTIVIDADES WHERE IDCUENTA = ?")) {
-
-            ps.setString(1, idCuenta);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                Actividad act = new Actividad();
-                act.setIdActividad(rs.getString("IDACTIVIDAD"));
-                act.setIdCuenta(rs.getString("IDCUENTA"));
-                act.setDescripcion(rs.getString("DESCRIPCION"));
-                act.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
-                act.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
-                act.setTipo(rs.getString("TIPO"));
-                act.setRazon(rs.getString("RAZON"));
-                act.setDetalle(rs.getString("DETALLE"));
-                act.setResolucion(rs.getString("RESOLUCION"));
-                act.setComentarios(rs.getString("COMENTARIOS"));
-                act.setTelefono(rs.getLong("TELEFONO"));
-                act.setCorreo(rs.getString("CORREO"));
-                act.setIdUsuario(rs.getString("IDUSUARIO"));
-
-                lista.add(act);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
         return lista;
     }
 
     /**
-     * Obtiene las actividades pendientes (fecha_cierre >= hoy)
+     * Obtiene actividades por cuenta utilizando el procedimiento almacenado
+     * obtenerActividadesPorCuenta
+     * 
+     * @param idCuenta ID de la cuenta
+     * @return Lista de actividades de la cuenta
+     */
+    public List<Actividad> obtenerActividadesPorCuenta(String idCuenta) {
+        List<Actividad> lista = new ArrayList<>();
+        String sql = "{CALL obtenerActividadesPorCuenta(?)}";
+        try (Connection conn = ConexionBD.conectar();
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idCuenta);
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapearActividad(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error obtenerActividadesPorCuenta: " + e.getMessage());
+        }
+        return lista;
+    }
+
+    /**
+     * Obtiene las actividades pendientes utilizando el procedimiento almacenado
+     * obtenerActividadesPendientes
      * 
      * @return Lista de actividades pendientes
      */
     public List<Actividad> obtenerActividadesPendientes() {
         List<Actividad> lista = new ArrayList<>();
-        String sql = "SELECT * FROM ACTIVIDADES WHERE FECHA_CIERRE >= CURDATE() ORDER BY FECHA_CIERRE ASC";
-
+        String sql = "{CALL obtenerActividadesPendientes()}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall(sql);
+                ResultSet rs = cs.executeQuery()) {
 
             while (rs.next()) {
-                Actividad actividad = new Actividad();
-                actividad.setIdActividad(rs.getString("IDACTIVIDAD"));
-                actividad.setIdCuenta(rs.getString("IDCUENTA"));
-                actividad.setDescripcion(rs.getString("DESCRIPCION"));
-                actividad.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
-                actividad.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
-                actividad.setTipo(rs.getString("TIPO"));
-                actividad.setRazon(rs.getString("RAZON"));
-                actividad.setDetalle(rs.getString("DETALLE"));
-                actividad.setResolucion(rs.getString("RESOLUCION"));
-                actividad.setComentarios(rs.getString("COMENTARIOS"));
-                actividad.setTelefono(rs.getLong("TELEFONO"));
-                actividad.setCorreo(rs.getString("CORREO"));
-                actividad.setIdUsuario(rs.getString("IDUSUARIO"));
-                lista.add(actividad);
+                lista.add(mapearActividad(rs));
             }
-
         } catch (SQLException e) {
             LOGGER.severe("Error obtenerActividadesPendientes: " + e.getMessage());
         }
-
         return lista;
     }
 
+    /**
+     * Cuenta el número de actividades pendientes
+     * 
+     * @return Número de actividades pendientes
+     */
     public int contarActividadesPendientes() {
-       int i =0;
-       for(Actividad act : obtenerActividadesPendientes()){
-           i++;
-       }
-       return i;
-    }
-    
-     public int contarActividadesFinalizadas() {
-       int i =0;
-       for(Actividad act : obtenerActividadesFinalizadas()){
-           i++;
-       }
-       return i;
+        int i = 0;
+        for (Actividad act : obtenerActividadesPendientes()) {
+            i++;
+        }
+        return i;
     }
 
+    /**
+     * Cuenta el número de actividades finalizadas
+     * 
+     * @return Número de actividades finalizadas
+     */
+    public int contarActividadesFinalizadas() {
+        int i = 0;
+        for (Actividad act : obtenerActividadesFinalizadas()) {
+            i++;
+        }
+        return i;
+    }
 
+    /**
+     * Genera un ID de actividad único
+     * 
+     * @return ID de actividad único
+     */
     public static String generarIdActividadUnico() {
         String id;
-        String query = "SELECT 1 FROM ACTIVIDADES WHERE IDACTIVIDAD = ? LIMIT 1";
+        String sql = "{CALL existeActividad(?)}";
         do {
             StringBuilder sb = new StringBuilder();
             sb.append("1-");
@@ -283,84 +269,88 @@ public class ActividadDAO {
             id = sb.toString();
 
             try (Connection conn = ConexionBD.conectar();
-                    PreparedStatement stmt = conn.prepareStatement(query)) {
-                stmt.setString(1, id);
-                ResultSet rs = stmt.executeQuery();
+                    CallableStatement cs = conn.prepareCall(sql)) {
+                cs.setString(1, id);
+                ResultSet rs = cs.executeQuery();
                 if (!rs.next())
                     break;
             } catch (SQLException e) {
                 LOGGER.severe("Error generarIdActividadUnico: " + e.getMessage());
                 return null;
             }
-
         } while (true);
         return id;
     }
-    
+
+    /**
+     * Lista las actividades por usuario utilizando el procedimiento almacenado
+     * obtenerActividadesPorUsuario
+     * 
+     * @param idUsuario ID del usuario
+     * @return Lista de actividades del usuario
+     */
     public List<Actividad> listarPorUsuario(String idUsuario) {
-    List<Actividad> lista = new ArrayList<>();
-    try {
-        Connection con = ConexionBD.conectar();
-        String sql = "SELECT * FROM actividades WHERE idUsuario = ?";
-        PreparedStatement ps = con.prepareStatement(sql);
-        ps.setString(1, idUsuario);
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            Actividad a = new Actividad();
-            a.setIdActividad(rs.getString("idActividad"));
-            a.setIdCuenta(rs.getString("idCuenta"));
-            a.setDescripcion(rs.getString("descripcion"));
-            a.setFechaCreacion(rs.getTimestamp("fecha_creacion"));
-            a.setFechaCierre(rs.getTimestamp("fecha_cierre"));
-            a.setTipo(rs.getString("tipo"));
-            a.setRazon(rs.getString("razon"));
-            a.setDetalle(rs.getString("detalle"));
-            a.setResolucion(rs.getString("resolucion"));
-            a.setComentarios(rs.getString("comentarios"));
-            a.setTelefono(rs.getLong("telefono"));
-            a.setCorreo(rs.getString("correo"));
-            a.setIdUsuario(rs.getString("idUsuario"));
-            lista.add(a);
+        List<Actividad> lista = new ArrayList<>();
+        String sql = "{CALL obtenerActividadesPorUsuario(?)}";
+        try (Connection conn = ConexionBD.conectar();
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idUsuario);
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapearActividad(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error listarPorUsuario: " + e.getMessage());
         }
-        rs.close();
-        ps.close();
-        con.close();
-    } catch (Exception e) {
-        e.printStackTrace();
+        return lista;
     }
-    return lista;
-}
 
+    /**
+     * Obtiene las actividades finalizadas utilizando el procedimiento almacenado
+     * obtenerActividadesFinalizadas
+     * 
+     * @return Lista de actividades finalizadas
+     */
     public List<Actividad> obtenerActividadesFinalizadas() {
-    List<Actividad> lista = new ArrayList<>();
-    String sql = "SELECT * FROM ACTIVIDADES WHERE RESOLUCION = 'FINALIZADO' ORDER BY FECHA_CIERRE DESC";
+        List<Actividad> lista = new ArrayList<>();
+        String sql = "{CALL obtenerActividadesFinalizadas()}";
+        try (Connection conn = ConexionBD.conectar();
+                CallableStatement cs = conn.prepareCall(sql);
+                ResultSet rs = cs.executeQuery()) {
 
-    try (Connection conn = ConexionBD.conectar();
-         PreparedStatement ps = conn.prepareStatement(sql);
-         ResultSet rs = ps.executeQuery()) {
-
-        while (rs.next()) {
-            Actividad actividad = new Actividad();
-            actividad.setIdActividad(rs.getString("IDACTIVIDAD"));
-            actividad.setIdCuenta(rs.getString("IDCUENTA"));
-            actividad.setDescripcion(rs.getString("DESCRIPCION"));
-            actividad.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
-            actividad.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
-            actividad.setTipo(rs.getString("TIPO"));
-            actividad.setRazon(rs.getString("RAZON"));
-            actividad.setDetalle(rs.getString("DETALLE"));
-            actividad.setResolucion(rs.getString("RESOLUCION"));
-            actividad.setComentarios(rs.getString("COMENTARIOS"));
-            actividad.setTelefono(rs.getLong("TELEFONO"));
-            actividad.setCorreo(rs.getString("CORREO"));
-            actividad.setIdUsuario(rs.getString("IDUSUARIO"));
-            lista.add(actividad);
+            while (rs.next()) {
+                lista.add(mapearActividad(rs));
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error obtenerActividadesFinalizadas: " + e.getMessage());
         }
-
-    } catch (SQLException e) {
-        LOGGER.severe("Error obtenerActividadesFinalizadas: " + e.getMessage());
+        return lista;
     }
 
-    return lista;
-}
+    /**
+     * Método auxiliar para mapear los resultados de la consulta a un objeto
+     * Actividad
+     * 
+     * @param rs ResultSet con los datos de la actividad
+     * @return Objeto Actividad con los datos del ResultSet
+     * @throws SQLException Si ocurre algún error al acceder a los datos
+     */
+    private Actividad mapearActividad(ResultSet rs) throws SQLException {
+        Actividad actividad = new Actividad();
+        actividad.setIdActividad(rs.getString("IDACTIVIDAD"));
+        actividad.setIdCuenta(rs.getString("IDCUENTA"));
+        actividad.setDescripcion(rs.getString("DESCRIPCION"));
+        actividad.setFechaCreacion(rs.getTimestamp("FECHA_CREACION"));
+        actividad.setFechaCierre(rs.getTimestamp("FECHA_CIERRE"));
+        actividad.setTipo(rs.getString("TIPO"));
+        actividad.setRazon(rs.getString("RAZON"));
+        actividad.setDetalle(rs.getString("DETALLE"));
+        actividad.setResolucion(rs.getString("RESOLUCION"));
+        actividad.setComentarios(rs.getString("COMENTARIOS"));
+        actividad.setTelefono(rs.getLong("TELEFONO"));
+        actividad.setCorreo(rs.getString("CORREO"));
+        actividad.setIdUsuario(rs.getString("IDUSUARIO"));
+        return actividad;
+    }
 }

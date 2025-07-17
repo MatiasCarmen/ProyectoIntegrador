@@ -7,13 +7,14 @@ import java.util.List;
 
 public class ClienteValidator {
 
-   
     public static boolean isRutValido(String rut) {
-        if (StringUtils.isBlank(rut)) return false;
+        if (StringUtils.isBlank(rut))
+            return false;
 
         rut = rut.trim().toUpperCase();
 
-        // Acepta formato simple: 8 dígitos + guión + número o K para simular lo chileno maomenos
+        // Acepta formato simple: 8 dígitos + guión + número o K para simular lo chileno
+        // maomenos
         return rut.matches("\\d{8}-[0-9K]");
     }
 
@@ -23,11 +24,12 @@ public class ClienteValidator {
 
     public static boolean isNombreValido(String nombre) {
         return StringUtils.isNotBlank(nombre) &&
-               nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{2,50}");
+                nombre.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ\\s]{2,50}");
     }
 
     public static boolean isTelefonoValido(String telefono) {
-        if (StringUtils.isBlank(telefono)) return false;
+        if (StringUtils.isBlank(telefono))
+            return false;
         telefono = StringUtils.stripStart(telefono, "+");
         return telefono.matches("\\d{9}");
     }
@@ -40,27 +42,48 @@ public class ClienteValidator {
             String apellidoP, String apellidoM, String email, String telefono, int edad) {
         List<String> errores = new ArrayList<>();
 
-        if (!isRutValido(rut)) errores.add("RUT inválido");
-        if (!isNombreValido(nombres)) errores.add("Nombre inválido");
-        if (!isNombreValido(apellidoP)) errores.add("Apellido paterno inválido");
-        if (!isNombreValido(apellidoM)) errores.add("Apellido materno inválido");
-        if (!isEmailValido(email)) errores.add("Correo electrónico inválido");
-        if (!isTelefonoValido(telefono)) errores.add("Número de teléfono inválido");
-        if (!isEdadValida(edad)) errores.add("Edad inválida (debe ser entre 18 y 120 años)");
+        if (!isRutValido(rut))
+            errores.add("RUT inválido");
+        if (!isNombreValido(nombres))
+            errores.add("Nombre inválido");
+        if (!isNombreValido(apellidoP))
+            errores.add("Apellido paterno inválido");
+        if (!isNombreValido(apellidoM))
+            errores.add("Apellido materno inválido");
+        if (!isEmailValido(email))
+            errores.add("Correo electrónico inválido");
+        if (!isTelefonoValido(telefono))
+            errores.add("Número de teléfono inválido");
+        if (!isEdadValida(edad))
+            errores.add("Edad inválida (debe ser entre 18 y 120 años)");
 
         return errores;
     }
 
     public static String formatearRut(String rut) {
-        if (StringUtils.isBlank(rut)) return "";
+        if (StringUtils.isBlank(rut))
+            return "";
 
         rut = rut.replace(".", "").replace("-", "").toUpperCase();
         int length = rut.length();
-        if (length < 2) return rut;
+        if (length < 2)
+            return rut;
 
         String cuerpo = rut.substring(0, rut.length() - 1);
         String dv = rut.substring(rut.length() - 1);
 
-        return cuerpo + "-" + dv;
+        // Agregar puntos al cuerpo del RUT
+        StringBuilder resultado = new StringBuilder();
+        int count = 0;
+        for (int i = cuerpo.length() - 1; i >= 0; i--) {
+            if (count == 3) {
+                resultado.insert(0, ".");
+                count = 0;
+            }
+            resultado.insert(0, cuerpo.charAt(i));
+            count++;
+        }
+
+        return resultado.toString() + "-" + dv;
     }
 }

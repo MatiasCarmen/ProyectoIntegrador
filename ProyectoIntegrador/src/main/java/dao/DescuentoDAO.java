@@ -17,108 +17,157 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * DAO – DescuentoDAO: maneja CRUD de DESCUENTOS.
+ * DAO – DescuentoDAO: maneja CRUD de DESCUENTOS usando procedimientos
+ * almacenados.
+ * Implementa operaciones básicas de base de datos para la entidad Descuento.
  */
 public class DescuentoDAO {
     private static final Logger LOGGER = Logger.getLogger(DescuentoDAO.class.getName());
 
+    /**
+     * Crea un nuevo descuento en la base de datos.
+     * 
+     * @param d El objeto Descuento a crear
+     * @return true si la creación fue exitosa, false en caso contrario
+     */
     public boolean crear(Descuento d) {
-        String sql = "INSERT INTO DESCUENTOS (IDDESCUENTOS, COSTOT) VALUES (?,?)";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, d.getIdDescuentos());
-            ps.setBigDecimal(2, d.getCostoT());
-            LOGGER.info("Insertando Descuento: " + d.getIdDescuentos());
-            return ps.executeUpdate() > 0;
+                CallableStatement cs = conn.prepareCall("{CALL sp_crear_descuento(?, ?, ?)}")) {
+            cs.setString(1, d.getIdDescuentos());
+            cs.setBigDecimal(2, d.getCostoT());
+            cs.registerOutParameter(3, Types.BOOLEAN);
+
+            cs.execute();
+            boolean resultado = cs.getBoolean(3);
+
+            LOGGER.info("Descuento creado con ID: " + d.getIdDescuentos());
+            return resultado;
         } catch (SQLException e) {
-            LOGGER.severe("Error crear Descuento: " + e.getMessage());
+            LOGGER.severe("Error al crear descuento: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Obtiene un descuento por su ID.
+     * 
+     * @param id El ID del descuento a buscar
+     * @return El objeto Descuento encontrado o null si no existe
+     */
     public Descuento obtenerPorId(String id) {
-        String sql = "SELECT * FROM DESCUENTOS WHERE IDDESCUENTOS = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall("{CALL sp_obtener_descuento_por_id(?)}")) {
+            cs.setString(1, id);
+
+            try (ResultSet rs = cs.executeQuery()) {
                 if (rs.next()) {
-                    return new Descuento(
-                        rs.getString("IDDESCUENTOS"),
-                        rs.getBigDecimal("COSTOT")
-                    );
+                    return mapearDescuento(rs);
                 }
             }
         } catch (SQLException e) {
-            LOGGER.severe("Error obtener Descuento: " + e.getMessage());
+            LOGGER.severe("Error al obtener descuento: " + e.getMessage());
         }
         return null;
     }
 
+    /**
+     * Lista todos los descuentos en la base de datos.
+     * 
+     * @return Lista de todos los descuentos
+     */
     public List<Descuento> listarTodos() {
         List<Descuento> lista = new ArrayList<>();
-        String sql = "SELECT * FROM DESCUENTOS";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall("{CALL sp_listar_descuentos()}");
+                ResultSet rs = cs.executeQuery()) {
             while (rs.next()) {
-                lista.add(new Descuento(
-                    rs.getString("IDDESCUENTOS"),
-                    rs.getBigDecimal("COSTOT")
-                ));
+                lista.add(mapearDescuento(rs));
             }
         } catch (SQLException e) {
-            LOGGER.severe("Error listar Descuentos: " + e.getMessage());
+            LOGGER.severe("Error al listar descuentos: " + e.getMessage());
         }
         return lista;
     }
 
+    /**
+     * Actualiza un descuento existente.
+     * 
+     * @param d El objeto Descuento con los datos actualizados
+     * @return true si la actualización fue exitosa, false en caso contrario
+     */
     public boolean actualizar(Descuento d) {
-        String sql = "UPDATE DESCUENTOS SET COSTOT = ? WHERE IDDESCUENTOS = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setBigDecimal(1, d.getCostoT());
-            ps.setString(2, d.getIdDescuentos());
-            LOGGER.info("Actualizando Descuento: " + d.getIdDescuentos());
-            return ps.executeUpdate() > 0;
+                CallableStatement cs = conn.prepareCall("{CALL sp_actualizar_descuento(?, ?, ?)}")) {
+            cs.setString(1, d.getIdDescuentos());
+            cs.setBigDecimal(2, d.getCostoT());
+            cs.registerOutParameter(3, Types.BOOLEAN);
+
+            cs.execute();
+            boolean resultado = cs.getBoolean(3);
+
+            LOGGER.info("Descuento actualizado con ID: " + d.getIdDescuentos());
+            return resultado;
         } catch (SQLException e) {
-           	LOGGER.severe("Error actualizar Descuento: " + e.getMessage());
+            LOGGER.severe("Error al actualizar descuento: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Elimina un descuento por su ID.
+     * 
+     * @param id El ID del descuento a eliminar
+     * @return true si la eliminación fue exitosa, false en caso contrario
+     */
     public boolean eliminar(String id) {
-       	String sql = "DELETE FROM DESCUENTOS WHERE IDDESCUENTOS = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-           	ps.setString(1, id);
-           	LOGGER.info("Eliminando Descuento: " + id);
-           	return ps.executeUpdate() > 0;
+                CallableStatement cs = conn.prepareCall("{CALL sp_eliminar_descuento(?, ?)}")) {
+            cs.setString(1, id);
+            cs.registerOutParameter(2, Types.BOOLEAN);
+
+            cs.execute();
+            boolean resultado = cs.getBoolean(2);
+
+            LOGGER.info("Descuento eliminado con ID: " + id);
+            return resultado;
         } catch (SQLException e) {
-           	LOGGER.severe("Error eliminar Descuento: " + e.getMessage());
-           	return false;
+            LOGGER.severe("Error al eliminar descuento: " + e.getMessage());
+            return false;
         }
     }
-    
+
+    /**
+     * Obtiene un descuento por el ID de cuenta.
+     * 
+     * @param idCuenta El ID de la cuenta
+     * @return El objeto Descuento asociado a la cuenta o null si no existe
+     */
     public Descuento obtenerDescuentoPorIdCuenta(String idCuenta) {
-    Descuento descuento = null;
-    String sql =  "SELECT d.* FROM PRODUCTOS_INSTALADOS pi " +
-            "JOIN DESCUENTOS d ON pi.IDDESCUENTOS = d.IDDESCUENTOS " +
-            "WHERE pi.IDCUENTA = ?";
-    try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)){
-     
-        ps.setString(1, idCuenta);
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            descuento = new Descuento(
-                rs.getString("IDDESCUENTOS"),
-                rs.getBigDecimal("COSTOT")
-            );
+        try (Connection conn = ConexionBD.conectar();
+                CallableStatement cs = conn.prepareCall("{CALL sp_obtener_descuento_por_cuenta(?)}")) {
+            cs.setString(1, idCuenta);
+
+            try (ResultSet rs = cs.executeQuery()) {
+                if (rs.next()) {
+                    return mapearDescuento(rs);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error al obtener descuento por cuenta: " + e.getMessage());
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
+        return null;
     }
-    return descuento;
-}
+
+    /**
+     * Mapea un ResultSet a un objeto Descuento.
+     * 
+     * @param rs El ResultSet que contiene los datos del descuento
+     * @return Un objeto Descuento con los datos mapeados
+     * @throws SQLException si ocurre un error al acceder a los datos
+     */
+    private Descuento mapearDescuento(ResultSet rs) throws SQLException {
+        return new Descuento(
+                rs.getString("IDDESCUENTOS"),
+                rs.getBigDecimal("COSTOT"));
+    }
 }

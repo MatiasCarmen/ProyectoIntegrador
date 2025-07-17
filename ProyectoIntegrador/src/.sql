@@ -302,3 +302,133 @@ INSERT INTO DETALLE_PEDIDOS (IDPEDIDO, IDADICIONALES, IDPLAN, IDDESCUENTOS) VALU
 INSERT INTO SOLICITUDES (IDSOLICITUD, IDCUENTA, TIPO, ESTADO, AREA, SUBAREA, TIPO_REQUERIMIENTO, FECHA_CREACION, FECHA_CIERRE, COMENTARIOS) VALUES
 ('S001', '1-1111-CLI', 'RECLAMO', 'ABIERTA', 'TÉCNICA', 'INTERNET', 'LENTITUD', '2025-06-01', '2025-06-02', 'Cliente requiere revisión de internet.');
 INSERT INTO ACTIVIDADES_SOLICITUDES (IDACTIVIDAD, IDSOLICITUD) VALUES ('1-AX234404','S001');
+
+-- Procedimiento para insertar un nuevo cliente
+DELIMITER //
+CREATE PROCEDURE insertarCliente(
+    IN p_rut VARCHAR(10),
+    IN p_correo VARCHAR(255),
+    IN p_nombres VARCHAR(100),
+    IN p_apellidoP VARCHAR(100),
+    IN p_apellidoM VARCHAR(100),
+    IN p_telefono NUMERIC(9),
+    IN p_edad TINYINT,
+    IN p_direccion VARCHAR(100),
+    IN p_idComuna VARCHAR(20)
+)
+BEGIN
+    INSERT INTO CLIENTES (RUT, CORREO, NOMBRES, APELLIDOP, APELLIDOM, TELEFONO, EDAD, DIRECCION, IDCOMUNA) 
+    VALUES (p_rut, p_correo, p_nombres, p_apellidoP, p_apellidoM, p_telefono, p_edad, p_direccion, p_idComuna);
+END;
+//
+
+-- Procedimiento para obtener un cliente por su RUT
+CREATE PROCEDURE obtenerClientePorRut(
+    IN p_rut VARCHAR(10)
+)
+BEGIN
+    SELECT * FROM CLIENTES WHERE RUT = p_rut;
+END;
+//
+
+-- Procedimiento para listar todos los clientes
+CREATE PROCEDURE listarClientes()
+BEGIN
+    SELECT * FROM CLIENTES;
+END;
+//
+
+-- Procedimiento para actualizar un cliente existente
+CREATE PROCEDURE actualizarCliente(
+    IN p_correo VARCHAR(255),
+    IN p_nombres VARCHAR(100),
+    IN p_apellidoP VARCHAR(100),
+    IN p_apellidoM VARCHAR(100),
+    IN p_telefono NUMERIC(9),
+    IN p_edad TINYINT,
+    IN p_direccion VARCHAR(100),
+    IN p_idComuna VARCHAR(20),
+    IN p_rut VARCHAR(10)
+)
+BEGIN
+    UPDATE CLIENTES SET 
+        CORREO = p_correo,
+        NOMBRES = p_nombres,
+        APELLIDOP = p_apellidoP,
+        APELLIDOM = p_apellidoM,
+        TELEFONO = p_telefono,
+        EDAD = p_edad,
+        DIRECCION = p_direccion,
+        IDCOMUNA = p_idComuna
+    WHERE RUT = p_rut;
+END;
+//
+
+-- Procedimiento para eliminar un cliente por su RUT
+CREATE PROCEDURE eliminarCliente(
+    IN p_rut VARCHAR(10)
+)
+BEGIN
+    DELETE FROM CLIENTES WHERE RUT = p_rut;
+END;
+//
+
+-- Procedimiento para buscar clientes por criterio
+CREATE PROCEDURE buscarClientesPorCriterio(
+    IN p_criterio VARCHAR(255)
+)
+BEGIN
+    SELECT * FROM CLIENTES
+    WHERE RUT LIKE CONCAT('%', p_criterio, '%')
+    OR NOMBRES LIKE CONCAT('%', p_criterio, '%')
+    OR APELLIDOP LIKE CONCAT('%', p_criterio, '%')
+    OR APELLIDOM LIKE CONCAT('%', p_criterio, '%')
+    OR CORREO LIKE CONCAT('%', p_criterio, '%');
+END;
+//
+
+-- Procedimiento para búsqueda avanzada de clientes
+CREATE PROCEDURE buscarClientesAvanzado(
+    IN p_rut VARCHAR(10),
+    IN p_nombre VARCHAR(100),
+    IN p_apellidoP VARCHAR(100),
+    IN p_apellidoM VARCHAR(100),
+    IN p_direccion VARCHAR(100),
+    IN p_tipoCuenta VARCHAR(20),
+    IN p_comuna VARCHAR(100)
+)
+BEGIN
+    SELECT 
+        c.NOMBRES, 
+        c.APELLIDOP, 
+        c.APELLIDOM,
+        c.RUT, 
+        c.DIRECCION, 
+        co.DESCRIPCION as COMUNA,
+        COALESCE(cc.CLASE, 'Sin Cuenta') as TIPO_CUENTA,
+        cc.IDCUENTA as IDCUENTA_CLIENTE
+    FROM CLIENTES c
+    LEFT JOIN CUENTAS_CLIENTES cc ON c.RUT = cc.RUT
+    LEFT JOIN COMUNAS co ON c.IDCOMUNA = co.IDCOMUNA
+    WHERE 1=1
+        AND (p_nombre IS NULL OR p_nombre = '' 
+             OR CONCAT(c.NOMBRES, ' ', c.APELLIDOP, ' ', c.APELLIDOM) LIKE CONCAT('%', p_nombre, '%')
+             OR c.NOMBRES LIKE CONCAT('%', p_nombre, '%'))
+        AND (p_rut IS NULL OR p_rut = '' OR c.RUT LIKE CONCAT('%', p_rut, '%'))
+        AND (p_apellidoP IS NULL OR p_apellidoP = '' OR c.APELLIDOP LIKE CONCAT('%', p_apellidoP, '%'))
+        AND (p_apellidoM IS NULL OR p_apellidoM = '' OR c.APELLIDOM LIKE CONCAT('%', p_apellidoM, '%'))
+        AND (p_direccion IS NULL OR p_direccion = '' OR c.DIRECCION LIKE CONCAT('%', p_direccion, '%'))
+        AND (p_tipoCuenta IS NULL OR p_tipoCuenta = 'Todos' OR cc.CLASE = p_tipoCuenta)
+        AND (p_comuna IS NULL OR p_comuna = 'Todas' OR co.DESCRIPCION = p_comuna)
+    ORDER BY c.APELLIDOP, c.APELLIDOM, c.NOMBRES
+    LIMIT 1000;
+END;
+//
+
+-- Procedimiento para contar clientes
+CREATE PROCEDURE contarClientes()
+BEGIN
+    SELECT COUNT(*) FROM CLIENTES;
+END;
+//
+DELIMITER ;

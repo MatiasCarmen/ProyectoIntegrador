@@ -14,28 +14,35 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * DAO de CLIENTES: encapsula todo el acceso JDBC a la tabla CLIENTES,
+ * DAO de CLIENTES: encapsula todo el acceso JDBC a la tabla CLIENTES usando
+ * procedimientos almacenados,
  * incluyendo búsquedas avanzadas con JOIN a CUENTAS_CLIENTES.
  */
 public class ClienteDAO {
     private static final Logger LOGGER = Logger.getLogger(ClienteDAO.class.getName());
 
+    /**
+     * Crea un nuevo cliente usando el procedimiento almacenado insertarCliente
+     * 
+     * @param c El cliente a crear
+     * @return true si se creó correctamente, false en caso contrario
+     */
     public boolean crearCliente(Cliente c) {
-        String sql = "INSERT INTO CLIENTES (RUT, CORREO, NOMBRES, APELLIDOP, APELLIDOM, TELEFONO, EDAD, DIRECCION, IDCOMUNA) VALUES (?,?,?,?,?,?,?,?,?)";
+        String sql = "{CALL insertarCliente(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+                CallableStatement cs = conn.prepareCall(sql)) {
 
-            ps.setString(1, c.getRut());
-            ps.setString(2, c.getCorreo());
-            ps.setString(3, c.getNombres());
-            ps.setString(4, c.getApellidoP());
-            ps.setString(5, c.getApellidoM());
-            ps.setLong(6, c.getTelefono());
-            ps.setByte(7, c.getEdad());
-            ps.setString(8, c.getDireccion());
-            ps.setString(9, c.getIdComuna());
+            cs.setString(1, c.getRut());
+            cs.setString(2, c.getCorreo());
+            cs.setString(3, c.getNombres());
+            cs.setString(4, c.getApellidoP());
+            cs.setString(5, c.getApellidoM());
+            cs.setLong(6, c.getTelefono());
+            cs.setByte(7, c.getEdad());
+            cs.setString(8, c.getDireccion());
+            cs.setString(9, c.getIdComuna());
 
-            int r = ps.executeUpdate();
+            int r = cs.executeUpdate();
             LOGGER.info("Filas insertadas: " + r);
             return r > 0;
         } catch (SQLException e) {
@@ -44,25 +51,22 @@ public class ClienteDAO {
         }
     }
 
+    /**
+     * Obtiene un cliente por su RUT usando el procedimiento almacenado
+     * obtenerClientePorRut
+     * 
+     * @param rut El RUT del cliente a buscar
+     * @return El cliente encontrado o null si no existe
+     */
     public Cliente obtenerClientePorRut(String rut) {
-        String sql = "SELECT * FROM CLIENTES WHERE RUT = ?";
+        String sql = "{CALL obtenerClientePorRut(?)}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+                CallableStatement cs = conn.prepareCall(sql)) {
 
-            ps.setString(1, rut);
-            try (ResultSet rs = ps.executeQuery()) {
+            cs.setString(1, rut);
+            try (ResultSet rs = cs.executeQuery()) {
                 if (rs.next()) {
-                    Cliente c = new Cliente();
-                    c.setRut(rs.getString("RUT"));
-                    c.setCorreo(rs.getString("CORREO"));
-                    c.setNombres(rs.getString("NOMBRES"));
-                    c.setApellidoP(rs.getString("APELLIDOP"));
-                    c.setApellidoM(rs.getString("APELLIDOM"));
-                    c.setTelefono(rs.getLong("TELEFONO"));
-                    c.setEdad(rs.getByte("EDAD"));
-                    c.setDireccion(rs.getString("DIRECCION"));
-                    c.setIdComuna(rs.getString("IDCOMUNA"));
-                    return c;
+                    return mapearCliente(rs);
                 }
             }
         } catch (SQLException e) {
@@ -71,25 +75,20 @@ public class ClienteDAO {
         return null;
     }
 
+    /**
+     * Lista todos los clientes usando el procedimiento almacenado listarClientes
+     * 
+     * @return Lista inmutable de todos los clientes
+     */
     public ImmutableList<Cliente> listarClientes() {
         List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT * FROM CLIENTES";
+        String sql = "{CALL listarClientes()}";
         try (Connection conn = ConexionBD.conectar();
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(sql)) {
+                CallableStatement cs = conn.prepareCall(sql);
+                ResultSet rs = cs.executeQuery()) {
 
             while (rs.next()) {
-                Cliente c = new Cliente();
-                c.setRut(rs.getString("RUT"));
-                c.setCorreo(rs.getString("CORREO"));
-                c.setNombres(rs.getString("NOMBRES"));
-                c.setApellidoP(rs.getString("APELLIDOP"));
-                c.setApellidoM(rs.getString("APELLIDOM"));
-                c.setTelefono(rs.getLong("TELEFONO"));
-                c.setEdad(rs.getByte("EDAD"));
-                c.setDireccion(rs.getString("DIRECCION"));
-                c.setIdComuna(rs.getString("IDCOMUNA"));
-                lista.add(c);
+                lista.add(mapearCliente(rs));
             }
         } catch (SQLException e) {
             LOGGER.severe("Error al listar clientes: " + e.getMessage());
@@ -97,22 +96,29 @@ public class ClienteDAO {
         return GuavaUtils.toImmutableList(lista);
     }
 
+    /**
+     * Actualiza un cliente existente usando el procedimiento almacenado
+     * actualizarCliente
+     * 
+     * @param c El cliente con los datos actualizados
+     * @return true si se actualizó correctamente, false en caso contrario
+     */
     public boolean actualizarCliente(Cliente c) {
-        String sql = "UPDATE CLIENTES SET CORREO=?, NOMBRES=?, APELLIDOP=?, APELLIDOM=?, TELEFONO=?, EDAD=?, DIRECCION=?, IDCOMUNA=? WHERE RUT=?";
+        String sql = "{CALL actualizarCliente(?, ?, ?, ?, ?, ?, ?, ?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+                CallableStatement cs = conn.prepareCall(sql)) {
 
-            ps.setString(1, c.getCorreo());
-            ps.setString(2, c.getNombres());
-            ps.setString(3, c.getApellidoP());
-            ps.setString(4, c.getApellidoM());
-            ps.setLong(5, c.getTelefono());
-            ps.setByte(6, c.getEdad());
-            ps.setString(7, c.getDireccion());
-            ps.setString(8, c.getIdComuna());
-            ps.setString(9, c.getRut());
+            cs.setString(1, c.getCorreo());
+            cs.setString(2, c.getNombres());
+            cs.setString(3, c.getApellidoP());
+            cs.setString(4, c.getApellidoM());
+            cs.setLong(5, c.getTelefono());
+            cs.setByte(6, c.getEdad());
+            cs.setString(7, c.getDireccion());
+            cs.setString(8, c.getIdComuna());
+            cs.setString(9, c.getRut());
 
-            int r = ps.executeUpdate();
+            int r = cs.executeUpdate();
             LOGGER.info("Filas actualizadas: " + r);
             return r > 0;
         } catch (SQLException e) {
@@ -121,13 +127,20 @@ public class ClienteDAO {
         }
     }
 
+    /**
+     * Elimina un cliente por su RUT usando el procedimiento almacenado
+     * eliminarCliente
+     * 
+     * @param rut El RUT del cliente a eliminar
+     * @return true si se eliminó correctamente, false en caso contrario
+     */
     public boolean eliminarCliente(String rut) {
-        String sql = "DELETE FROM CLIENTES WHERE RUT=?";
+        String sql = "{CALL eliminarCliente(?)}";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+                CallableStatement cs = conn.prepareCall(sql)) {
 
-            ps.setString(1, rut);
-            int r = ps.executeUpdate();
+            cs.setString(1, rut);
+            int r = cs.executeUpdate();
             LOGGER.info("Filas eliminadas: " + r);
             return r > 0;
         } catch (SQLException e) {
@@ -136,36 +149,25 @@ public class ClienteDAO {
         }
     }
 
+    /**
+     * Busca clientes por un criterio general usando el procedimiento almacenado
+     * buscarClientesPorCriterio
+     * 
+     * @param criterio El criterio de búsqueda (se aplica a varios campos)
+     * @return Lista de clientes que coinciden con el criterio
+     */
     public List<Cliente> buscarPorCriterio(String criterio) {
         List<Cliente> lista = new ArrayList<>();
-        String sql = "SELECT * FROM CLIENTES WHERE " +
-                "RUT LIKE ? OR " +
-                "NOMBRES LIKE ? OR " +
-                "APELLIDOP LIKE ? OR " +
-                "APELLIDOM LIKE ? OR " +
-                "CORREO LIKE ?";
+        String sql = "{CALL buscarClientesPorCriterio(?)}";
 
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
+                CallableStatement cs = conn.prepareCall(sql)) {
 
-            String patron = "%" + criterio + "%";
-            for (int i = 1; i <= 5; i++) {
-                ps.setString(i, patron);
-            }
+            cs.setString(1, criterio);
 
-            try (ResultSet rs = ps.executeQuery()) {
+            try (ResultSet rs = cs.executeQuery()) {
                 while (rs.next()) {
-                    Cliente c = new Cliente();
-                    c.setRut(rs.getString("RUT"));
-                    c.setCorreo(rs.getString("CORREO"));
-                    c.setNombres(rs.getString("NOMBRES"));
-                    c.setApellidoP(rs.getString("APELLIDOP"));
-                    c.setApellidoM(rs.getString("APELLIDOM"));
-                    c.setTelefono(rs.getLong("TELEFONO"));
-                    c.setEdad(rs.getByte("EDAD"));
-                    c.setDireccion(rs.getString("DIRECCION"));
-                    c.setIdComuna(rs.getString("IDCOMUNA"));
-                    lista.add(c);
+                    lista.add(mapearCliente(rs));
                 }
             }
         } catch (SQLException e) {
@@ -174,6 +176,19 @@ public class ClienteDAO {
         return lista;
     }
 
+    /**
+     * Realiza una búsqueda avanzada de clientes usando el procedimiento almacenado
+     * buscarClientesAvanzado
+     * 
+     * @param rut        RUT del cliente (parcial o completo)
+     * @param nombre     Nombre del cliente
+     * @param apellidoP  Apellido paterno
+     * @param apellidoM  Apellido materno
+     * @param direccion  Dirección
+     * @param tipoCuenta Tipo de cuenta asociada
+     * @param comuna     Comuna
+     * @return Lista de arrays con los resultados de la búsqueda
+     */
     public List<Object[]> buscarClientesAvanzado(
             String rut,
             String nombre,
@@ -184,72 +199,29 @@ public class ClienteDAO {
             String comuna) {
 
         List<Object[]> resultados = new ArrayList<>();
-        StringBuilder sql = new StringBuilder(
-                "SELECT c.NOMBRES, c.APELLIDOP, c.APELLIDOM, \n" +
-                        "       c.RUT, c.DIRECCION, co.DESCRIPCION as COMUNA, \n" +
-                        "       COALESCE(cc.CLASE, 'Sin Cuenta') as TIPO_CUENTA, \n" +
-                        "       cc.IDCUENTA as IDCUENTA_CLIENTE " +
-                        "FROM CLIENTES c " +
-                        "LEFT JOIN CUENTAS_CLIENTES cc ON c.RUT = cc.RUT " +
-                        "LEFT JOIN COMUNAS co ON c.IDCOMUNA = co.IDCOMUNA ");
-        List<String> params = new ArrayList<>();
-
-        // Búsqueda por nombre completo
-        if (nombre != null && !nombre.trim().isEmpty()) {
-            sql.append(" AND (CONCAT(c.NOMBRES, ' ', c.APELLIDOP, ' ', c.APELLIDOM) LIKE ? " +
-                    "OR c.NOMBRES LIKE ?)");
-            params.add("%" + nombre + "%");
-            params.add("%" + nombre + "%");
-        }
-
-        if (rut != null && !rut.trim().isEmpty()) {
-            sql.append(" AND c.RUT LIKE ?");
-            params.add("%" + rut + "%");
-        }
-        if (apellidoP != null && !apellidoP.trim().isEmpty()) {
-            sql.append(" AND c.APELLIDOP LIKE ?");
-            params.add("%" + apellidoP + "%");
-        }
-        if (apellidoM != null && !apellidoM.trim().isEmpty()) {
-            sql.append(" AND c.APELLIDOM LIKE ?");
-            params.add("%" + apellidoM + "%");
-        }
-        if (direccion != null && !direccion.trim().isEmpty()) {
-            sql.append(" AND c.DIRECCION LIKE ?");
-            params.add("%" + direccion + "%");
-        }
-        if (tipoCuenta != null && !tipoCuenta.equals("Todos")) {
-            sql.append(" AND cc.CLASE = ?");
-            params.add(tipoCuenta);
-        }
-        if (comuna != null && !comuna.equals("Todas")) {
-            sql.append(" AND co.DESCRIPCION = ?");
-            params.add(comuna);
-        }
-
-        // Agregar ordenamiento
-        sql.append(" ORDER BY c.APELLIDOP, c.APELLIDOM, c.NOMBRES");
-
-        // Agregar límite para mejor rendimiento
-        sql.append(" LIMIT 1000");
+        String sql = "{CALL buscarClientesAvanzado(?, ?, ?, ?, ?, ?, ?)}";
 
         long startTime = System.currentTimeMillis();
 
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql.toString())) {
+                CallableStatement cs = conn.prepareCall(sql)) {
 
             // Configurar parámetros
-            for (int i = 0; i < params.size(); i++) {
-                ps.setString(i + 1, params.get(i));
-            }
+            cs.setString(1, rut);
+            cs.setString(2, nombre);
+            cs.setString(3, apellidoP);
+            cs.setString(4, apellidoM);
+            cs.setString(5, direccion);
+            cs.setString(6, tipoCuenta);
+            cs.setString(7, comuna);
 
             // Loggear información detallada
             System.out.println("\n=== Búsqueda Avanzada de Clientes ===");
-            System.out.println("SQL: " + sql.toString());
-            System.out.println("Total parámetros: " + params.size());
-            System.out.println("Parámetros aplicados: " + params);
+            System.out.println("Procedimiento: buscarClientesAvanzado");
+            System.out.println("Parámetros: " + rut + ", " + nombre + ", " + apellidoP + ", " +
+                    apellidoM + ", " + direccion + ", " + tipoCuenta + ", " + comuna);
 
-            try (ResultSet rs = ps.executeQuery()) {
+            try (ResultSet rs = cs.executeQuery()) {
                 while (rs.next()) {
                     Object[] fila = new Object[8];
                     fila[0] = rs.getString("NOMBRES");
@@ -280,11 +252,17 @@ public class ClienteDAO {
         return resultados;
     }
 
+    /**
+     * Cuenta el número total de clientes usando el procedimiento almacenado
+     * contarClientes
+     * 
+     * @return El número total de clientes
+     */
     public int contarClientes() {
-        String sql = "SELECT COUNT(*) FROM CLIENTES";
+        String sql = "{CALL contarClientes()}";
         try (Connection conn = ConexionBD.conectar();
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(sql)) {
+                CallableStatement cs = conn.prepareCall(sql);
+                ResultSet rs = cs.executeQuery()) {
             if (rs.next()) {
                 return rs.getInt(1);
             }
@@ -292,5 +270,26 @@ public class ClienteDAO {
             LOGGER.severe("Error al contar clientes: " + e.getMessage());
         }
         return 0;
+    }
+
+    /**
+     * Método auxiliar para mapear los resultados de la consulta a un objeto Cliente
+     * 
+     * @param rs ResultSet con los datos del cliente
+     * @return Objeto Cliente con los datos del ResultSet
+     * @throws SQLException Si ocurre algún error al acceder a los datos
+     */
+    private Cliente mapearCliente(ResultSet rs) throws SQLException {
+        Cliente c = new Cliente();
+        c.setRut(rs.getString("RUT"));
+        c.setCorreo(rs.getString("CORREO"));
+        c.setNombres(rs.getString("NOMBRES"));
+        c.setApellidoP(rs.getString("APELLIDOP"));
+        c.setApellidoM(rs.getString("APELLIDOM"));
+        c.setTelefono(rs.getLong("TELEFONO"));
+        c.setEdad(rs.getByte("EDAD"));
+        c.setDireccion(rs.getString("DIRECCION"));
+        c.setIdComuna(rs.getString("IDCOMUNA"));
+        return c;
     }
 }

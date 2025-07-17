@@ -19,37 +19,49 @@ import java.util.logging.Logger;
 
 /**
  * DAO – MesaCentralDAO: maneja CRUD de MESA_CENTRAL.
+ * Esta clase ha sido migrada para utilizar procedimientos almacenados.
  */
 public class MesaCentralDAO {
     private static final Logger LOGGER = Logger.getLogger(MesaCentralDAO.class.getName());
 
+    /**
+     * Crea un nuevo registro de mesa central.
+     * 
+     * @param m La mesa central a crear
+     * @return true si la creación fue exitosa, false en caso contrario
+     */
     public boolean crear(MesaCentral m) {
-        String sql = "INSERT INTO MESA_CENTRAL (IDACTIVIDAD, TELEFONO, LUGAR) VALUES (?,?,?)";
+        String sql = "{CALL sp_crear_mesa_central(?, ?, ?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, m.getIdActividad());
-            ps.setLong(2, m.getTelefono());
-            ps.setString(3, m.getLugar());
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, m.getIdActividad());
+            cs.setLong(2, m.getTelefono());
+            cs.setString(3, m.getLugar());
+            cs.registerOutParameter(4, Types.BOOLEAN);
+
+            cs.execute();
             LOGGER.info("Insertando MesaCentral: actividad=" + m.getIdActividad());
-            return ps.executeUpdate() > 0;
+            return cs.getBoolean(4);
         } catch (SQLException e) {
             LOGGER.severe("Error crear MesaCentral: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Obtiene una mesa central por su ID de actividad.
+     * 
+     * @param idActividad El ID de la actividad asociada
+     * @return La mesa central encontrada o null si no existe
+     */
     public MesaCentral obtenerPorActividad(String idActividad) {
-        String sql = "SELECT * FROM MESA_CENTRAL WHERE IDACTIVIDAD = ?";
+        String sql = "{CALL sp_obtener_mesa_central_por_actividad(?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idActividad);
-            try (ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idActividad);
+            try (ResultSet rs = cs.executeQuery()) {
                 if (rs.next()) {
-                    return new MesaCentral(
-                        rs.getString("IDACTIVIDAD"),
-                        rs.getLong("TELEFONO"),
-                        rs.getString("LUGAR")
-                    );
+                    return mapearMesaCentral(rs);
                 }
             }
         } catch (SQLException e) {
@@ -58,136 +70,167 @@ public class MesaCentralDAO {
         return null;
     }
 
+    /**
+     * Actualiza un registro de mesa central existente.
+     * 
+     * @param m La mesa central con los datos actualizados
+     * @return true si la actualización fue exitosa, false en caso contrario
+     */
     public boolean actualizar(MesaCentral m) {
-        String sql = "UPDATE MESA_CENTRAL SET TELEFONO = ?, LUGAR = ? WHERE IDACTIVIDAD = ?";
+        String sql = "{CALL sp_actualizar_mesa_central(?, ?, ?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setLong(1, m.getTelefono());
-            ps.setString(2, m.getLugar());
-            ps.setString(3, m.getIdActividad());
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, m.getIdActividad());
+            cs.setLong(2, m.getTelefono());
+            cs.setString(3, m.getLugar());
+            cs.registerOutParameter(4, Types.BOOLEAN);
+
+            cs.execute();
             LOGGER.info("Actualizando MesaCentral: actividad=" + m.getIdActividad());
-            return ps.executeUpdate() > 0;
+            return cs.getBoolean(4);
         } catch (SQLException e) {
             LOGGER.severe("Error actualizar MesaCentral: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Elimina una mesa central por su ID de actividad.
+     * 
+     * @param idActividad El ID de la actividad asociada
+     * @return true si la eliminación fue exitosa, false en caso contrario
+     */
     public boolean eliminar(String idActividad) {
-        String sql = "DELETE FROM MESA_CENTRAL WHERE IDACTIVIDAD = ?";
+        String sql = "{CALL sp_eliminar_mesa_central(?, ?)}";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idActividad);
-           	LOGGER.info("Eliminando MesaCentral: actividad=" + idActividad);
-           	return ps.executeUpdate() > 0;
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idActividad);
+            cs.registerOutParameter(2, Types.BOOLEAN);
+
+            cs.execute();
+            LOGGER.info("Eliminando MesaCentral: actividad=" + idActividad);
+            return cs.getBoolean(2);
         } catch (SQLException e) {
-           	LOGGER.severe("Error eliminar MesaCentral: " + e.getMessage());
-           	return false;
+            LOGGER.severe("Error eliminar MesaCentral: " + e.getMessage());
+            return false;
         }
     }
 
+    /**
+     * Lista todas las mesas centrales.
+     * 
+     * @return Lista de todas las mesas centrales
+     */
     public List<MesaCentral> listarTodos() {
         List<MesaCentral> lista = new ArrayList<>();
-        try (Connection conn = ConexionBD.conectar()) {
-            String sql = "SELECT * FROM MESA_CENTRAL";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-
+        String sql = "{CALL sp_listar_mesas_centrales()}";
+        try (Connection conn = ConexionBD.conectar();
+                CallableStatement cs = conn.prepareCall(sql);
+                ResultSet rs = cs.executeQuery()) {
             while (rs.next()) {
-                MesaCentral mc = new MesaCentral();
-                mc.setIdActividad(rs.getString("ID_ACTIVIDAD"));
-                mc.setTelefono(rs.getLong("TELEFONO")); // Convertir a Long
-                mc.setLugar(rs.getString("LUGAR"));
-                lista.add(mc);
+                lista.add(mapearMesaCentral(rs));
             }
         } catch (SQLException e) {
             LOGGER.severe("Error al listar mesa central: " + e.getMessage());
         }
         return lista;
-    } 
-    
-      public List<MesaCentral> listarTodosPorIdCuenta(String idCuenta) {
+    }
+
+    /**
+     * Lista todas las mesas centrales asociadas a una cuenta.
+     * 
+     * @param idCuenta El ID de la cuenta
+     * @return Lista de mesas centrales de la cuenta
+     */
+    public List<MesaCentral> listarTodosPorIdCuenta(String idCuenta) {
         List<MesaCentral> lista = new ArrayList<>();
-        try (Connection conn = ConexionBD.conectar()) {
-            String sql = "SELECT M.IDACTIVIDAD,M.TELEFONO,M.LUGAR FROM MESA_CENTRAL AS M INNER JOIN " +
-"ACTIVIDADES AS A ON M.IDACTIVIDAD = A.IDACTIVIDAD " +
-"WHERE A.IDCUENTA = ?";
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1,idCuenta);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next()) {
-                MesaCentral mc = new MesaCentral();
-                mc.setIdActividad(rs.getString("M.IDACTIVIDAD"));
-                mc.setTelefono(rs.getLong("TELEFONO")); 
-                mc.setLugar(rs.getString("LUGAR"));
-                lista.add(mc);
+        String sql = "{CALL sp_listar_mesas_centrales_por_cuenta(?)}";
+        try (Connection conn = ConexionBD.conectar();
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idCuenta);
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapearMesaCentral(rs));
+                }
             }
         } catch (SQLException e) {
-            LOGGER.severe("Error al listar mesa central: " + e.getMessage());
+            LOGGER.severe("Error al listar mesa central por cuenta: " + e.getMessage());
         }
         return lista;
     }
-      
-      public List<MesaCentral> filtrarPorCampoYValor(String idCuenta, String campo, Object valor) {
-    List<MesaCentral> lista = new ArrayList<>();
 
-    List<String> camposPermitidos = List.of("M.LUGAR", "M.TELEFONO", "M.IDACTIVIDAD");
-    if (!camposPermitidos.contains("M." + campo.toUpperCase())) {
+    /**
+     * Filtra mesas centrales por campo y valor específico.
+     * 
+     * @param idCuenta El ID de la cuenta
+     * @param campo    El campo por el cual filtrar
+     * @param valor    El valor a buscar
+     * @return Lista de mesas centrales que coinciden con el filtro
+     */
+    public List<MesaCentral> filtrarPorCampoYValor(String idCuenta, String campo, Object valor) {
+        List<MesaCentral> lista = new ArrayList<>();
+        List<String> camposPermitidos = List.of("LUGAR", "TELEFONO", "IDACTIVIDAD");
+        if (!camposPermitidos.contains(campo.toUpperCase())) {
+            return lista;
+        }
+
+        String sql = "{CALL sp_filtrar_mesas_centrales(?, ?, ?)}";
+        try (Connection conn = ConexionBD.conectar();
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idCuenta);
+            cs.setString(2, campo);
+            cs.setString(3, valor.toString());
+
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapearMesaCentral(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error al filtrar mesa central: " + e.getMessage());
+        }
         return lista;
     }
 
-    String sql = "SELECT M.IDACTIVIDAD, M.TELEFONO, M.LUGAR " +
-                 "FROM MESA_CENTRAL AS M " +
-                 "INNER JOIN ACTIVIDADES AS A ON M.IDACTIVIDAD = A.IDACTIVIDAD " +
-                 "WHERE A.IDCUENTA = ? AND M." + campo + " = ?";
+    /**
+     * Filtra mesas centrales por campo y valor usando LIKE.
+     * 
+     * @param idCuenta El ID de la cuenta
+     * @param campo    El campo por el cual filtrar
+     * @param valor    El valor a buscar (parcial)
+     * @return Lista de mesas centrales que coinciden con el filtro
+     */
+    public List<MesaCentral> filtrarPorCampoYValorLike(String idCuenta, String campo, String valor) {
+        List<MesaCentral> lista = new ArrayList<>();
+        String sql = "{CALL sp_filtrar_mesas_centrales_like(?, ?, ?)}";
+        try (Connection conn = ConexionBD.conectar();
+                CallableStatement cs = conn.prepareCall(sql)) {
+            cs.setString(1, idCuenta);
+            cs.setString(2, campo);
+            cs.setString(3, valor);
 
-    try (Connection conn = ConexionBD.conectar();
-         PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setString(1, idCuenta);
-        if (valor instanceof String) {
-            ps.setString(2, (String) valor);
-        } else if (valor instanceof Long) {
-            ps.setLong(2, (Long) valor);
-        } else {
-            ps.setObject(2, valor);
+            try (ResultSet rs = cs.executeQuery()) {
+                while (rs.next()) {
+                    lista.add(mapearMesaCentral(rs));
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.severe("Error al filtrar mesa central: " + e.getMessage());
         }
-
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            MesaCentral mc = new MesaCentral();
-            mc.setIdActividad(rs.getString("IDACTIVIDAD"));
-            mc.setTelefono(rs.getLong("TELEFONO"));
-            mc.setLugar(rs.getString("LUGAR"));
-            lista.add(mc);
-        }
-    } catch (SQLException e) {
-        LOGGER.severe("Error al filtrar mesa central: " + e.getMessage());
+        return lista;
     }
-    return lista;
-}
-      
-      public List<MesaCentral> filtrarPorCampoYValorLike(String idCuenta, String campo, String valor) {
-    List<MesaCentral> lista = new ArrayList<>();
-    String sql = "SELECT M.IDACTIVIDAD, M.TELEFONO, M.LUGAR FROM MESA_CENTRAL M " +
-                 "JOIN ACTIVIDADES A ON M.IDACTIVIDAD = A.IDACTIVIDAD " +
-                 "WHERE A.IDCUENTA = ? AND M." + campo + " LIKE ?";
-    try (Connection conn = ConexionBD.conectar();
-         PreparedStatement ps = conn.prepareStatement(sql)) {
-        ps.setString(1, idCuenta);
-        ps.setString(2, "%" + valor + "%");
-        ResultSet rs = ps.executeQuery();
-        while (rs.next()) {
-            MesaCentral mc = new MesaCentral();
-            mc.setIdActividad(rs.getString("IDACTIVIDAD"));
-            mc.setTelefono(rs.getLong("TELEFONO"));
-            mc.setLugar(rs.getString("LUGAR"));
-            lista.add(mc);
-        }
-    } catch (SQLException e) {
-        LOGGER.severe("Error al filtrar mesa central: " + e.getMessage());
-    }
-    return lista;
-}
 
+    /**
+     * Mapea un ResultSet a un objeto MesaCentral.
+     * 
+     * @param rs El ResultSet que contiene los datos
+     * @return Un objeto MesaCentral con los datos del ResultSet
+     * @throws SQLException si hay un error al acceder a los datos
+     */
+    private MesaCentral mapearMesaCentral(ResultSet rs) throws SQLException {
+        return new MesaCentral(
+                rs.getString("IDACTIVIDAD"),
+                rs.getLong("TELEFONO"),
+                rs.getString("LUGAR"));
+    }
 }

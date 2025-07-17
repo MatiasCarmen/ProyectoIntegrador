@@ -18,45 +18,71 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * DAO – SolicitudDAO: abstracción de persistencia para Solicitud.
+ * DAO – SolicitudDAO: abstracción de persistencia para Solicitud usando
+ * procedimientos almacenados.
+ * SOLID – SRP: única responsabilidad = persistencia de solicitudes.
+ * Seguridad: usa procedimientos almacenados y manejo de transacciones.
  */
 public class SolicitudDAO {
     private static final Logger LOGGER = Logger.getLogger(SolicitudDAO.class.getName());
 
+    /**
+     * Mapea un ResultSet a un objeto Solicitud.
+     * 
+     * @param rs ResultSet con los datos de la solicitud
+     * @return Objeto Solicitud mapeado
+     * @throws SQLException si hay error al acceder a los datos
+     */
+    private Solicitud mapearSolicitud(ResultSet rs) throws SQLException {
+        return new Solicitud(
+                rs.getString("IDSOLICITUD"),
+                rs.getString("IDCUENTA"),
+                rs.getString("DESCRIPCION"),
+                rs.getDate("FECHASOLICITUD"),
+                rs.getString("ESTADO"),
+                rs.getString("COMENTARIOS"));
+    }
+
+    /**
+     * Crea una nueva solicitud en la base de datos.
+     * 
+     * @param s Solicitud a crear
+     * @return true si se creó correctamente, false en caso contrario
+     */
     public boolean crear(Solicitud s) {
-        String sql = "INSERT INTO SOLICITUDES " +
-                "(IDSOLICITUD, IDCUENTA, DESCRIPCION, FECHASOLICITUD, ESTADO, COMENTARIOS) " +
-                "VALUES (?,?,?,?,?,?)";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, s.getIdSolicitud());
-            ps.setString(2, s.getIdCuenta());
-            ps.setString(3, s.getDescripcion());
-            ps.setDate(4, s.getFechaSolicitud());
-            ps.setString(5, s.getEstado());
-            ps.setString(6, s.getComentarios());
+                CallableStatement cs = conn.prepareCall("{CALL sp_crear_solicitud(?, ?, ?, ?, ?, ?)}")) {
+
+            cs.setString(1, s.getIdSolicitud());
+            cs.setString(2, s.getIdCuenta());
+            cs.setString(3, s.getDescripcion());
+            cs.setDate(4, s.getFechaSolicitud());
+            cs.setString(5, s.getEstado());
+            cs.setString(6, s.getComentarios());
+
             LOGGER.info("Insertar Solicitud: " + s.getIdSolicitud());
-            return ps.executeUpdate() > 0;
+            cs.execute();
+            return true;
         } catch (SQLException e) {
             LOGGER.severe("Error crear Solicitud: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Obtiene una solicitud por su ID.
+     * 
+     * @param id ID de la solicitud a buscar
+     * @return Solicitud encontrada o null si no existe
+     */
     public Solicitud obtenerPorId(String id) {
-        String sql = "SELECT * FROM SOLICITUDES WHERE IDSOLICITUD = ?";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, id);
-            try (ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall("{CALL sp_obtener_solicitud_por_id(?)}")) {
+
+            cs.setString(1, id);
+            try (ResultSet rs = cs.executeQuery()) {
                 if (rs.next()) {
-                    return new Solicitud(
-                            rs.getString("IDSOLICITUD"),
-                            rs.getString("IDCUENTA"),
-                            rs.getString("DESCRIPCION"),
-                            rs.getDate("FECHASOLICITUD"),
-                            rs.getString("ESTADO"),
-                            rs.getString("COMENTARIOS"));
+                    return mapearSolicitud(rs);
                 }
             }
         } catch (SQLException e) {
@@ -65,20 +91,19 @@ public class SolicitudDAO {
         return null;
     }
 
+    /**
+     * Lista todas las solicitudes en la base de datos.
+     * 
+     * @return Lista de todas las solicitudes
+     */
     public List<Solicitud> listarTodos() {
         List<Solicitud> lista = new ArrayList<>();
-        String sql = "SELECT * FROM SOLICITUDES";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall("{CALL sp_listar_solicitudes()}");
+                ResultSet rs = cs.executeQuery()) {
+
             while (rs.next()) {
-                lista.add(new Solicitud(
-                        rs.getString("IDSOLICITUD"),
-                        rs.getString("IDCUENTA"),
-                        rs.getString("DESCRIPCION"),
-                        rs.getDate("FECHASOLICITUD"),
-                        rs.getString("ESTADO"),
-                        rs.getString("COMENTARIOS")));
+                lista.add(mapearSolicitud(rs));
             }
         } catch (SQLException e) {
             LOGGER.severe("Error listar Solicitudes: " + e.getMessage());
@@ -86,45 +111,64 @@ public class SolicitudDAO {
         return lista;
     }
 
+    /**
+     * Actualiza una solicitud existente.
+     * 
+     * @param s Solicitud con los datos actualizados
+     * @return true si se actualizó correctamente, false en caso contrario
+     */
     public boolean actualizar(Solicitud s) {
-        String sql = "UPDATE SOLICITUDES SET IDCUENTA=?, DESCRIPCION=?, FECHASOLICITUD=?, " +
-                "ESTADO=?, COMENTARIOS=? WHERE IDSOLICITUD=?";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, s.getIdCuenta());
-            ps.setString(2, s.getDescripcion());
-            ps.setDate(3, s.getFechaSolicitud());
-            ps.setString(4, s.getEstado());
-            ps.setString(5, s.getComentarios());
-            ps.setString(6, s.getIdSolicitud());
+                CallableStatement cs = conn.prepareCall("{CALL sp_actualizar_solicitud(?, ?, ?, ?, ?, ?)}")) {
+
+            cs.setString(1, s.getIdSolicitud());
+            cs.setString(2, s.getIdCuenta());
+            cs.setString(3, s.getDescripcion());
+            cs.setDate(4, s.getFechaSolicitud());
+            cs.setString(5, s.getEstado());
+            cs.setString(6, s.getComentarios());
+
             LOGGER.info("Actualizar Solicitud: " + s.getIdSolicitud());
-            return ps.executeUpdate() > 0;
+            cs.execute();
+            return true;
         } catch (SQLException e) {
             LOGGER.severe("Error actualizar Solicitud: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Elimina una solicitud por su ID.
+     * 
+     * @param id ID de la solicitud a eliminar
+     * @return true si se eliminó correctamente, false en caso contrario
+     */
     public boolean eliminar(String id) {
-        String sql = "DELETE FROM SOLICITUDES WHERE IDSOLICITUD = ?";
         try (Connection conn = ConexionBD.conectar();
-                PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, id);
+                CallableStatement cs = conn.prepareCall("{CALL sp_eliminar_solicitud(?)}")) {
+
+            cs.setString(1, id);
             LOGGER.info("Eliminar Solicitud: " + id);
-            return ps.executeUpdate() > 0;
+            cs.execute();
+            return true;
         } catch (SQLException e) {
             LOGGER.severe("Error eliminar Solicitud: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Cuenta el número de solicitudes en estado 'ABIERTA'.
+     * 
+     * @return Número de solicitudes abiertas
+     */
     public int contarSolicitudesAbiertas() {
-        String sql = "SELECT COUNT(*) FROM SOLICITUDES WHERE ESTADO = 'ABIERTA'";
         try (Connection conn = ConexionBD.conectar();
-                Statement st = conn.createStatement();
-                ResultSet rs = st.executeQuery(sql)) {
+                CallableStatement cs = conn.prepareCall("{CALL sp_contar_solicitudes_abiertas()}");
+                ResultSet rs = cs.executeQuery()) {
+
             if (rs.next()) {
-                return rs.getInt(1);
+                return rs.getInt("total");
             }
         } catch (SQLException e) {
             LOGGER.severe("Error al contar solicitudes abiertas: " + e.getMessage());

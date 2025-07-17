@@ -3,17 +3,21 @@ package dao;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 import entidades.Cliente;
+import controladores.ComunasControlador;
 import java.util.List;
+import entidades.Comuna;
 
 @DisplayName("Pruebas para ClienteDAO")
 public class ClienteDAOTest {
 
     private ClienteDAO clienteDAO;
     private Cliente clientePrueba;
+    private ComunasControlador comunasControlador;
 
     @BeforeEach
     void setUp() {
         clienteDAO = new ClienteDAO();
+        comunasControlador = new ComunasControlador();
         clientePrueba = new Cliente();
         clientePrueba.setRut("12345678-9");
         clientePrueba.setNombres("Juan Test");
@@ -21,9 +25,16 @@ public class ClienteDAOTest {
         clientePrueba.setApellidoM("Prueba");
         clientePrueba.setCorreo("juan.test@claro.cl");
         clientePrueba.setTelefono(987654321L);
-        clientePrueba.setEdad((byte)25);
+        clientePrueba.setEdad((byte) 25);
         clientePrueba.setDireccion("Calle Test 123");
-        clientePrueba.setIdComuna("13101");
+
+        // Obtener una comuna válida de la base de datos
+        List<Comuna> comunas = comunasControlador.listarComunas();
+        if (!comunas.isEmpty()) {
+            clientePrueba.setIdComuna(comunas.get(0).getIdComuna());
+        } else {
+            throw new RuntimeException("No hay comunas disponibles en la base de datos");
+        }
     }
 
     @Test
@@ -123,8 +134,8 @@ public class ClienteDAOTest {
         // Assert
         assertFalse(resultados.isEmpty(), "Deberían encontrarse resultados");
         assertTrue(resultados.stream()
-                           .anyMatch(c -> c.getRut().equals(clientePrueba.getRut())),
-                  "El cliente de prueba debería estar en los resultados");
+                .anyMatch(c -> c.getRut().equals(clientePrueba.getRut())),
+                "El cliente de prueba debería estar en los resultados");
 
         // Cleanup
         clienteDAO.eliminarCliente(clientePrueba.getRut());

@@ -18,41 +18,66 @@ import java.util.List;
 import java.util.logging.Logger;
 
 /**
- * DAO – ActividadPedidoDAO: maneja CRUD de la relación ACTIVIDAD_PEDIDOS.
- * SRP: solo persistencia de ActividadPedido.
- * Seguridad: usa PreparedStatement.
+ * DAO – ActividadPedidoDAO: maneja CRUD de la relación ACTIVIDAD_PEDIDOS usando
+ * procedimientos almacenados.
+ * SOLID – SRP: solo persistencia de ActividadPedido.
+ * Seguridad: usa procedimientos almacenados y manejo de transacciones.
  */
 public class ActividadPedidoDAO {
     private static final Logger LOGGER = Logger.getLogger(ActividadPedidoDAO.class.getName());
 
+    /**
+     * Mapea un ResultSet a un objeto ActividadPedido.
+     * 
+     * @param rs ResultSet con los datos de la relación actividad-pedido
+     * @return Objeto ActividadPedido mapeado
+     * @throws SQLException si hay error al acceder a los datos
+     */
+    private ActividadPedido mapearActividadPedido(ResultSet rs) throws SQLException {
+        return new ActividadPedido(
+                rs.getString("IDACTIVIDAD"),
+                rs.getString("IDPEDIDO"),
+                rs.getString("CATEGORIA"));
+    }
+
+    /**
+     * Crea una nueva relación entre actividad y pedido.
+     * 
+     * @param ap ActividadPedido a crear
+     * @return true si se creó correctamente, false en caso contrario
+     */
     public boolean crear(ActividadPedido ap) {
-        String sql = "INSERT INTO ACTIVIDAD_PEDIDOS (IDACTIVIDAD, IDPEDIDO, CATEGORIA) VALUES (?,?,?)";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, ap.getIdActividad());
-            ps.setString(2, ap.getIdPedido());
-            ps.setString(3, ap.getCategoria());
+                CallableStatement cs = conn.prepareCall("{CALL sp_crear_actividad_pedido(?, ?, ?)}")) {
+
+            cs.setString(1, ap.getIdActividad());
+            cs.setString(2, ap.getIdPedido());
+            cs.setString(3, ap.getCategoria());
+
             LOGGER.info("Insertando ActividadPedido: " + ap.getIdActividad() + "↔" + ap.getIdPedido());
-            return ps.executeUpdate() > 0;
+            cs.execute();
+            return true;
         } catch (SQLException e) {
             LOGGER.severe("Error crear ActividadPedido: " + e.getMessage());
             return false;
         }
     }
 
+    /**
+     * Lista todas las relaciones actividad-pedido para una actividad específica.
+     * 
+     * @param idActividad ID de la actividad a buscar
+     * @return Lista de ActividadPedido asociados a la actividad
+     */
     public List<ActividadPedido> listarPorActividad(String idActividad) {
         List<ActividadPedido> lista = new ArrayList<>();
-        String sql = "SELECT * FROM ACTIVIDAD_PEDIDOS WHERE IDACTIVIDAD = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idActividad);
-            try (ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall("{CALL sp_listar_pedidos_por_actividad(?)}")) {
+
+            cs.setString(1, idActividad);
+            try (ResultSet rs = cs.executeQuery()) {
                 while (rs.next()) {
-                    lista.add(new ActividadPedido(
-                        rs.getString("IDACTIVIDAD"),
-                        rs.getString("IDPEDIDO"),
-                        rs.getString("CATEGORIA")
-                    ));
+                    lista.add(mapearActividadPedido(rs));
                 }
             }
         } catch (SQLException e) {
@@ -61,19 +86,21 @@ public class ActividadPedidoDAO {
         return lista;
     }
 
+    /**
+     * Lista todas las relaciones actividad-pedido para un pedido específico.
+     * 
+     * @param idPedido ID del pedido a buscar
+     * @return Lista de ActividadPedido asociados al pedido
+     */
     public List<ActividadPedido> listarPorPedido(String idPedido) {
         List<ActividadPedido> lista = new ArrayList<>();
-        String sql = "SELECT * FROM ACTIVIDAD_PEDIDOS WHERE IDPEDIDO = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idPedido);
-            try (ResultSet rs = ps.executeQuery()) {
+                CallableStatement cs = conn.prepareCall("{CALL sp_listar_actividades_por_pedido(?)}")) {
+
+            cs.setString(1, idPedido);
+            try (ResultSet rs = cs.executeQuery()) {
                 while (rs.next()) {
-                    lista.add(new ActividadPedido(
-                        rs.getString("IDACTIVIDAD"),
-                        rs.getString("IDPEDIDO"),
-                        rs.getString("CATEGORIA")
-                    ));
+                    lista.add(mapearActividadPedido(rs));
                 }
             }
         } catch (SQLException e) {
@@ -82,14 +109,23 @@ public class ActividadPedidoDAO {
         return lista;
     }
 
+    /**
+     * Elimina una relación actividad-pedido específica.
+     * 
+     * @param idActividad ID de la actividad
+     * @param idPedido    ID del pedido
+     * @return true si se eliminó correctamente, false en caso contrario
+     */
     public boolean eliminar(String idActividad, String idPedido) {
-        String sql = "DELETE FROM ACTIVIDAD_PEDIDOS WHERE IDACTIVIDAD = ? AND IDPEDIDO = ?";
         try (Connection conn = ConexionBD.conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, idActividad);
-            ps.setString(2, idPedido);
+                CallableStatement cs = conn.prepareCall("{CALL sp_eliminar_actividad_pedido(?, ?)}")) {
+
+            cs.setString(1, idActividad);
+            cs.setString(2, idPedido);
+
             LOGGER.info("Eliminando ActividadPedido: " + idActividad + "↔" + idPedido);
-            return ps.executeUpdate() > 0;
+            cs.execute();
+            return true;
         } catch (SQLException e) {
             LOGGER.severe("Error eliminar ActividadPedido: " + e.getMessage());
             return false;
