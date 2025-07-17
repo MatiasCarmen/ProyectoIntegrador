@@ -1,0 +1,17 @@
+# Logs
+ProyectoIntegrador/logs/
+ProyectoIntegrador/logs/*.log
+ProyectoIntegrador/logs/archived/
+
+# Build
+ProyectoIntegrador/target/
+
+# IDEs
+*.iml
+.idea/
+*.vscode/
+*.class
+
+# Sistema
+.DS_Store
+Thumbs.db

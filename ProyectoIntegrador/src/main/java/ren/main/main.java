@@ -1,55 +1,66 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- */
-
 package ren.main;
 
-import com.formdev.flatlaf.FlatLaf;
-import com.formdev.flatlaf.intellijthemes.FlatArcDarkIJTheme;
+/**
+ *
+ * @author matias papu
+ */
+import com.formdev.flatlaf.FlatLightLaf;
+import entidades.Usuario;
 import vista.Login;
+import vista.tema.TemaAdministrador;
 
 import javax.swing.*;
+import java.awt.*;
+import vista.VistaClienteDetallePanel;
 
 public class main {
+    public static Usuario logeado;
 
-    //  Este método se llama desde Login al hacer login correcto
-    public static main main;
-
-    private JFrame frame;
+    public static VistaClienteDetallePanel ventanap;
 
     public static void main(String[] args) {
-        // Estilo visual (FlatLaf)
-        FlatLaf.setup(new FlatArcDarkIJTheme());
-
+        // mejora aspectos waos
         SwingUtilities.invokeLater(() -> {
-            main = new main();
-            main.showLogin();  // Muestra el formulario de login
+            try {
+                // Inicializar FlatLaf y FlatLaf Extras para SVG y temas avanzados
+                FlatLightLaf.setup();
+            
+
+                // Configuración global de la UI
+                UIManager.put("Button.arc", 12);
+                UIManager.put("Component.arc", 12);
+                UIManager.put("ProgressBar.arc", 12);
+                UIManager.put("TextComponent.arc", 12);
+                UIManager.put("Component.focusWidth", 1);
+                UIManager.put("Component.innerFocusWidth", 1);
+                UIManager.put("Component.borderWidth", 1);
+
+                // Colores corporativos de kotecta sipi
+                Color rojo_claro = new Color(237, 28, 36);
+                Color rojo_hover = new Color(200, 16, 46);
+
+                // Aplicar colores y estilos a las tablitas
+                UIManager.put("Button.default.background", rojo_claro);
+                UIManager.put("Button.default.foreground", Color.WHITE);
+                UIManager.put("Button.default.hoverBackground", rojo_hover);
+                UIManager.put("TextField.placeholderForeground", new Color(150, 150, 150));
+                UIManager.put("PasswordField.placeholderForeground", new Color(150, 150, 150));
+                UIManager.put("Component.focusColor", rojo_claro);
+                UIManager.put("Component.borderColor", new Color(220, 220, 220));
+                UIManager.put("Table.selectionBackground", new Color(255, 235, 235));
+                UIManager.put("Table.selectionForeground", rojo_claro);
+
+                // Crear y mostrar el frame de login, esto hace que se ejecute el login
+                JFrame loginFrame = new JFrame();
+                loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                Login loginPanel = new Login(loginFrame);
+                loginFrame.add(loginPanel);
+                loginFrame.setLocationRelativeTo(null);
+                loginFrame.setVisible(true);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         });
-    }
-
-    public void showLogin() {
-        if (frame != null) {
-            frame.dispose();
-        }
-
-        frame = new JFrame("Sistema CRM - Iniciar Sesión");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 350);
-        frame.setLocationRelativeTo(null);
-        frame.setContentPane(new Login());
-        frame.setVisible(true);
-    }
-
-    public void showMainForm() {
-        if (frame != null) {
-            frame.dispose();
-        }
-
-        frame = new JFrame("Sistema CRM - Menú Principal");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLocationRelativeTo(null);
-        frame.setContentPane(new MenuPrincipal());
-        frame.setVisible(true);
     }
 }

@@ -6,16 +6,20 @@ package BD;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;//la libreria lookback
 /**
  *
  * @author matias papu
  */
 public class ConexionBD {
+    private static final Logger logger = LoggerFactory.getLogger(ConexionBD.class); //manda al look que cree para que aparesca en una carpetita
+
     // 1. Atributos de conexión
-    private static final String BD = "SistemasCRM_V2"; // nombre de tu base
+    private static final String BD = "proyectointegrador"; // nombre de la base de datos actual
     private static final String URL = "jdbc:mysql://localhost:3306/" + BD;
-    private static final String USER = "root"; // usuario de MySQL
-    private static final String PASSWORD = "Ms211596321*"; // contraseña de MySQL
+     private static final String USER = "root"; // modificar solo es para local
+    private static final String PASSWORD = "root123*"; // modificar solo es local
 
     // 2. Método público para obtener la conexión
     public static Connection conectar() {
@@ -25,17 +29,16 @@ public class ConexionBD {
             // 3. Cargar el driver de MySQL
             Class.forName("com.mysql.cj.jdbc.Driver");
 
-            System.out.println(" Conectando a la base de datos: " + BD);
+            logger.info("Conectando a la base de datos: {}", BD);
 
             // 4. Establecer conexión
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println(" Conexión exitosa a la base de datos.");
+            logger.info("Conexión exitosa a la base de datos :D");
+
         } catch (ClassNotFoundException e) {
-            System.err.println(" Error: No se encontró el driver de MySQL.");
-            e.printStackTrace();
+            logger.error("Error: No se encontró el driver de MySQL", e);
         } catch (SQLException e) {
-            System.err.println(" Error al conectar con la base de datos.");
-            e.printStackTrace();
+            logger.error("Error al conectar con la base de datos", e);
         }
 
         return conn;

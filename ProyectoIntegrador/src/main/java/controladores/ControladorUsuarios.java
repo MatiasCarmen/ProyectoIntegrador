@@ -2,6 +2,7 @@ package controladores;
 
 import entidades.Usuario;
 import BD.ConexionBD;
+import dao.UsuarioDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -25,18 +26,25 @@ public class ControladorUsuarios {
      * @return objeto Usuario si es válido, null si no existe
      */
     public Usuario validarLogin(String idUsuario, String clave) {
-        Usuario user = null;
-
+       return  new UsuarioDAO().validarLogin(idUsuario, clave);
+    }
+    /**
+     * Valida las credenciales del usuario.
+     * @param usuario Nombre de usuario
+     * @param password Contraseña del usuario
+     * @return objeto Usuario si es válido, null si no existe
+     */
+    public Usuario validarCredenciales(String usuario, String password) {
         try {
             String sql = "SELECT * FROM USUARIOS WHERE IDUSUARIO = ? AND CLAVE = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, idUsuario);
-            ps.setString(2, clave);
+            ps.setString(1, usuario);
+            ps.setString(2, password);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                user = new Usuario(
+                return new Usuario(
                     rs.getString("IDUSUARIO"),
                     rs.getString("RUT"),
                     rs.getString("IDROL"),
@@ -51,9 +59,18 @@ public class ControladorUsuarios {
             }
 
         } catch (SQLException e) {
-            System.err.println("Error al validar login: " + e.getMessage());
+            System.err.println("Error al validar credenciales: " + e.getMessage());
         }
 
-        return user;
+        return null;
     }
+
+    /**
+     * Crea un nuevo usuario en la base de datos.
+     * @param user Objeto Usuario con datos a insertar
+     * @throws SQLException si ocurre un error de BD
+     */
+   
+    
+    
 }
