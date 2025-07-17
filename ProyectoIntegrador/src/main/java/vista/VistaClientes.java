@@ -12,6 +12,7 @@ package vista;
 import controladores.ClienteControlador;
 import controladores.ComunasControlador;
 import com.formdev.flatlaf.FlatClientProperties;
+import javax.swing.ImageIcon;
 import entidades.Cliente;
 import entidades.Comuna;
 import net.miginfocom.swing.MigLayout;

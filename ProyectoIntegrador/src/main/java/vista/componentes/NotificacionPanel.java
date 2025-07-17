@@ -43,12 +43,17 @@ public class NotificacionPanel extends JPanel {
 
         // Ícono de notificaciones
         JLabel iconLabel = new JLabel();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/imagenes/icons/notification.svg"));
-        if (icon.getImageLoadStatus() == MediaTracker.COMPLETE) {
-            Image scaledIcon = icon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
-            iconLabel.setIcon(new ImageIcon(scaledIcon));
+        java.net.URL url = getClass().getResource("/imagenes/notification.png");
+        if (url != null) {
+            ImageIcon icon = new ImageIcon(url);
+            if (icon.getImageLoadStatus() == MediaTracker.COMPLETE) {
+                Image scaledIcon = icon.getImage().getScaledInstance(24, 24, Image.SCALE_SMOOTH);
+                iconLabel.setIcon(new ImageIcon(scaledIcon));
+            } else {
+                iconLabel.setText("🔔");
+                iconLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
+            }
         } else {
-            // Fallback si no encuentra el ícono SVG
             iconLabel.setText("🔔");
             iconLabel.setFont(new Font("Segoe UI", Font.BOLD, 20));
         }

@@ -8,6 +8,7 @@ import entidades.Comuna;
 import validators.ClienteValidator;
 
 import com.formdev.flatlaf.FlatClientProperties;
+import com.formdev.flatlaf.extras.FlatSVGIcon;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -37,40 +38,73 @@ public class VistaAgregarCliente extends JPanel {
     private final JLabel lblErrorTelefono = new JLabel();
     private final JLabel lblErrorEdad = new JLabel();
 
-    private final Border bordeNormal = BorderFactory.createLineBorder(Color.GRAY);
-    private final Border bordeError = BorderFactory.createLineBorder(Color.RED);
-    private final Border bordeValido = BorderFactory.createLineBorder(new Color(0, 150, 0));
+    private final Border bordeNormal = BorderFactory.createLineBorder(new Color(220, 220, 220), 1, true);
+    private final Border bordeError = BorderFactory.createLineBorder(new Color(211, 47, 47), 2, true);
+    private final Border bordeValido = BorderFactory.createLineBorder(new Color(46, 125, 50), 2, true);
 
     private static final Color COLOR_PRIMARIO = new Color(237, 28, 36);
     private static final Color COLOR_SECUNDARIO = new Color(33, 33, 33);
     private static final Color COLOR_FONDO = Color.WHITE;
     private static final Color COLOR_ERROR = new Color(211, 47, 47);
+    private static final Font FUENTE_LABEL = new Font("Segoe UI", Font.PLAIN, 15);
+    private static final Font FUENTE_TITULO = new Font("Segoe UI", Font.BOLD, 24);
+    private static final Font FUENTE_BOTON = new Font("Segoe UI", Font.BOLD, 16);
 
     public VistaAgregarCliente() {
-        setLayout(new MigLayout("insets 20, fillx, gap 10 10", "[right][grow,fill][]"));
-        setBackground(COLOR_FONDO);
+        setLayout(new BorderLayout());
+        setBackground(new Color(245, 245, 245));
 
-        JPanel mainPanel = new JPanel(new MigLayout("insets 30, fillx, gap 15 15", "[right][grow,fill][]"));
+        // Panel de título con icono SVG
+        JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        titlePanel.setBackground(new Color(245, 245, 245));
+        JLabel icon = new JLabel(new FlatSVGIcon("imagenes/icons/add-client.svg", 32, 32));
+        JLabel title = new JLabel("Registro de Cliente");
+        title.setFont(FUENTE_TITULO);
+        title.setForeground(COLOR_SECUNDARIO);
+        titlePanel.add(icon);
+        titlePanel.add(Box.createHorizontalStrut(10));
+        titlePanel.add(title);
+        add(titlePanel, BorderLayout.NORTH);
+
+        // Panel principal elevado
+        JPanel mainPanel = new vista.util.UIHelper.ElevatedPanel();
         mainPanel.setBackground(COLOR_FONDO);
-
-        JLabel titulo = new JLabel("Registro de Cliente");
-        titulo.setFont(new Font("Segoe UI", Font.BOLD, 24));
-        titulo.setForeground(COLOR_PRIMARIO);
-        mainPanel.add(titulo, "span, center, gapbottom 20, wrap");
+        mainPanel.setBorder(new EmptyBorder(30, 40, 30, 40));
+        mainPanel.setLayout(new MigLayout("wrap 2, gap 20 10", "[right][grow,fill]"));
 
         configurarCampos();
         llenarComboComunas();
         agregarCamposAlPanel(mainPanel);
 
-        JButton btnGuardar = crearBotonEstilizado("Guardar", COLOR_PRIMARIO);
-        JButton btnLimpiar = crearBotonEstilizado("Limpiar", COLOR_SECUNDARIO);
-        JPanel buttonPanel = new JPanel(new MigLayout("insets 0, gap 10", "[grow,right]"));
-        buttonPanel.setOpaque(false);
-        buttonPanel.add(btnLimpiar, "split 2");
-        buttonPanel.add(btnGuardar);
-        mainPanel.add(buttonPanel, "span, growx, wrap");
+        // Separador visual
+        mainPanel.add(new JSeparator(), "span, growx, gaptop 10, gapbottom 10");
 
-        add(mainPanel, "grow");
+        // Botones grandes con iconos SVG
+        JButton btnGuardar = new JButton("Guardar", new FlatSVGIcon("imagenes/icons/save.svg", 18, 18));
+        JButton btnLimpiar = new JButton("Limpiar", new FlatSVGIcon("imagenes/icons/clear.svg", 18, 18));
+        btnGuardar.setBackground(new Color(33, 150, 243));
+        btnGuardar.setForeground(Color.WHITE);
+        btnGuardar.setFont(FUENTE_BOTON);
+        btnGuardar.setPreferredSize(new Dimension(160, 40));
+        btnGuardar.setFocusPainted(false);
+        btnGuardar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnGuardar.putClientProperty(FlatClientProperties.STYLE, "arc:16");
+
+        btnLimpiar.setBackground(new Color(158, 158, 158));
+        btnLimpiar.setForeground(Color.WHITE);
+        btnLimpiar.setFont(FUENTE_BOTON);
+        btnLimpiar.setPreferredSize(new Dimension(160, 40));
+        btnLimpiar.setFocusPainted(false);
+        btnLimpiar.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btnLimpiar.putClientProperty(FlatClientProperties.STYLE, "arc:16");
+
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 20, 0));
+        buttonPanel.setOpaque(false);
+        buttonPanel.add(btnLimpiar);
+        buttonPanel.add(btnGuardar);
+        mainPanel.add(buttonPanel, "span, growx, gaptop 10");
+
+        add(mainPanel, BorderLayout.CENTER);
 
         btnGuardar.addActionListener(e -> guardarCliente());
         btnLimpiar.addActionListener(e -> limpiarCampos());
@@ -79,19 +113,22 @@ public class VistaAgregarCliente extends JPanel {
     }
 
     private void configurarCampos() {
-        configurarCampoTexto(txtRut, "Ingrese RUT");
-        configurarCampoTexto(txtCorreo, "Ingrese correo");
-        configurarCampoTexto(txtNombres, "Ingrese nombres");
-        configurarCampoTexto(txtApellidoP, "Ingrese apellido paterno");
-        configurarCampoTexto(txtApellidoM, "Ingrese apellido materno");
-        configurarCampoTexto(txtTelefono, "Ingrese teléfono");
-        configurarCampoTexto(txtEdad, "Ingrese edad");
-        configurarCampoTexto(txtDireccion, "Ingrese dirección");
+        configurarCampoTexto(txtRut, "Ej: 12.345.678-9", "Ingrese el RUT del cliente");
+        configurarCampoTexto(txtCorreo, "Ej: correo@ejemplo.com", "Ingrese el correo electrónico");
+        configurarCampoTexto(txtNombres, "Ej: Juan Carlos", "Ingrese los nombres del cliente");
+        configurarCampoTexto(txtApellidoP, "Ej: Pérez", "Ingrese el apellido paterno");
+        configurarCampoTexto(txtApellidoM, "Ej: González", "Ingrese el apellido materno");
+        configurarCampoTexto(txtTelefono, "Ej: 912345678", "Ingrese el teléfono (9 dígitos)");
+        configurarCampoTexto(txtEdad, "Ej: 30", "Ingrese la edad (18-120)");
+        configurarCampoTexto(txtDireccion, "Ej: Av. Siempre Viva 123", "Ingrese la dirección");
     }
 
-    private void configurarCampoTexto(JTextField campo, String placeholder) {
+    private void configurarCampoTexto(JTextField campo, String placeholder, String tooltip) {
         campo.putClientProperty(FlatClientProperties.PLACEHOLDER_TEXT, placeholder);
+        campo.putClientProperty(FlatClientProperties.STYLE, "arc:12; borderWidth:2;");
         campo.setBorder(bordeNormal);
+        campo.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        campo.setToolTipText(tooltip);
     }
 
     private void llenarComboComunas() {
@@ -99,6 +136,12 @@ public class VistaAgregarCliente extends JPanel {
         for (Comuna c : comunas) {
             comboComuna.addItem(c.getDescripcion());
         }
+        comboComuna.setFont(new Font("Segoe UI", Font.PLAIN, 15));
+        comboComuna.setBackground(Color.WHITE);
+        comboComuna.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
+                BorderFactory.createEmptyBorder(8, 12, 8, 12)));
+        comboComuna.setToolTipText("Seleccione la comuna de residencia");
     }
 
     private void agregarCamposAlPanel(JPanel panel) {
@@ -112,58 +155,26 @@ public class VistaAgregarCliente extends JPanel {
         agregarCampoConLabel(panel, "Dirección:", txtDireccion, null);
 
         JLabel lblComuna = new JLabel("Comuna:");
+        lblComuna.setFont(FUENTE_LABEL);
         panel.add(lblComuna);
-        panel.add(comboComuna, "span 1");
-        panel.add(new JLabel(), "wrap");
-    }
-
-    private void agregarSeccion(JPanel panel, String tituloSeccion, int row) {
-        JLabel labelSeccion = new JLabel(tituloSeccion);
-        labelSeccion.setFont(new Font("Segoe UI", Font.BOLD, 18));
-        labelSeccion.setForeground(new Color(50, 50, 50));
-        panel.add(labelSeccion, "cell 0 " + row + ", left, wrap");
-    }
-
-    private void agregarCampoComuna(JPanel panel, int row) {
-        JLabel lblComuna = new JLabel("Comuna:");
-        lblComuna.setForeground(COLOR_SECUNDARIO);
-        lblComuna.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
-        // Estilizar el combo
-        comboComuna.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-        comboComuna.setBackground(Color.WHITE);
-        comboComuna.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createLineBorder(new Color(200, 200, 200), 1),
-                BorderFactory.createEmptyBorder(8, 12, 8, 12)));
-
-        panel.add(lblComuna, "cell 3 " + row + ", right");
-        panel.add(comboComuna, "cell 4 " + row + ", growx");
+        panel.add(comboComuna, "wrap");
     }
 
     private void agregarCampoConLabel(JPanel panel, String labelText, JTextField field, JLabel errorLabel) {
         JLabel label = new JLabel(labelText);
+        label.setFont(FUENTE_LABEL);
         label.setForeground(COLOR_SECUNDARIO);
-        label.setFont(new Font("Segoe UI", Font.PLAIN, 14));
-
         panel.add(label);
-        panel.add(field);
-
+        JPanel fieldPanel = new JPanel(new BorderLayout());
+        fieldPanel.setOpaque(false);
+        fieldPanel.add(field, BorderLayout.CENTER);
         if (errorLabel != null) {
             errorLabel.setForeground(COLOR_ERROR);
             errorLabel.setFont(new Font("Segoe UI", Font.PLAIN, 12));
-            panel.add(errorLabel, "wrap");
-        } else {
-            panel.add(new JLabel(), "wrap");
+            errorLabel.setBorder(new EmptyBorder(2, 8, 0, 0));
+            fieldPanel.add(errorLabel, BorderLayout.SOUTH);
         }
-    }
-
-    private JButton crearBotonEstilizado(String texto, Color color) {
-        JButton button = new JButton(texto);
-        button.setBackground(color);
-        button.setForeground(Color.WHITE);
-        button.setFocusPainted(false);
-        button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        return button;
+        panel.add(fieldPanel, "wrap");
     }
 
     private void configurarValidaciones() {

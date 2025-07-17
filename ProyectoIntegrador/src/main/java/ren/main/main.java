@@ -1,4 +1,5 @@
 package ren.main;
+
 /**
  *
  * @author matias papu
@@ -13,15 +14,17 @@ import java.awt.*;
 import vista.VistaClienteDetallePanel;
 
 public class main {
-      public static Usuario  logeado ;
-      
-      public static VistaClienteDetallePanel ventanap;
+    public static Usuario logeado;
+
+    public static VistaClienteDetallePanel ventanap;
+
     public static void main(String[] args) {
         // mejora aspectos waos
         SwingUtilities.invokeLater(() -> {
             try {
-                // Establece el  tema claro , se ve mejor
+                // Inicializar FlatLaf y FlatLaf Extras para SVG y temas avanzados
                 FlatLightLaf.setup();
+            
 
                 // Configuración global de la UI
                 UIManager.put("Button.arc", 12);
@@ -36,7 +39,7 @@ public class main {
                 Color rojo_claro = new Color(237, 28, 36);
                 Color rojo_hover = new Color(200, 16, 46);
 
-                // Aplicar colores y estilos a las tablitas 
+                // Aplicar colores y estilos a las tablitas
                 UIManager.put("Button.default.background", rojo_claro);
                 UIManager.put("Button.default.foreground", Color.WHITE);
                 UIManager.put("Button.default.hoverBackground", rojo_hover);
@@ -47,7 +50,7 @@ public class main {
                 UIManager.put("Table.selectionBackground", new Color(255, 235, 235));
                 UIManager.put("Table.selectionForeground", rojo_claro);
 
-                // Crear y mostrar el frame de login, esto hace que se ejecute el login 
+                // Crear y mostrar el frame de login, esto hace que se ejecute el login
                 JFrame loginFrame = new JFrame();
                 loginFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 Login loginPanel = new Login(loginFrame);

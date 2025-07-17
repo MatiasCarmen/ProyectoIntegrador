@@ -19,20 +19,23 @@ public class VistasActividades extends JPanel {
     private final ActividadesControlador ctrl = new ActividadesControlador();
 
     private final JTextField txtFiltro = new JTextField(15);
-    private final JComboBox<String> comboCampo = new JComboBox<>(new String[]{
+    private final JComboBox<String> comboCampo = new JComboBox<>(new String[] {
             "ID Actividad", "Cuenta", "Descripción", "Tipo", "Razón", "Resolución"
     });
-    private final JButton btnFiltrar = new JButton("🔍 Filtrar");
-    private final JButton btnLimpiar = new JButton("❌ Limpiar Filtro");
-    private final JButton btnVerDetalle = new JButton("🔎 Ver Detalle");
+    private final JButton btnFiltrar = new JButton("Filtrar");
+    private final JButton btnLimpiar = new JButton("Limpiar Filtro");
+    private final JButton btnVerDetalle = new JButton("Ver Detalle");
 
     public VistasActividades() {
         setLayout(new BorderLayout());
 
         // Tabla de actividades
-        String[] cols = {"IDAct", "Cuenta", "Descripción", "Fecha", "Tipo", "Razón", "Resolución"};
+        String[] cols = { "IDAct", "Cuenta", "Descripción", "Fecha", "Tipo", "Razón", "Resolución" };
         model = new DefaultTableModel(cols, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
         };
         tblActividades = new JTable(model);
         tblActividades.setRowHeight(25);
@@ -95,7 +98,7 @@ public class VistasActividades extends JPanel {
         List<Actividad> lista = ctrl.listarPorUsuario(main.logeado.getIdUsuario());
         if (lista != null) {
             for (Actividad a : lista) {
-                model.addRow(new Object[]{
+                model.addRow(new Object[] {
                         a.getIdActividad(),
                         a.getIdCuenta(),
                         a.getDescripcion(),
@@ -154,7 +157,5 @@ public class VistasActividades extends JPanel {
                 model.removeRow(i);
             }
         }
-        
-        recargarTabla();
     }
 }

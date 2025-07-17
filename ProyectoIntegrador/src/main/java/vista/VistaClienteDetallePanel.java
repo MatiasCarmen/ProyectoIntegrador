@@ -13,16 +13,20 @@ import entidades.*;
 import com.formdev.flatlaf.FlatClientProperties;
 import net.miginfocom.swing.MigLayout;
 import ren.main.VistaPrincipal;
+import utils.FacturaPDFGenerator;
 
 import javax.swing.*;
 import javax.swing.border.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import ren.main.main;
+import validators.MesaCentralValidator;
 
 /**
  * Panel de detalle de cliente con pestañas para Actividades, Agenda y
@@ -46,11 +50,12 @@ public class VistaClienteDetallePanel extends JPanel {
     private final JTextField txtDireccion = new JTextField();
     private final JComboBox<Comuna> cboComuna = new JComboBox<>();
     private DefaultTableModel modelo = null;
+    private JTable tabla;
 
     public VistaClienteDetallePanel(Cliente cliente, String idCuenta) {
         this.cliente = cliente;
         this.idCuenta = idCuenta;
-         main.ventanap= this;
+        main.ventanap = this;
         initUI();
     }
 
@@ -126,7 +131,7 @@ public class VistaClienteDetallePanel extends JPanel {
         JPanel panel = new JPanel(new BorderLayout());
 
         String[] columnas = { "ID", "Tipo", "Fecha Creación", "Fecha Cierre", "Descripción", "IdUsuario" };
-         modelo = new DefaultTableModel(columnas, 0) {
+        modelo = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -189,17 +194,18 @@ public class VistaClienteDetallePanel extends JPanel {
                         JOptionPane.WARNING_MESSAGE);
             }
         });
-        
+
         tabla.addMouseListener(new MouseAdapter() {
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        if (e.getClickCount() == 2 && tabla.getSelectedRow() != -1) {
-            String idActividad = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
-            VistaVerActividad vista = new VistaVerActividad(SwingUtilities.getWindowAncestor(VistaClienteDetallePanel.this), idActividad);
-            vista.setVisible(true);
-        }
-    }
-});
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2 && tabla.getSelectedRow() != -1) {
+                    String idActividad = tabla.getValueAt(tabla.getSelectedRow(), 0).toString();
+                    VistaVerActividad vista = new VistaVerActividad(
+                            SwingUtilities.getWindowAncestor(VistaClienteDetallePanel.this), idActividad);
+                    vista.setVisible(true);
+                }
+            }
+        });
 
         panelBotones.add(btnAgregarActividad);
         panelBotones.add(btnEditarActividad);
@@ -212,13 +218,13 @@ public class VistaClienteDetallePanel extends JPanel {
         JPanel panel = new JPanel(new BorderLayout());
 
         String[] columnas = { "IdActividad", "Telefono", "Lugar", "Fecha" };
-        DefaultTableModel modelo = new DefaultTableModel(columnas, 0) {
+        modelo = new DefaultTableModel(columnas, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        JTable tabla = new JTable(modelo);
+        tabla = new JTable(modelo);
         tabla.setRowHeight(30);
         tabla.setSelectionBackground(new Color(237, 28, 36, 50));
 
@@ -297,7 +303,70 @@ public class VistaClienteDetallePanel extends JPanel {
         panelFiltros.add(btnLimpiar);
 
         panel.add(panelFiltros, BorderLayout.SOUTH);
+
+        // Agregar funcionalidad de edición
+        tabla.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    editarSeleccionMesaCentral();
+                }
+            }
+        });
+
         return panel;
+    }
+
+    private void editarSeleccionMesaCentral() {
+        int fila = tabla.getSelectedRow();
+        if (fila == -1) {
+            JOptionPane.showMessageDialog(this, "Selecciona una fila para editar.", "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String idActividad = modelo.getValueAt(fila, 0).toString();
+        String telefonoActual = modelo.getValueAt(fila, 1).toString();
+        String lugarActual = modelo.getValueAt(fila, 2).toString();
+
+        JTextField txtTelefono = new JTextField(telefonoActual);
+        JTextField txtLugar = new JTextField(lugarActual);
+
+        JPanel panel = new JPanel(new GridLayout(0, 1, 5, 5));
+        panel.add(new JLabel("Teléfono:"));
+        panel.add(txtTelefono);
+        panel.add(new JLabel("Lugar:"));
+        panel.add(txtLugar);
+
+        int opcion = JOptionPane.showConfirmDialog(this, panel, "Editar Mesa Central", JOptionPane.OK_CANCEL_OPTION);
+        if (opcion == JOptionPane.OK_OPTION) {
+            String nuevoTelefono = txtTelefono.getText().trim();
+            String nuevoLugar = txtLugar.getText().trim();
+
+            List<String> errores = MesaCentralValidator.validarMesaCentral(nuevoTelefono, nuevoLugar);
+
+            if (!errores.isEmpty()) {
+                JOptionPane.showMessageDialog(this,
+                        String.join("\n", errores),
+                        "Errores de Validación",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            ControladorMesa_central mesaCtrl = new ControladorMesa_central();
+            boolean actualizado = mesaCtrl
+                    .actualizarMesaCentral(new MesaCentral(idActividad, Long.parseLong(nuevoTelefono), nuevoLugar));
+
+            if (actualizado) {
+                JOptionPane.showMessageDialog(this, "Registro actualizado correctamente.", "Éxito",
+                        JOptionPane.INFORMATION_MESSAGE);
+                // Refrescar la tabla
+                refrescarTablaActividades();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo actualizar el registro.", "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     private JScrollPane crearPanelProductos() {
@@ -322,10 +391,10 @@ public class VistaClienteDetallePanel extends JPanel {
             }
 
             for (String cuenta : cuentasServicio) {
-                panel.add(crearProducto("📺 TV Hogar", "TELEVISION", cuenta));
-                panel.add(crearProducto("📶 Internet Hogar", "BANDA_ANCHA", cuenta));
-                panel.add(crearProducto("📞 Telefonía Fija", "TELEFONIA", cuenta));
-                panel.add(crearProducto("📱 Móvil", "MOVIL", cuenta));
+                panel.add(crearProducto(" TV Hogar", "TELEVISION", cuenta));
+                panel.add(crearProducto(" Internet Hogar", "BANDA_ANCHA", cuenta));
+                panel.add(crearProducto(" Telefonía Fija", "TELEFONIA", cuenta));
+                panel.add(crearProducto(" Móvil", "MOVIL", cuenta));
             }
         } catch (Exception ex) {
             JLabel error = new JLabel("Error al cargar productos: " + ex.getMessage());
@@ -342,9 +411,29 @@ public class VistaClienteDetallePanel extends JPanel {
         contenedor.setBackground(Color.WHITE);
         contenedor.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
+        // Selecciona el icono según el tipo
+        String iconPath = switch (tipo) {
+            case "TELEVISION" -> "/imagenes/tv.png";
+            case "BANDA_ANCHA" -> "/imagenes/internet.png";
+            case "TELEFONIA" -> "/imagenes/phone.png";
+            case "MOVIL" -> "/imagenes/mobile.png";
+            default -> null;
+        };
+
         JLabel lbl = new JLabel(nombre);
         lbl.setFont(new Font("Segoe UI", Font.BOLD, 14));
         lbl.setForeground(new Color(51, 51, 51));
+
+        if (iconPath != null) {
+            java.net.URL url = getClass().getResource(iconPath);
+            if (url != null) {
+                lbl.setIcon(vista.util.UIHelper.cargarImagenRedimensionada(url, 128, 128));
+                lbl.setIconTextGap(10);
+                lbl.setMaximumSize(new Dimension(128, 128));
+                lbl.setPreferredSize(new Dimension(128, 128));
+            }
+        }
+
         contenedor.add(lbl);
 
         JPanel productos = new JPanel();
@@ -410,8 +499,9 @@ public class VistaClienteDetallePanel extends JPanel {
         JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         panel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0));
 
-        JButton btnGuardar = new JButton("💾 Guardar Cambios");
-        JButton btnVolver = new JButton("⬅️ Volver a Clientes");
+        JButton btnGuardar = new JButton("Guardar Cambios");
+        JButton btnVolver = new JButton("Volver a Clientes");
+        JButton btnGenerarFactura = new JButton("Generar Factura PDF");
 
         btnGuardar.setBackground(new Color(46, 125, 50));
         btnGuardar.setForeground(Color.WHITE);
@@ -424,8 +514,14 @@ public class VistaClienteDetallePanel extends JPanel {
         btnGuardar.addActionListener(e -> guardar());
         btnVolver.addActionListener(e -> volverAClientes());
 
+        btnGenerarFactura.setBackground(new Color(33, 150, 243));
+        btnGenerarFactura.setForeground(Color.WHITE);
+        btnGenerarFactura.setFont(new Font("Segoe UI", Font.BOLD, 14));
+        btnGenerarFactura.addActionListener(e -> generarFacturaPDF());
+
         panel.add(btnGuardar);
         panel.add(btnVolver);
+        panel.add(btnGenerarFactura);
 
         return panel;
     }
@@ -494,17 +590,34 @@ public class VistaClienteDetallePanel extends JPanel {
             vp.actualizarTablaClientes();
         }
     }
-    
-     public void refrescarTablaActividades() {
+
+    public void refrescarTablaActividades() {
         modelo.setRowCount(0);
         List<Actividad> actividades = new ActividadesControlador().obtenerActividadesPorCuenta(idCuenta);
         for (Actividad a : actividades) {
-            modelo.addRow(new Object[]{
-                a.getIdActividad(), a.getTipo(), a.getFechaCreacion(), a.getFechaCierre(), a.getDescripcion(), a.getIdUsuario()
+            modelo.addRow(new Object[] {
+                    a.getIdActividad(), a.getTipo(), a.getFechaCreacion(), a.getFechaCierre(), a.getDescripcion(),
+                    a.getIdUsuario()
             });
         }
     }
 
-    
+    private void generarFacturaPDF() {
+        try {
+            String nombreArchivo = "factura_" + cliente.getRut() + "_" + new Date().getTime() + ".pdf";
+            String rutaArchivo = System.getProperty("user.home") + "/Desktop/" + nombreArchivo;
 
+            FacturaPDFGenerator.generarFacturaPDF(idCuenta, cliente, rutaArchivo);
+
+            JOptionPane.showMessageDialog(this,
+                    "Factura generada exitosamente en: " + rutaArchivo,
+                    "Éxito",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error al generar la factura: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }

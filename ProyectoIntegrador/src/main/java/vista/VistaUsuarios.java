@@ -4,6 +4,7 @@
  */
 
 package vista;
+
 /**
  *
  * @author mathi
@@ -17,6 +18,9 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import java.awt.Frame;
+import java.awt.Window;
+import java.awt.Dialog;
 
 /**
  * Panel de gestión de usuarios.
@@ -30,12 +34,15 @@ public class VistaUsuarios extends JPanel {
     private final JButton btnAgregar = new JButton("Agregar Usuario");
 
     public VistaUsuarios() {
-        setLayout(new MigLayout("fill","[grow][pref][pref]","[grow][]"));
+        setLayout(new MigLayout("fill", "[grow][pref][pref]", "[grow][]"));
 
-        model = new DefaultTableModel(new String[]{
-            "ID","RUT","Rol","País","Nombres","ApellidoP","ApellidoM","Área"
+        model = new DefaultTableModel(new String[] {
+                "ID", "RUT", "Rol", "País", "Nombres", "ApellidoP", "ApellidoM", "Área"
         }, 0) {
-            @Override public boolean isCellEditable(int r, int c) { return false; }
+            @Override
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
         };
         tblUsuarios = new JTable(model);
         add(new JScrollPane(tblUsuarios), "grow, wrap");
@@ -57,15 +64,15 @@ public class VistaUsuarios extends JPanel {
         if (lista != null) {
             lista.forEach(u -> {
                 if (u != null) {
-                    model.addRow(new Object[]{
-                        u.getIdUsuario(),
-                        u.getRut(),
-                        u.getIdRol(),
-                        u.getIdPais(),
-                        u.getNombres(),
-                        u.getApellidoP(),
-                        u.getApellidoM(),
-                        u.getArea()
+                    model.addRow(new Object[] {
+                            u.getIdUsuario(),
+                            u.getRut(),
+                            u.getIdRol(),
+                            u.getIdPais(),
+                            u.getNombres(),
+                            u.getApellidoP(),
+                            u.getApellidoM(),
+                            u.getArea()
                     });
                 }
             });
@@ -74,13 +81,10 @@ public class VistaUsuarios extends JPanel {
     }
 
     private void mostrarDialogoAgregar() {
-        // Aquí puedes abrir un diálogo custom de alta de usuario lo mejor del mundo sisisisi pero aun no funcniona
-        JOptionPane.showMessageDialog(
-            this,
-            "Funcionalidad de agregar usuario pendiente de implementación.",
-            "Agregar Usuario",
-            JOptionPane.INFORMATION_MESSAGE
-        );
+        Window window = SwingUtilities.getWindowAncestor(this);
+        if (window instanceof ren.main.VistaPrincipal vistaPrincipal) {
+            vistaPrincipal.mostrarPanel(ren.main.VistaPrincipal.TARJETA_CREAR_USUARIO);
+        }
     }
 
     public void actualizarTabla() {
@@ -91,15 +95,15 @@ public class VistaUsuarios extends JPanel {
             if (usuarios != null) {
                 for (Usuario usuario : usuarios) {
                     if (usuario != null) {
-                        model.addRow(new Object[]{
-                            usuario.getIdUsuario(),
-                            usuario.getRut(),
-                            usuario.getIdRol(),
-                            usuario.getIdPais(),
-                            usuario.getNombres(),
-                            usuario.getApellidoP(),
-                            usuario.getApellidoM(),
-                            usuario.getArea()
+                        model.addRow(new Object[] {
+                                usuario.getIdUsuario(),
+                                usuario.getRut(),
+                                usuario.getIdRol(),
+                                usuario.getIdPais(),
+                                usuario.getNombres(),
+                                usuario.getApellidoP(),
+                                usuario.getApellidoM(),
+                                usuario.getArea()
                         });
                     }
                 }
@@ -107,9 +111,9 @@ public class VistaUsuarios extends JPanel {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
-                "Error al actualizar la tabla de usuarios: " + e.getMessage(),
-                "Error",
-                JOptionPane.ERROR_MESSAGE);
+                    "Error al actualizar la tabla de usuarios: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 }

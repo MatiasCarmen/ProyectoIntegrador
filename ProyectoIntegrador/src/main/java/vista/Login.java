@@ -2,6 +2,7 @@ package vista;
 
 import com.formdev.flatlaf.FlatClientProperties;
 import com.formdev.flatlaf.FlatLightLaf;
+import javax.swing.ImageIcon;
 import controladores.ControladorUsuarios;
 import entidades.Usuario;
 import net.miginfocom.swing.MigLayout;
@@ -170,7 +171,7 @@ public class Login extends JPanel {
         contentPanel.add(logoLabel, "align center, gapbottom 20");
 
         // Título de bienvenida
-        JLabel lblTitle = new JLabel("¡Bienvenido Papu!");
+        JLabel lblTitle = new JLabel("¡Bienvenido!");
         lblTitle.setFont(new Font("Segoe UI", Font.BOLD, 28));
         lblTitle.setForeground(new Color(237, 28, 36));
         contentPanel.add(lblTitle, "gapbottom 5");
@@ -280,9 +281,9 @@ public class Login extends JPanel {
         Timer timer = new Timer(500, evt -> {
             String username = txtUsername.getText().trim();
             String password = new String(txtPassword.getPassword());
-            
+
             System.out.println(BCryptUtil.hashPassword(password));
-            
+
             Usuario usuario = controlador.validarLogin(username, password);
             if (usuario != null) {
                 main.logeado = usuario;

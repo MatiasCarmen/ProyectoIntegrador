@@ -1,11 +1,17 @@
-# IntelliJ
-.idea/
-*.iml
+# Logs
+ProyectoIntegrador/logs/
+ProyectoIntegrador/logs/*.log
+ProyectoIntegrador/logs/archived/
 
-# Java/Maven
-target/
+# Build
+ProyectoIntegrador/target/
+
+# IDEs
+*.iml
+.idea/
+*.vscode/
 *.class
 
-# OS
+# Sistema
 .DS_Store
 Thumbs.db

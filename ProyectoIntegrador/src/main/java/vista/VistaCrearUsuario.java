@@ -24,7 +24,7 @@ public class VistaCrearUsuario extends JPanel {
 
     private final JComboBox<String> cmbRoles;
     private final JComboBox<String> cmbArea;
-    private final String[] AREAS = {"Ventas", "Soporte", "Logística", "TI", "RRHH", "Operaciones"};
+    private final String[] AREAS = { "Ventas", "Soporte", "Logística", "TI", "RRHH", "Operaciones" };
 
     private final JButton btnGuardar = new JButton("Guardar");
     private final JButton btnNuevo = new JButton("Nuevo");
@@ -81,8 +81,11 @@ public class VistaCrearUsuario extends JPanel {
         formPanel.add(pnlBtns, "span 2, center, gaptop 10");
 
         // Tabla
-        model = new DefaultTableModel(new String[]{"ID", "Nombre", "Apellido", "RUT", "Rol", "Área", "Fecha Creación"}, 0) {
-            public boolean isCellEditable(int r, int c) { return false; }
+        model = new DefaultTableModel(
+                new String[] { "ID", "Nombre", "Apellido", "RUT", "Rol", "Área", "Fecha Creación" }, 0) {
+            public boolean isCellEditable(int r, int c) {
+                return false;
+            }
         };
         tblUsuarios = new JTable(model);
         tblUsuarios.setRowHeight(25);
@@ -134,7 +137,7 @@ public class VistaCrearUsuario extends JPanel {
             return;
         }
 
-        if (rolNombre == null || rolNombre.equals("Seleccione rol")) {
+        if (rolNombre == null || rolNombre.equals("-- Seleccione rol --")) {
             JOptionPane.showMessageDialog(this, "Selecciona un rol válido.", "Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
@@ -170,7 +173,8 @@ public class VistaCrearUsuario extends JPanel {
             limpiarCampos();
             cargarUsuarios();
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error al guardar: " + e.getMessage(), "Error",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -179,7 +183,8 @@ public class VistaCrearUsuario extends JPanel {
         if (row >= 0) {
             idUsuarioActual = model.getValueAt(row, 0).toString();
             Usuario usuario = controlador.obtenerPorId(idUsuarioActual);
-            if (usuario == null) return;
+            if (usuario == null)
+                return;
 
             if (usuario.getIdRol().equals("R001")) {
                 JOptionPane.showMessageDialog(this, "No puedes editar un usuario Administrador.");
@@ -200,14 +205,14 @@ public class VistaCrearUsuario extends JPanel {
         model.setRowCount(0);
         List<Usuario> lista = controlador.listarUsuarios();
         for (Usuario u : lista) {
-            model.addRow(new Object[]{
-                u.getIdUsuario(),
-                u.getNombres(),
-                u.getApellidoP(),
-                u.getRut(),
-                u.getIdRol(),
-                u.getArea(),
-                u.getFechaCreacion() != null ? u.getFechaCreacion().toString() : ""
+            model.addRow(new Object[] {
+                    u.getIdUsuario(),
+                    u.getNombres(),
+                    u.getApellidoP(),
+                    u.getRut(),
+                    u.getIdRol(),
+                    u.getArea(),
+                    u.getFechaCreacion() != null ? u.getFechaCreacion().toString() : ""
             });
         }
     }

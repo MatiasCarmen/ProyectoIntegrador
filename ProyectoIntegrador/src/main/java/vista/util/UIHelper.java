@@ -198,4 +198,22 @@ public class UIHelper {
         g2.dispose();
         return icon;
     }
+
+    // Método para cargar y redimensionar imágenes a un tamaño específico
+    public static ImageIcon cargarImagenRedimensionada(String ruta, int ancho, int alto) {
+        ImageIcon iconoOriginal = new ImageIcon(ruta);
+        Image imagenOriginal = iconoOriginal.getImage();
+        Image imagenRedimensionada = imagenOriginal.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+        return new ImageIcon(imagenRedimensionada);
+    }
+
+    // Sobrecarga para aceptar URL directamente
+    public static ImageIcon cargarImagenRedimensionada(java.net.URL url, int ancho, int alto) {
+        if (url == null)
+            return null;
+        ImageIcon iconoOriginal = new ImageIcon(url);
+        Image imagenOriginal = iconoOriginal.getImage();
+        Image imagenRedimensionada = imagenOriginal.getScaledInstance(ancho, alto, Image.SCALE_SMOOTH);
+        return new ImageIcon(imagenRedimensionada);
+    }
 }
